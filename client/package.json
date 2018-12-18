@@ -1,0 +1,42 @@
+{
+  "name": "repertoire-client",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Maikel van Veen <maikeloo10@hotmail.com>",
+  "scripts": {
+    "build": "yarn clear-dist && parcel build public/index.html --no-source-maps && yarn move-html-file",
+    "clear-dist": "rm -rf dist/",
+    "move-html-file": "mv dist/index.html ./index.html",
+    "start-client": "yarn clear-dist && parcel public/index.html"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/classnames": "^2.2.6",
+    "@types/graphql": "^14.0.3",
+    "@types/lodash-es": "^4.17.1",
+    "@types/react": "^16.7.17",
+    "@types/react-dom": "^16.0.11",
+    "@types/react-router-dom": "^4.3.1",
+    "autoprefixer": "^9.4.3",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "json5": "^2.1.0",
+    "parcel-bundler": "^1.10.3",
+    "sass": "^1.15.2",
+    "tslint": "^5.12.0",
+    "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "apollo-boost": "^0.1.22",
+    "babel-polyfill": "^6.26.0",
+    "classnames": "^2.2.6",
+    "graphql": "^14.0.2",
+    "graphql-tag": "^2.10.0",
+    "lodash-es": "^4.17.11",
+    "react": "^16.6.3",
+    "react-apollo": "^2.3.3",
+    "react-dom": "^16.6.3",
+    "react-router-dom": "^4.3.1"
+  }
+}

@@ -4,5 +4,15 @@
   "version": "1.0.0",
   "main": "client/index.ts",
   "author": "Maikel van Veen <maikeloo10@hotmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start-client": "cd client && yarn start-client",
+    "tslint": "tslint -p . -c tslint.json \"**/*.ts\" \"**/*.tsx\""
+  },
+  "devDependencies": {
+    "tslint": "^5.12.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.2.2"
+  }
 }
