@@ -28,4 +28,17 @@
     &--is-full-width {
         width: 100%;
     }
+
+    &--is-disabled {
+        &,
+        &:hover,
+        &:active {
+            background-color: $color-dark-grey;
+            transform: unset;
+            border-bottom: 4px solid $color-dark-grey;
+            margin-bottom: 0;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+    }
 }

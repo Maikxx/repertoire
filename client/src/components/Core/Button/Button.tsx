@@ -7,16 +7,18 @@ export enum ButtonStyleType {
 }
 
 interface Props {
-    className?: string
-    type: string
     buttonStyle: ButtonStyleType
+    className?: string
+    disabled?: boolean
     isFullWidth?: boolean
+    type: string
 }
 
 export class Button extends React.Component<Props> {
     private bem = new BEM('Button', () => ({
         [`is-${this.props.buttonStyle}`]: true,
         'is-full-width': this.props.isFullWidth,
+        'is-disabled': this.props.disabled,
     }))
 
     public render() {

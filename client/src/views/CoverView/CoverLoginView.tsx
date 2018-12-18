@@ -29,6 +29,7 @@ interface State {
     email?: string
     password?: string
     redirectToReferrer?: boolean
+    canSubmitForm?: boolean
 }
 
 export class CoverLoginView extends React.Component<Props, State> {
@@ -36,13 +37,14 @@ export class CoverLoginView extends React.Component<Props, State> {
         email: '',
         password: '',
         redirectToReferrer: false,
+        canSubmitForm: false,
     }
 
     private bem = new BEM('CoverLoginView')
 
     public render() {
         const { className } = this.props
-        const { redirectToReferrer, email, password } = this.state
+        const { redirectToReferrer, email, password, canSubmitForm } = this.state
 
         if (redirectToReferrer) {
             const { history, location } = this.props
@@ -90,6 +92,7 @@ export class CoverLoginView extends React.Component<Props, State> {
                             </FieldCollection>
                             <Button
                                 buttonStyle={ButtonStyleType.Brand}
+                                disabled={!canSubmitForm}
                                 isFullWidth={true}
                                 type={`submit`}
                             >
@@ -116,10 +119,20 @@ export class CoverLoginView extends React.Component<Props, State> {
     private onChangeInput: React.ChangeEventHandler<HTMLInputElement> = event => {
         const { target: { value, name }} = event
 
-        this.setState({ [name]: value })
+        this.setState({
+            [name]: value,
+        }, () => {
+            this.setState({ canSubmitForm: !!this.state.email && !!this.state.password })
+        })
     }
 
     private onSubmit = (loginUser: MutationFn) => (event: React.FormEvent<HTMLFormElement>) => {
+        const { email, password } = this.state
+
+        if (!email || !password) {
+            throw new Error('All input fields need to be filled out')
+        }
+
         loginUser()
     }
 }
