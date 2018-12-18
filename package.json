@@ -1,0 +1,8 @@
+{
+  "name": "repertoire",
+  "private": true,
+  "version": "1.0.0",
+  "main": "client/index.ts",
+  "author": "Maikel van Veen <maikeloo10@hotmail.com>",
+  "license": "MIT"
+}
