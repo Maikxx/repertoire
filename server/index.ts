@@ -1,5 +1,6 @@
 import * as express from 'express'
 import * as helmet from 'helmet'
+import * as cors from 'helmet'
 import { ApolloServer } from 'apollo-server-express'
 import { createSchema } from './api/schema'
 import { connectToMongoAtlas } from './db/connect'
@@ -12,6 +13,7 @@ connectToMongoAtlas()
 
 const app = express()
 app.use(helmet())
+app.use(cors())
 
 const server = new ApolloServer({ schema: createSchema() })
 server.applyMiddleware({ app })
