@@ -6,6 +6,7 @@ import { Field } from '../../components/Core/Field/Field/Field'
 import { Form } from '../../components/Core/DataEntry/Form/Form'
 import { Text } from '../../components/Core/Text/Text/Text'
 import { Input } from '../../components/Core/DataEntry/Input/Input'
+import { Button, ButtonStyleType } from '../../components/Core/Button/Button'
 
 interface Props {
     className?: string
@@ -44,6 +45,13 @@ export class CoverLoginView extends React.Component<Props> {
                             </Field>
                         </FieldGroup>
                     </FieldCollection>
+                    <Button
+                        buttonStyle={ButtonStyleType.Brand}
+                        isFullWidth={true}
+                        type={`submit`}
+                    >
+                        Login
+                    </Button>
                 </Form>
             </div>
         )
