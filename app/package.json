@@ -1,5 +1,5 @@
 {
-  "name": "repertoire-client",
+  "name": "repertoire-app",
   "version": "1.0.0",
   "private": true,
   "author": "Maikel van Veen <maikeloo10@hotmail.com>",
@@ -7,7 +7,7 @@
     "build": "yarn clear-dist && parcel build public/index.html --no-source-maps && yarn move-html-file",
     "clear-dist": "rm -rf dist/",
     "move-html-file": "mv dist/index.html ./index.html",
-    "start-client": "yarn clear-dist && parcel public/index.html -p 3000"
+    "start-app": "yarn clear-dist && parcel public/index.html -p 4000"
   },
   "license": "MIT",
   "devDependencies": {

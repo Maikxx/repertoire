@@ -10,7 +10,7 @@ export class RootView extends React.Component<Props> {
     public render() {
         return (
             <main className={this.bem.getClassName()}>
-                Repertoire for service providers
+                Repertoire for artists
             </main>
         )
     }

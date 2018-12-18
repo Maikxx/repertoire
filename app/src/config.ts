@@ -7,7 +7,7 @@ interface Config {
 }
 
 export const config = <Config> {
-    projectPrefix: 'rps',
+    projectPrefix: 'rpa',
 }
 
 export const prefixWithAppPrefix = (key: string) => `${config.projectPrefix}-${key}`
