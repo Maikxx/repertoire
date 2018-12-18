@@ -9,16 +9,33 @@ import { Input } from '../../components/Core/DataEntry/Input/Input'
 import { Button, ButtonStyleType } from '../../components/Core/Button/Button'
 import { TextLink } from '../../components/Core/Text/TextLink/TextLink'
 import { routes } from '../routes'
+import { RouteComponentProps } from 'react-router-dom'
 
-interface Props {
+interface Props extends RouteComponentProps {
     className?: string
 }
 
-export class CoverLoginView extends React.Component<Props> {
+interface State {
+    redirectToReferrer: boolean
+}
+
+export class CoverLoginView extends React.Component<Props, State> {
+    public state: State = {
+        redirectToReferrer: false,
+    }
+
     private bem = new BEM('CoverLoginView')
 
     public render() {
         const { className } = this.props
+        const { redirectToReferrer } = this.state
+
+        if (redirectToReferrer) {
+            const { history, location } = this.props
+            const { from } = location.state || { from: { pathname: '/' }}
+
+            history.push(from)
+        }
 
         return (
             <div className={this.bem.getClassName(className)}>

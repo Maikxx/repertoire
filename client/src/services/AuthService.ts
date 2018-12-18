@@ -1,4 +1,4 @@
-export const fakeAuth = {
+export const authService = {
     isAuthenticated: false,
     authenticate(cb: any) {
         this.isAuthenticated = true

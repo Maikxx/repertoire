@@ -2,7 +2,7 @@ import './CoverView.scss'
 import * as React from 'react'
 import { BEM } from '../../services/BEMService'
 import { CoverHeader } from '../../components/Cover/CoverHeader/CoverHeader'
-import { Route } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { routes } from '../routes'
 import { CoverLoginView } from './CoverLoginView'
 
@@ -19,7 +19,10 @@ export class CoverView extends React.Component<Props> {
         return (
             <section className={this.bem.getClassName(className)}>
                 <CoverHeader />
-                <Route path={routes.cover.index} exact={true} component={CoverLoginView}/>
+                <Switch>
+                    <Route path={routes.cover.login} exact={true} component={CoverLoginView}/>
+                    <Redirect from={routes.cover.index} exact={true} to={routes.cover.login}/>
+                </Switch>
             </section>
         )
     }
