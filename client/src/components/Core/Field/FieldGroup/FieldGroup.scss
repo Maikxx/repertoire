@@ -1,0 +1,31 @@
+.rps-FieldGroup {
+    @import '../../../../scss/variables/colors';
+
+    > .rps-Row {
+        align-items: unset;
+    }
+
+    &__title {
+        font-weight: 600;
+        flex: 1;
+        font-size: 1.3rem;
+        color: $color-white;
+    }
+
+    &__content {
+        padding-top: 12px;
+        flex: 5;
+        margin-left: 24px;
+    }
+
+    .rps-Field + .rps-Field {
+        margin-top: 36px;
+    }
+
+    &:not(.rps-FieldGroup--has-title) {
+        .rps-FieldGroup__content {
+            margin-left: 0;
+            padding-top: 0;
+        }
+    }
+}

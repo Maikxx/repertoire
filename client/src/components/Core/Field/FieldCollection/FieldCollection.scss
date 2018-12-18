@@ -1,0 +1,8 @@
+.rps-FieldCollection {
+    display: flex;
+    flex-direction: column;
+
+    > .rps-Field + .rps-Field {
+        margin-top: 12px;
+    }
+}

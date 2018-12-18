@@ -1,0 +1,11 @@
+.rps-Input {
+    @import '../../../../scss/variables/colors';
+    @import '../../../../scss/variables/fonts';
+
+    width: 340px;
+    background-color: $color-white;
+    border: 0;
+    padding: 8px 6px;
+    color: $color-text;
+    font-size: 1rem;
+}

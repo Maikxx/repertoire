@@ -1,0 +1,19 @@
+.rps-Field {
+    &__container {
+        width: 100%;
+    }
+
+    &__title {
+        font-weight: normal;
+        font-size: 1.25rem;
+        flex: 1;
+    }
+
+    &__content {
+        flex: 5;
+    }
+
+    .rps-Column > .rps-Field__content {
+        margin-top: 8px;
+    }
+}

@@ -1,0 +1,15 @@
+.rps-CoverHeader {
+    @import '../../../scss/variables/colors';
+
+    .rps-Image {
+        max-height: 180px;
+        margin-bottom: 12px;
+    }
+
+    .rps-Heading {
+        font-size: 24px;
+        font-weight: 500;
+        color: $color-white;
+        text-align: center;
+    }
+}
