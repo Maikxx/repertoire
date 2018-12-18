@@ -62,12 +62,12 @@ html, body {
 }
 
 body {
-    @import './variables/colors';
+    @import './variables/fonts';
 
     display: flex;
     line-height: 1;
-    background-color: $color-background;
-    font-family: 'Raleway', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #FFFFFF;
+    font-family: $font-roboto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -ms-overflow-style: -ms-autohiding-scrollbar;
