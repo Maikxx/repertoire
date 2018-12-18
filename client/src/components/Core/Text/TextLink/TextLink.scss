@@ -1,0 +1,12 @@
+.rps-TextLink {
+    @import '../../../../scss/variables/colors';
+
+    color: $color-white;
+    transition: .1s all ease-in-out;
+    font-size: 1.125rem;
+    display: inline-block;
+
+    &:hover {
+        color: darken($color-white, 20);
+    }
+}

@@ -7,6 +7,8 @@ import { Form } from '../../components/Core/DataEntry/Form/Form'
 import { Text } from '../../components/Core/Text/Text/Text'
 import { Input } from '../../components/Core/DataEntry/Input/Input'
 import { Button, ButtonStyleType } from '../../components/Core/Button/Button'
+import { TextLink } from '../../components/Core/Text/TextLink/TextLink'
+import { routes } from '../routes'
 
 interface Props {
     className?: string
@@ -52,6 +54,9 @@ export class CoverLoginView extends React.Component<Props> {
                     >
                         Login
                     </Button>
+                    <TextLink to={routes.cover.forgot}>
+                        Forgot password?
+                    </TextLink>
                 </Form>
             </div>
         )
