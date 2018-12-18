@@ -1,3 +1,5 @@
+import { UserLoginArgs } from '../../api/User/UserLogin.mutation'
+
 export const UserService = () => {
     const GetCurrentUser = async () => {
         return {
@@ -6,7 +8,16 @@ export const UserService = () => {
         }
     }
 
+    const UserLogin = async (args: UserLoginArgs) => {
+        console.log(args)
+
+        return {
+            userToken: 'Token',
+        }
+    }
+
     return {
         GetCurrentUser,
+        UserLogin,
     }
 }

@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "apollo-boost": "^0.1.22",
+    "apollo-link-context": "^1.0.12",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
     "graphql": "^14.0.2",

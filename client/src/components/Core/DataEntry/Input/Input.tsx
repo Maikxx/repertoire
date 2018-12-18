@@ -8,6 +8,7 @@ interface Props {
     disabled?: boolean
     name: string
     onChange?: React.ChangeEventHandler<HTMLInputElement>
+    placeholder?: string
     type: string
 }
 
