@@ -5,12 +5,14 @@ import { getUser } from './User/getUser.query'
 import { getUsers } from './User/getUsers.query'
 import { updateUser } from './User/updateUser.mutation'
 import { userLogin } from './User/userLogin.mutation'
+import { getMe } from './User/getMe.query'
 
 export const createSchema = () => new GraphQLSchema({
     query: new GraphQLObjectType({
         name: 'Query',
         description: 'The root for all queries available.',
         fields: () => ({
+            me: getMe(),
             getUser: getUser(),
             getUsers: getUsers(),
         }),

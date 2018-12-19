@@ -22,8 +22,14 @@ export class RootView extends React.Component<Props> {
         return (
             <main className={this.bem.getClassName()}>
                 <Switch>
-                    <AuthenticatedRoute path={routes.app.index} component={AppView}/>
-                    <Route path={routes.cover.index} component={CoverView} />
+                    <AuthenticatedRoute
+                        path={routes.app.index}
+                        component={AppView}
+                    />
+                    <Route
+                        path={routes.cover.index}
+                        component={CoverView}
+                    />
                     <Redirect
                         from={routes.index}
                         exact={true}

@@ -13,7 +13,7 @@ export class AppView extends React.Component<Props> {
 
         return (
             <div className={this.bem.getClassName(className)}>
-                App
+                Hoi
             </div>
         )
     }

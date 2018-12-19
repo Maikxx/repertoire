@@ -64,6 +64,21 @@ export const UserService = () => {
         return userData
     }
 
+    const GetMe = async (_id: string) => {
+        try {
+            const users = await User.find({ _id })
+
+            if (!users || !users.length) {
+                throw new Error('No user found with this identifier')
+            }
+
+            const me = users[0]
+            return me
+        } catch (error) {
+            throw new ApolloError('No user found with this identifier', '404')
+        }
+    }
+
     const GetUsersByField = async (field: string, value: string): Promise<any[]> => {
         const fields = {}
         fields[field] = value
@@ -179,6 +194,7 @@ export const UserService = () => {
     return {
         CreateUser,
         DeleteUser,
+        GetMe,
         GetUserById,
         GetUsers,
         GetUsersByField,

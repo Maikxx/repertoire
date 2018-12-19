@@ -17,7 +17,9 @@ export class AuthenticatedRoute extends React.Component<Props> {
                 {...restProps}
                 render={props => (
                     authToken
-                        ? <Component {...props} />
+                        ? (
+                            <Component {...props} />
+                        )
                         : (
                             <Redirect
                                 to={{
