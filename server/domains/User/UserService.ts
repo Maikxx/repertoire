@@ -20,13 +20,6 @@ interface DeleteUserArgs {
 }
 
 export const UserService = () => {
-    const GetCurrentUser = async () => {
-        return {
-            _id: '1',
-            createdAt: new Date(),
-        }
-    }
-
     const GetUserData = (args?: UserDataArgs, update = false) => {
         if (!args) {
             throw new ApolloError('No arguments were found', '400')
@@ -178,7 +171,6 @@ export const UserService = () => {
     return {
         CreateUser,
         DeleteUser,
-        GetCurrentUser,
         GetUserById,
         GetUsers,
         GetUsersByField,

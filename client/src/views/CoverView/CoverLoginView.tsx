@@ -12,6 +12,7 @@ import { routes } from '../routes'
 import { RouteComponentProps } from 'react-router-dom'
 import gql from 'graphql-tag'
 import { Mutation, MutationFn } from 'react-apollo'
+import { setAuthToken } from '../../services/LocalStorageService'
 
 const LOGIN_MUTATION = gql`
     mutation userLogin($auth: AuthInputType!) {
@@ -137,13 +138,20 @@ export class CoverLoginView extends React.Component<Props, State> {
         })
     }
 
-    private onSubmit = (userLogin: MutationFn) => (event: React.FormEvent<HTMLFormElement>) => {
+    private onSubmit = (userLogin: MutationFn) => async (event: React.FormEvent<HTMLFormElement>) => {
         const { email, password } = this.state
 
         if (!email || !password) {
             throw new Error('All input fields need to be filled out')
         }
 
-        userLogin({ variables: { auth: { email, password }}})
+        const response = await userLogin({ variables: { auth: { email, password }}})
+        const data = response && response.data && response.data.userLogin
+        const token = data && data.token
+
+        if (token) {
+            setAuthToken(token)
+            this.setState({ redirectToReferrer: true })
+        }
     }
 }

@@ -1,5 +1,4 @@
 import { GraphQLSchema, GraphQLObjectType } from 'graphql'
-import { getCurrentUser } from './User/getCurrentUser.query'
 import { createUser } from './User/CreateUser.mutation'
 import { deleteUser } from './User/deleteUser.mutation'
 import { getUser } from './User/getUser.query'
@@ -12,7 +11,6 @@ export const createSchema = () => new GraphQLSchema({
         name: 'Query',
         description: 'The root for all queries available.',
         fields: () => ({
-            getCurrentUser: getCurrentUser(),
             getUser: getUser(),
             getUsers: getUsers(),
         }),
