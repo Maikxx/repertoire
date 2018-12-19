@@ -1,22 +1,24 @@
-import { UserTokenType } from './User.type'
+import { AuthType, AuthInputType } from './User.type'
+import { GraphQLNonNull } from 'graphql'
 import { UserService } from '../../domains/User/UserService'
-import { GraphQLString } from 'graphql'
 
-export interface UserLoginArgs {
-    email: string
-    password: string
+export interface AuthArgs {
+    auth?: {
+        email: string
+        password: string
+    }
 }
 
 export const userLogin = () => ({
-    type: UserTokenType,
+    type: AuthType,
+    description: 'Authenticate user',
     args: {
-        email: { type: GraphQLString },
-        password: { type: GraphQLString },
+        auth: {
+            type: new GraphQLNonNull(AuthInputType),
+        },
     },
-    resolve: async (root, args: UserLoginArgs) => {
+    resolve: (_, args: AuthArgs) => {
         const userService = UserService()
-
-        const userToken = await userService.UserLogin(args)
-        return userToken
+        return userService.UserLogin(args)
     },
 })
