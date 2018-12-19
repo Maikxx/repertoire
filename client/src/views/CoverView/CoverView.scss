@@ -6,7 +6,9 @@
     transform: translate(-50%, -50%);
     color: $color-white;
 
-    .rps-CoverLoginView {
+    .rps-CoverLoginView,
+    .rps-CoverSignUpView,
+    .rps-CoverForgotPasswordView {
         margin-top: 36px;
     }
 }
