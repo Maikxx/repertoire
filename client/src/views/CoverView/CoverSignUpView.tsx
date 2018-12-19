@@ -13,22 +13,23 @@ import { RouteComponentProps } from 'react-router-dom'
 import gql from 'graphql-tag'
 import { Mutation, MutationFn } from 'react-apollo'
 
-const LOGIN_MUTATION = gql`
-    mutation userLogin($auth: AuthInputType!) {
-        userLogin(auth: $auth) {
-            token
+const SIGN_UP_USER_MUTATION = gql`
+    mutation createUser($user: UserInputType!) {
+        createUser(user: $user) {
+            _id
         }
     }
 `
 
-interface LoginMutationVariables {
-    auth: {
+interface SignUpMutationVariables {
+    user: {
         email?: string
         password?: string
+        isAdmin?: boolean
     }
 }
 
-interface LoginMutationResponse {
+interface SignUpMutationResponse {
     token: string
 }
 
@@ -39,19 +40,21 @@ interface Props extends RouteComponentProps {
 interface State {
     email?: string
     password?: string
+    confirmPassword?: string
     redirectToReferrer?: boolean
     canSubmitForm?: boolean
 }
 
-export class CoverLoginView extends React.Component<Props, State> {
+export class CoverSignUpView extends React.Component<Props, State> {
     public state: State = {
         email: '',
         password: '',
+        confirmPassword: '',
         redirectToReferrer: false,
         canSubmitForm: false,
     }
 
-    private bem = new BEM('CoverLoginView')
+    private bem = new BEM('CoverSignUpView')
 
     public render() {
         const { className } = this.props
@@ -66,7 +69,7 @@ export class CoverLoginView extends React.Component<Props, State> {
 
         return (
             <div className={this.bem.getClassName(className)}>
-                <Mutation<LoginMutationResponse, LoginMutationVariables> mutation={LOGIN_MUTATION}>
+                <Mutation<SignUpMutationResponse, SignUpMutationVariables> mutation={SIGN_UP_USER_MUTATION}>
                     {(mutate, { loading, data, error }) => (
                         <Form
                             renderFormTitle={this.renderFormTitle}
@@ -96,6 +99,17 @@ export class CoverLoginView extends React.Component<Props, State> {
                                             type={`password`}
                                         />
                                     </Field>
+                                    <Field
+                                        isLabel={true}
+                                        isVertical={true}
+                                        title={`Confirm password`}
+                                    >
+                                        <Input
+                                            name={`confirmPassword`}
+                                            onChange={this.onChangeInput}
+                                            type={`password`}
+                                        />
+                                    </Field>
                                 </FieldGroup>
                             </FieldCollection>
                             <Button
@@ -104,13 +118,10 @@ export class CoverLoginView extends React.Component<Props, State> {
                                 isFullWidth={true}
                                 type={`submit`}
                             >
-                                Login
+                                Sign up
                             </Button>
-                            <TextLink to={routes.cover.forgot}>
-                                Forgot password?
-                            </TextLink>
-                            <TextLink to={routes.cover.signUp}>
-                                Create an account?
+                            <TextLink to={routes.cover.login}>
+                                Have an account? Log in here
                             </TextLink>
                         </Form>
                     )}
@@ -122,28 +133,34 @@ export class CoverLoginView extends React.Component<Props, State> {
     private renderFormTitle = () => {
         return (
             <Text Element={`legend`}>
-                Sign in
+                Sign up
             </Text>
         )
     }
 
-    private onChangeInput: React.ChangeEventHandler<HTMLInputElement> = event => {
+    private checkIfUserCanSubmitForm = (): boolean => {
+        const { email, password, confirmPassword } = this.state
+
+        return (!!email && !!password && (!!confirmPassword && password === confirmPassword))
+    }
+
+    private onChangeInput: React.ChangeEventHandler<HTMLInputElement> = (event): null | void => {
         const { target: { value, name }} = event
 
         this.setState({
             [name]: value,
         }, () => {
-            this.setState({ canSubmitForm: !!this.state.email && !!this.state.password })
+            this.setState({ canSubmitForm: this.checkIfUserCanSubmitForm() })
         })
     }
 
-    private onSubmit = (userLogin: MutationFn) => (event: React.FormEvent<HTMLFormElement>) => {
+    private onSubmit = (userSignUp: MutationFn) => (event: React.FormEvent<HTMLFormElement>) => {
         const { email, password } = this.state
 
         if (!email || !password) {
             throw new Error('All input fields need to be filled out')
         }
 
-        userLogin({ variables: { auth: { email, password }}})
+        userSignUp({ variables: { user: { email, password, isAdmin: true }}})
     }
 }

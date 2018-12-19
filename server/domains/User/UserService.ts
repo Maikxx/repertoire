@@ -4,11 +4,13 @@ import { encodeToken } from '../../services/TokenManager'
 import { getCurrentISOStringDate } from '../../services/DateFormatter'
 import { User } from '../../models/User'
 import { AuthArgs } from '../../api/User/userLogin.mutation'
+import * as mongoose from 'mongoose'
 
 interface UserDataArgs {
     _id?: string
     user: {
         email: string
+        // isAdmin?: boolean
         password: string
     }
 }
@@ -32,14 +34,18 @@ export const UserService = () => {
 
         const email = args.user.email
         const password = encrypt(args.user.password)
+        // const isAdmin = args.user.isAdmin
+
         const createdAt = getCurrentISOStringDate()
         const updatedAt = getCurrentISOStringDate()
 
         const userData = {
+            _id: null,
             email: null,
             password: null,
             createdAt: null,
             updatedAt: null,
+            // isAdmin: null,
         }
 
         if (email) {
@@ -50,9 +56,14 @@ export const UserService = () => {
             userData.password = password
         }
 
+        // if (isAdmin === true || isAdmin === false) {
+        //     userData.isAdmin = isAdmin
+        // }
+
         if (update) {
             userData.updatedAt = updatedAt
         } else {
+            userData._id = mongoose.Types.ObjectId(),
             userData.createdAt = createdAt
             userData.updatedAt = updatedAt
         }
@@ -78,7 +89,7 @@ export const UserService = () => {
             const newUser = new User(newUserData)
             const users = await GetUsersByField('email', newUserData.email)
 
-            if (users || users.length > 0) {
+            if (users && users.length > 0) {
                 throw new ApolloError('User already exists', '409')
             }
 
@@ -135,9 +146,9 @@ export const UserService = () => {
         }
     }
 
-    const UserLogin = async (args: AuthArgs): Promise<string> => {
-        const email = args.auth && args.auth.email
-        const password = args.auth && args.auth.password
+    const UserLogin = async (args: AuthArgs): Promise<any> => {
+        const email = args.auth.email
+        const password = args.auth.password
         const userService = UserService()
 
         const users = await userService.GetUsersByField('email', email)
@@ -156,7 +167,9 @@ export const UserService = () => {
                 createdAt: getCurrentISOStringDate(),
             })
 
-            return token
+            return {
+                token,
+            }
         }
 
         throw new ApolloError('Email and/or password do not match', '409')

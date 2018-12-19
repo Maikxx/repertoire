@@ -5,6 +5,7 @@ import { CoverHeader } from '../../components/Cover/CoverHeader/CoverHeader'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { routes } from '../routes'
 import { CoverLoginView } from './CoverLoginView'
+import { CoverSignUpView } from './CoverSignUpView'
 
 interface Props {
     className?: string
@@ -20,7 +21,8 @@ export class CoverView extends React.Component<Props> {
             <section className={this.bem.getClassName(className)}>
                 <CoverHeader />
                 <Switch>
-                    <Route path={routes.cover.login} exact={true} component={CoverLoginView}/>
+                    <Route path={routes.cover.login} component={CoverLoginView}/>
+                    <Route path={routes.cover.signUp} component={CoverSignUpView}/>
                     <Redirect from={routes.cover.index} exact={true} to={routes.cover.login}/>
                 </Switch>
             </section>

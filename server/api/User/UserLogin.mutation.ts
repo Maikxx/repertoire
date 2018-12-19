@@ -3,7 +3,7 @@ import { GraphQLNonNull } from 'graphql'
 import { UserService } from '../../domains/User/UserService'
 
 export interface AuthArgs {
-    auth?: {
+    auth: {
         email: string
         password: string
     }

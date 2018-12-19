@@ -18,7 +18,7 @@ export const UserType = new GraphQLObjectType({
             type: new GraphQLNonNull(GraphQLString),
             description: 'Encrypted password',
         },
-        admin: {
+        isAdmin: {
             type: GraphQLBoolean,
             description: 'Whether or not the user is admin',
         },
@@ -46,6 +46,10 @@ export const UserInputType = new GraphQLInputObjectType({
         password: {
             type: GraphQLString,
             description: 'Encrypted password',
+        },
+        isAdmin: {
+            type: GraphQLBoolean,
+            description: 'A switch whether or not the user is an admin',
         },
     },
 })

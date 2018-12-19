@@ -4,5 +4,6 @@ export const routes = {
         index: '/cover',
         login: '/cover/login',
         forgot: '/cover/forgot',
+        signUp: '/cover/signup',
     },
 }
