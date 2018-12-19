@@ -1,9 +1,9 @@
 import { GraphQLNonNull } from 'graphql'
-import { UserType, UserInputType } from './User.type'
+import { UserInputType, AuthType } from './User.type'
 import { UserService } from '../../domains/User/UserService'
 
 export const createUser = () => ({
-    type: UserType,
+    type: AuthType,
     description: 'Create a user on database',
     args: {
         user: {

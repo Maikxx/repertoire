@@ -1,7 +1,7 @@
 import { ApolloError } from 'apollo-server-express'
 import { encrypt, compare } from '../../services/Encrypter'
 import { encodeToken } from '../../services/TokenManager'
-import { getCurrentISOStringDate } from '../../services/DateFormatter'
+import { getCurrentISOStringDate, getDateFromISOString } from '../../services/DateFormatter'
 import { User } from '../../models/User'
 import { AuthArgs } from '../../api/User/userLogin.mutation'
 import * as mongoose from 'mongoose'
@@ -86,8 +86,16 @@ export const UserService = () => {
                 throw new ApolloError('User already exists', '409')
             }
 
-            const response = await newUser.save()
-            return response
+            const user = await newUser.save() as any
+            const token = encodeToken({
+                id: user._id,
+                email: user.email,
+                createdAt: user.createdAt,
+            })
+
+            return {
+                token,
+            }
         } catch (error) {
             throw new ApolloError(error.message, '500')
         }
