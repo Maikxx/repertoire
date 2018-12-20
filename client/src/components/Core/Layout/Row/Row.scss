@@ -6,4 +6,8 @@
     &--should-align-default {
         align-items: flex-start;
     }
+
+    &--should-justify-end {
+        justify-content: flex-end;
+    }
 }

@@ -58,7 +58,10 @@ export class Inbox extends React.Component<Props> {
                                 Names of the PROs
                             </Field>
                         </FieldGroup>
-                        <Row>
+                        <Row
+                            justifyEnd={true}
+                            className={this.bem.getElement('action-bar')}
+                        >
                             <Button
                                 buttonStyle={ButtonStyleType.Secondary}
                                 isSmall={true}
