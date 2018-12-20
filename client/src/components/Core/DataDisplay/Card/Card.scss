@@ -1,0 +1,8 @@
+.rps-Card {
+    @import '../../../../scss/variables/colors';
+
+    display: block;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.33);
+    background-color: $color-white;
+}
