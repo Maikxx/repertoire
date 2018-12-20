@@ -1,0 +1,14 @@
+.rps-ArtistItem {
+    .rps-Card {
+        padding: 8px 16px;
+    }
+
+    .rps-Heading {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .rps-Icon + * {
+        margin-left: 12px;
+    }
+}

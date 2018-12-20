@@ -5,6 +5,7 @@ import { Sidebar } from '../../Chrome/SideBar/SideBar'
 import { SidebarList } from '../../Chrome/SideBar/SideBarList'
 import { SidebarListHeader } from '../../Chrome/Sidebar/SidebarListHeader'
 import { InboxItem } from './InboxItem'
+import { ArtistItem } from './ArtistItem'
 
 interface Props {
     className?: string
@@ -23,6 +24,12 @@ export class InboxSidebar extends React.Component<Props> {
                         Inbox
                     </SidebarListHeader>
                     <InboxItem />
+                </SidebarList>
+                <SidebarList>
+                    <SidebarListHeader level={2}>
+                        Artists
+                    </SidebarListHeader>
+                    <ArtistItem />
                 </SidebarList>
             </Sidebar>
         )
