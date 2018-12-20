@@ -5,6 +5,8 @@ import { Row } from '../../Core/Layout/Row/Row'
 import LogoWhiteHorizontal from '../../../../public/images/logo/rpt-logo-white-horizontal.svg'
 import { Image } from '../../Core/Image/Image'
 import { Wrap } from '../../Core/Layout/Wrap/Wrap'
+import { Link } from 'react-router-dom'
+import { routes } from '../../../views/routes'
 
 interface Props {
     className?: string
@@ -20,10 +22,12 @@ export class PageHeader extends React.Component<Props> {
             <header className={this.bem.getClassName(className)}>
                 <Wrap>
                     <Row>
-                        <Image
-                            src={LogoWhiteHorizontal}
-                            alt={`Repertoire logo`}
-                        />
+                        <Link to={routes.app.index}>
+                            <Image
+                                src={LogoWhiteHorizontal}
+                                alt={`Repertoire logo`}
+                            />
+                        </Link>
                     </Row>
                 </Wrap>
             </header>
