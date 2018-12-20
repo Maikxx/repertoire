@@ -5,6 +5,7 @@ import { Row } from '../../../components/Core/Layout/Row/Row'
 import { Wrap } from '../../../components/Core/Layout/Wrap/Wrap'
 import { InboxSidebar } from '../../../components/App/Inbox/InboxSidebar/InboxSidebar'
 import { Inbox } from '../../../components/App/Inbox/Inbox/Inbox'
+import { Background } from '../../../components/Core/Background/Background'
 
 interface Props {
     className?: string
@@ -24,6 +25,7 @@ export class InboxView extends React.Component<Props> {
                         <Inbox />
                     </Row>
                 </Wrap>
+                <Background />
             </View>
         )
     }

@@ -1,8 +1,9 @@
 .rps-Inbox {
     @import '../../../../scss/variables/colors';
 
-    position: relative;
     color: $color-soft-brown;
+    position: relative;
+    z-index: 1;
 
     &__heading {
         color: $color-blue;

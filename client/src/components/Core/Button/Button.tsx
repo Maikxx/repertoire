@@ -26,7 +26,7 @@ export class Button extends React.Component<Props> {
     }))
 
     public render() {
-        const { children, className, buttonStyle, isFullWidth, ...restProps } = this.props
+        const { children, className, buttonStyle, isFullWidth, isSmall, ...restProps } = this.props
 
         return (
             <button
