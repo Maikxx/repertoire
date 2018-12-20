@@ -8,5 +8,8 @@ export const routes = {
     },
     app: {
         index: '/app',
+        inbox: {
+            index: '/app/inbox',
+        },
     },
 }

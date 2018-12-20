@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { BEM } from '../services/BEMService'
 import { RouteComponentProps, Switch, Route, Redirect } from 'react-router-dom'
-import { CoverView } from './CoverView/CoverView'
+import { CoverView } from './Cover/CoverView'
 import { routes } from './routes'
 import { getAuthToken } from '../services/LocalStorageService'
 import { AuthenticatedRoute } from '../components/Core/AuthenticatedRoute/AuthenticatedRoute'
-import { AppView } from './AppView/AppView'
+import { AppView } from './App/AppView'
 import { View } from '../components/Core/Layout/View/View'
 
 interface Props extends RouteComponentProps {}

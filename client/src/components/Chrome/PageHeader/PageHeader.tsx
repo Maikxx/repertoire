@@ -4,6 +4,7 @@ import { BEM } from '../../../services/BEMService'
 import { Row } from '../../Core/Layout/Row/Row'
 import LogoWhiteHorizontal from '../../../../public/images/logo/rpt-logo-white-horizontal.svg'
 import { Image } from '../../Core/Image/Image'
+import { Wrap } from '../../Core/Layout/Wrap/Wrap'
 
 interface Props {
     className?: string
@@ -17,12 +18,14 @@ export class PageHeader extends React.Component<Props> {
 
         return (
             <header className={this.bem.getClassName(className)}>
-                <Row>
-                    <Image
-                        src={LogoWhiteHorizontal}
-                        alt={`Repertoire logo`}
-                    />
-                </Row>
+                <Wrap>
+                    <Row>
+                        <Image
+                            src={LogoWhiteHorizontal}
+                            alt={`Repertoire logo`}
+                        />
+                    </Row>
+                </Wrap>
             </header>
         )
     }
