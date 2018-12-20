@@ -1,9 +1,9 @@
 import './InboxSidebar.scss'
 import * as React from 'react'
-import { BEM } from '../../../services/BEMService'
-import { Sidebar } from '../../Chrome/SideBar/SideBar'
-import { SidebarList } from '../../Chrome/SideBar/SideBarList'
-import { SidebarListHeader } from '../../Chrome/Sidebar/SidebarListHeader'
+import { BEM } from '../../../../services/BEMService'
+import { Sidebar } from '../../../Chrome/SideBar/SideBar'
+import { SidebarList } from '../../../Chrome/SideBar/SideBarList'
+import { SidebarListHeader } from '../../../Chrome/Sidebar/SidebarListHeader'
 import { InboxItem } from './InboxItem'
 import { ArtistItem } from './ArtistItem'
 

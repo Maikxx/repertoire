@@ -3,7 +3,7 @@ import { BEM } from '../../../services/BEMService'
 import { View } from '../../../components/Core/Layout/View/View'
 import { Row } from '../../../components/Core/Layout/Row/Row'
 import { Wrap } from '../../../components/Core/Layout/Wrap/Wrap'
-import { InboxSidebar } from '../../../components/App/Inbox/InboxSidebar'
+import { InboxSidebar } from '../../../components/App/Inbox/InboxSidebar/InboxSidebar'
 
 interface Props {
     className?: string
