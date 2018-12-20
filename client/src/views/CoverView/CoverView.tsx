@@ -7,6 +7,7 @@ import { routes } from '../routes'
 import { CoverLoginView } from './CoverLoginView'
 import { CoverSignUpView } from './CoverSignUpView'
 import { CoverForgotPasswordView } from './CoverForgotPasswordView'
+import { View } from '../../components/Core/Layout/View/View'
 
 interface Props {
     className?: string
@@ -19,7 +20,7 @@ export class CoverView extends React.Component<Props> {
         const { className } = this.props
 
         return (
-            <section className={this.bem.getClassName(className)}>
+            <View className={this.bem.getClassName(className)}>
                 <CoverHeader />
                 <Switch>
                     <Route path={routes.cover.login} component={CoverLoginView}/>
@@ -27,7 +28,7 @@ export class CoverView extends React.Component<Props> {
                     <Route path={routes.cover.forgot} component={CoverForgotPasswordView}/>
                     <Redirect from={routes.cover.index} exact={true} to={routes.cover.login}/>
                 </Switch>
-            </section>
+            </View>
         )
     }
 }

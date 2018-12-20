@@ -10,6 +10,7 @@ import { Button, ButtonStyleType } from '../../components/Core/Button/Button'
 import { TextLink } from '../../components/Core/Text/TextLink/TextLink'
 import { routes } from '../routes'
 import { RouteComponentProps } from 'react-router-dom'
+import { View } from '../../components/Core/Layout/View/View'
 
 interface Props extends RouteComponentProps {
     className?: string
@@ -33,7 +34,7 @@ export class CoverForgotPasswordView extends React.Component<Props, State> {
         const { canSubmitForm } = this.state
 
         return (
-            <div className={this.bem.getClassName(className)}>
+            <View className={this.bem.getClassName(className)}>
                 <Form renderFormTitle={this.renderFormTitle}>
                     <FieldCollection>
                         <FieldGroup>
@@ -62,7 +63,7 @@ export class CoverForgotPasswordView extends React.Component<Props, State> {
                         Have an account? Log in here
                     </TextLink>
                 </Form>
-            </div>
+            </View>
         )
     }
 

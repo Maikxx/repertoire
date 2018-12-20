@@ -13,6 +13,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import gql from 'graphql-tag'
 import { Mutation, MutationFn } from 'react-apollo'
 import { setAuthToken } from '../../services/LocalStorageService'
+import { View } from '../../components/Core/Layout/View/View'
 
 const LOGIN_MUTATION = gql`
     mutation userLogin($auth: AuthInputType!) {
@@ -66,7 +67,7 @@ export class CoverLoginView extends React.Component<Props, State> {
         }
 
         return (
-            <div className={this.bem.getClassName(className)}>
+            <View className={this.bem.getClassName(className)}>
                 <Mutation<LoginMutationResponse, LoginMutationVariables> mutation={LOGIN_MUTATION}>
                     {(mutate, { loading, data, error }) => (
                         <Form
@@ -116,7 +117,7 @@ export class CoverLoginView extends React.Component<Props, State> {
                         </Form>
                     )}
                 </Mutation>
-            </div>
+            </View>
         )
     }
 

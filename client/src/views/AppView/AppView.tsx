@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { BEM } from '../../services/BEMService'
 import { PageHeader } from '../../components/Chrome/PageHeader/PageHeader'
+import { View } from '../../components/Core/Layout/View/View'
 
 interface Props {
     className?: string
@@ -13,9 +14,9 @@ export class AppView extends React.Component<Props> {
         const { className } = this.props
 
         return (
-            <div className={this.bem.getClassName(className)}>
+            <View className={this.bem.getClassName(className)}>
                 <PageHeader />
-            </div>
+            </View>
         )
     }
 }

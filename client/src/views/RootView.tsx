@@ -6,6 +6,7 @@ import { routes } from './routes'
 import { getAuthToken } from '../services/LocalStorageService'
 import { AuthenticatedRoute } from '../components/Core/AuthenticatedRoute/AuthenticatedRoute'
 import { AppView } from './AppView/AppView'
+import { View } from '../components/Core/Layout/View/View'
 
 interface Props extends RouteComponentProps {}
 
@@ -20,7 +21,10 @@ export class RootView extends React.Component<Props> {
             : routes.cover.index
 
         return (
-            <main className={this.bem.getClassName()}>
+            <View
+                className={this.bem.getClassName()}
+                isMain={true}
+            >
                 <Switch>
                     <AuthenticatedRoute
                         path={routes.app.index}
@@ -36,7 +40,7 @@ export class RootView extends React.Component<Props> {
                         to={redirectToRoute}
                     />
                 </Switch>
-            </main>
+            </View>
         )
     }
 }

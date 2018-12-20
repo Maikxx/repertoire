@@ -12,6 +12,7 @@ import { routes } from '../routes'
 import { RouteComponentProps } from 'react-router-dom'
 import gql from 'graphql-tag'
 import { Mutation, MutationFn } from 'react-apollo'
+import { View } from '../../components/Core/Layout/View/View'
 
 const SIGN_UP_USER_MUTATION = gql`
     mutation createUser($user: UserInputType!) {
@@ -68,7 +69,7 @@ export class CoverSignUpView extends React.Component<Props, State> {
         }
 
         return (
-            <div className={this.bem.getClassName(className)}>
+            <View className={this.bem.getClassName(className)}>
                 <Mutation<SignUpMutationResponse, SignUpMutationVariables> mutation={SIGN_UP_USER_MUTATION}>
                     {(mutate, { loading, data, error }) => (
                         <Form
@@ -126,7 +127,7 @@ export class CoverSignUpView extends React.Component<Props, State> {
                         </Form>
                     )}
                 </Mutation>
-            </div>
+            </View>
         )
     }
 
