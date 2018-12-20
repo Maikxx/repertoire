@@ -1,0 +1,13 @@
+.rps-Inbox {
+    @import '../../../../scss/variables/colors';
+
+    position: relative;
+
+    .rps-Heading {
+        color: $color-blue;
+    }
+
+    .rps-Card {
+        padding: 72px 60px 24px;
+    }
+}

@@ -4,6 +4,7 @@ import { View } from '../../../components/Core/Layout/View/View'
 import { Row } from '../../../components/Core/Layout/Row/Row'
 import { Wrap } from '../../../components/Core/Layout/Wrap/Wrap'
 import { InboxSidebar } from '../../../components/App/Inbox/InboxSidebar/InboxSidebar'
+import { Inbox } from '../../../components/App/Inbox/Inbox/Inbox'
 
 interface Props {
     className?: string
@@ -18,11 +19,9 @@ export class InboxView extends React.Component<Props> {
         return (
             <View className={this.bem.getClassName(className)}>
                 <Wrap>
-                    <Row>
+                    <Row alignDefault={true}>
                         <InboxSidebar />
-                        <section>
-                            Inbox
-                        </section>
+                        <Inbox />
                     </Row>
                 </Wrap>
             </View>

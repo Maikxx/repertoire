@@ -4,10 +4,13 @@ import { BEM } from '../../../../services/BEMService'
 
 interface Props {
     className?: string
+    alignDefault?: boolean
 }
 
 export class Row extends React.PureComponent<Props> {
-    private bem = new BEM('Row')
+    private bem = new BEM('Row', () => ({
+        'should-align-default': this.props.alignDefault,
+    }))
 
     public render() {
         const { children, className } = this.props

@@ -4,6 +4,8 @@ import { BEM } from '../../../services/BEMService'
 
 export enum ButtonStyleType {
     Brand = 'brand',
+    Secondary = 'secondary',
+    Default = 'default',
 }
 
 interface Props {
@@ -11,14 +13,16 @@ interface Props {
     className?: string
     disabled?: boolean
     isFullWidth?: boolean
+    isSmall?: boolean
     type: string
 }
 
 export class Button extends React.Component<Props> {
     private bem = new BEM('Button', () => ({
         [`is-${this.props.buttonStyle}`]: true,
-        'is-full-width': this.props.isFullWidth,
         'is-disabled': this.props.disabled,
+        'is-full-width': this.props.isFullWidth,
+        'is-small': this.props.isSmall,
     }))
 
     public render() {

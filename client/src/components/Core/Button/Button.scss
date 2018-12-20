@@ -9,6 +9,8 @@
     border: 0;
     transition: .005s all ease-in-out;
 
+    // Types //
+
     &--is-brand {
         background-color: $color-brand;
         border-bottom: 4px solid $color-dark-green;
@@ -17,16 +19,28 @@
         &:active {
             background-color: $color-dark-green;
         }
+    }
 
+    &--is-secondary {
+        color: $color-white;
+        background-color: $color-secondary;
+        border-bottom: 4px solid $color-purple;
+
+        &:hover,
         &:active {
-            transform: translateY(4px);
-            border-bottom-width: 0;
-            margin-bottom: 5px;
+            background-color: $color-purple;
         }
     }
 
-    &--is-full-width {
-        width: 100%;
+    &--is-default {
+        color: $color-grey;
+        background-color: transparent;
+        border-bottom: 0;
+
+        &:hover,
+        &:active {
+            color: $color-dark-grey;
+        }
     }
 
     &--is-disabled {
@@ -34,11 +48,19 @@
         &:hover,
         &:active {
             background-color: $color-dark-grey;
-            transform: unset;
             border-bottom: 4px solid $color-dark-grey;
-            margin-bottom: 0;
             pointer-events: none;
             cursor: not-allowed;
         }
+    }
+
+    // Style adjustments //
+
+    &--is-full-width {
+        width: 100%;
+    }
+
+    &--is-small {
+        padding: 8px 16px;
     }
 }
