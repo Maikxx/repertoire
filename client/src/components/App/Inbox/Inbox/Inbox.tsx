@@ -21,46 +21,91 @@ export class Inbox extends React.Component<Props> {
 
         return (
             <section className={this.bem.getClassName(className)}>
-                <Card>
+                <Card className={this.bem.getElement('card')}>
                     <Column>
-                        <Heading level={2}>
+                        <Heading
+                            className={this.bem.getElement('heading')}
+                            level={2}
+                        >
                             Confirm song information
                         </Heading>
-                        <Row>
-                            <Field title={`Writer / composer`} isVertical={true}>
+                        <Row className={this.bem.getElement('field-row')}>
+                            <Field
+                                isInverse={true}
+                                isVertical={true}
+                                title={`Writer / composer`}
+                            >
                                 Name of the artist(s)
                             </Field>
-                            <Field title={`Date`} isVertical={true}>
+                            <Field
+                                isInverse={true}
+                                isVertical={true}
+                                title={`Date`}
+                            >
                                 Date of recording
                             </Field>
                         </Row>
-                        <Row>
-                            <Field title={`Song title`} isVertical={true}>
+                        <Row className={this.bem.getElement('field-row')}>
+                            <Field
+                                isInverse={true}
+                                isVertical={true}
+                                title={`Song title`}
+                            >
                                 Name of the song
                             </Field>
-                            <Field title={`Location`} isVertical={true}>
+                            <Field
+                                isInverse={true}
+                                title={`Location`}
+                                isVertical={true}
+                            >
                                 Loction where the song is created
                             </Field>
                         </Row>
-                        <FieldGroup title={`Split`}>
+                        <FieldGroup
+                            className={this.bem.getElement('field-group')}
+                            isVertical={true}
+                            title={`Split`}
+                        >
                             50% / 50%
                         </FieldGroup>
-                        <FieldGroup title={`Publishers`}>
-                            <Field title={`Names`}>
-                                A state to check if the names of publishers can be shown
-                            </Field>
-                            <Field title={`Role`}>
-                                Role of the publisher
-                            </Field>
+                        <FieldGroup
+                            className={this.bem.getElement('field-group')}
+                            isVertical={true}
+                            title={`Publishers`}
+                        >
+                            <Row className={this.bem.getElement('field-row')}>
+                                <Field
+                                    isInverse={true}
+                                    isVertical={true}
+                                    title={`Names`}
+                                >
+                                    A state to check if the names of publishers can be shown
+                                </Field>
+                                <Field
+                                    isInverse={true}
+                                    isVertical={true}
+                                    title={`Role`}
+                                >
+                                    Role of the publisher
+                                </Field>
+                            </Row>
                         </FieldGroup>
-                        <FieldGroup title={`PRO`}>
-                            <Field title={`Names`}>
+                        <FieldGroup
+                            className={this.bem.getElement('field-group')}
+                            isVertical={true}
+                            title={`PRO`}
+                        >
+                            <Field
+                                isInverse={true}
+                                isVertical={true}
+                                title={`Names`}
+                            >
                                 Names of the PROs
                             </Field>
                         </FieldGroup>
                         <Row
-                            justifyEnd={true}
                             className={this.bem.getElement('action-bar')}
+                            justifyEnd={true}
                         >
                             <Button
                                 buttonStyle={ButtonStyleType.Secondary}

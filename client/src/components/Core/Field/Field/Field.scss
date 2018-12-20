@@ -11,9 +11,20 @@
 
     &__content {
         flex: 5;
+        font-size: 1rem;
     }
 
     .rps-Column > .rps-Field__content {
         margin-top: 8px;
+    }
+
+    &--is-inverse {
+        .rps-Field__title {
+            font-size: 1rem;
+        }
+
+        .rps-Field__content {
+            font-size: 1.25rem;
+        }
     }
 }

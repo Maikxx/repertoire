@@ -28,4 +28,19 @@
             padding-top: 0;
         }
     }
+
+    &--is-vertical {
+        .rps-FieldGroup__content {
+            padding-top: unset;
+            margin-left: unset;
+            flex: unset;
+        }
+
+        .rps-Field {
+            &,
+            & + .rps-Field {
+                margin-top: 12px;
+            }
+        }
+    }
 }

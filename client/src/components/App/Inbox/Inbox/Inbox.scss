@@ -2,13 +2,29 @@
     @import '../../../../scss/variables/colors';
 
     position: relative;
+    color: $color-soft-brown;
 
-    .rps-Heading {
+    &__heading {
         color: $color-blue;
+        margin-bottom: 24px;
     }
 
-    .rps-Card {
+    &__card {
         padding: 72px 60px 24px;
+    }
+
+    &__field-group {
+        margin-top: 12px;
+    }
+
+    &__field-row {
+        .rps-Field {
+            flex: 1;
+        }
+
+        + .rps-Inbox__field-row {
+            margin-top: 12px;
+        }
     }
 
     &__action-bar {

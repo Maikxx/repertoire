@@ -7,12 +7,15 @@ import { Column } from '../../Layout/Column/Column'
 interface Props {
     className?: string
     isLabel?: boolean
-    title: string
+    isInverse?: boolean
     isVertical?: boolean
+    title: string
 }
 
 export class Field extends React.Component<Props> {
-    private bem = new BEM('Field')
+    private bem = new BEM('Field', () => ({
+        'is-inverse': this.props.isInverse,
+    }))
 
     public render() {
         const { className } = this.props
