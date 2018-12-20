@@ -105,7 +105,7 @@ export class CoverLoginView extends React.Component<Props, State> {
                                 isFullWidth={true}
                                 type={`submit`}
                             >
-                                Login
+                                Sign in
                             </Button>
                             <TextLink to={routes.cover.forgot}>
                                 Forgot password?
