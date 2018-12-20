@@ -69,7 +69,7 @@ export class CoverForgotPasswordView extends React.Component<Props, State> {
 
     private renderFormTitle = () => {
         return (
-            <Text Element={`legend`}>
+            <Text element={`legend`}>
                 Reset password
             </Text>
         )

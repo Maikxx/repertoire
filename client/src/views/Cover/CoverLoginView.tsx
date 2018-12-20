@@ -123,7 +123,7 @@ export class CoverLoginView extends React.Component<Props, State> {
 
     private renderFormTitle = () => {
         return (
-            <Text Element={`legend`}>
+            <Text element={`legend`}>
                 Sign in
             </Text>
         )

@@ -4,14 +4,17 @@ import { BEM } from '../../../../services/BEMService'
 
 interface Props {
     className?: string
-    Element: string
+    element: string
+    isSubtle?: boolean
 }
 
 export class Text extends React.Component<Props> {
-    private bem = new BEM('Text')
+    private bem = new BEM('Text', () => ({
+        'is-subtle': this.props.isSubtle,
+    }))
 
     public render() {
-        const { children, className, Element } = this.props
+        const { children, className, element: Element } = this.props
 
         return (
             <Element className={this.bem.getClassName(className)}>

@@ -1,5 +1,22 @@
 .rps-InboxItem {
+    .rps-Row {
+        align-items: flex-start;
+    }
+
     .rps-Card {
         padding: 16px;
+    }
+
+    .rps-Icon + * {
+        margin-left: 24px;
+    }
+
+    .rps-Heading {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .rps-Column > * + * {
+        margin-top: 6px;
     }
 }

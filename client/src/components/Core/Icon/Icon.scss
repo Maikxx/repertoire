@@ -1,0 +1,15 @@
+.rps-Icon {
+    @import '../../../scss/variables/colors';
+
+    height: 60px;
+    min-width: 60px;
+
+    &--is-placeholder {
+        border: 1px solid $color-dark-grey;
+    }
+
+    &--is-small {
+        height: 36px;
+        min-width: 36px;
+    }
+}
