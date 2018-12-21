@@ -11,6 +11,7 @@
     position: relative;
     overflow: hidden;
     z-index: 1;
+    outline: none;
 
     // Types //
 
@@ -64,13 +65,26 @@
     }
 
     &--is-disabled {
-        &,
+        background-color: $color-dark-grey;
+        pointer-events: none;
+        cursor: not-allowed;
+
+        &::after {
+            content: "";
+            height: unset;
+            left: unset;
+            position: unset;
+            top: unset;
+            transition: unset;
+            width: unset;
+            z-index: unset;
+        }
+
         &:hover,
         &:active {
-            background-color: $color-dark-grey;
-            border-bottom: 4px solid $color-dark-grey;
-            pointer-events: none;
-            cursor: not-allowed;
+            &::after {
+                transform: unset;
+            }
         }
     }
 

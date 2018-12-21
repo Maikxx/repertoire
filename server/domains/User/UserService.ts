@@ -5,9 +5,10 @@ import { getCurrentISOStringDate, getDateFromISOString } from '../../services/Da
 import { User } from '../../models/User'
 import { AuthArgs } from '../../api/User/userLogin.mutation'
 import * as mongoose from 'mongoose'
+import { UpdateUserArgs } from '../../api/User/updateUser.mutation'
 
 interface UserDataArgs {
-    _id?: string
+    _id: string
     user: {
         email: string
         // isAdmin?: boolean
@@ -20,7 +21,7 @@ interface DeleteUserArgs {
 }
 
 export const UserService = () => {
-    const GetUserData = (args?: UserDataArgs, update = false) => {
+    const GetUserData = (args?: UpdateUserArgs, update = false) => {
         if (!args) {
             throw new ApolloError('No arguments were found', '400')
         }
@@ -116,7 +117,7 @@ export const UserService = () => {
         }
     }
 
-    const UpdateUser = async (args: UserDataArgs) => {
+    const UpdateUser = async (args: UpdateUserArgs) => {
         const { _id } = args
         const updatedUserData = GetUserData(args, true)
 

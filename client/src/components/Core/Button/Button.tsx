@@ -13,6 +13,7 @@ interface Props {
     className?: string
     disabled?: boolean
     isFullWidth?: boolean
+    onClick?: React.MouseEventHandler<HTMLButtonElement>
     isSmall?: boolean
     type: string
 }

@@ -16,4 +16,9 @@
     &--is-round {
         border-radius: 50%;
     }
+
+    &--is-extra-small {
+        height: 16px;
+        min-width: 16px;
+    }
 }

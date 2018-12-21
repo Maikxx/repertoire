@@ -8,6 +8,8 @@ export const createUser = () => ({
     args: {
         user: {
             type: new GraphQLNonNull(UserInputType),
+            description: 'The input type required to create a user, includes email and password',
+            required: true,
         },
     },
     resolve: (_, args) => {

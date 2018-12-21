@@ -13,9 +13,10 @@ export const getUser = () => ({
         _id: {
             type: new GraphQLNonNull(MongoID),
             description: 'ID of the user that you wanna get',
+            required: true,
         },
     },
-    resolve: async (root, args: GetUserArgs) => {
+    resolve: async (_, args: GetUserArgs) => {
         const userService = UserService()
 
         const user = await userService.GetUserById(args._id)

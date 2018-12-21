@@ -9,7 +9,8 @@ export const deleteUser = () => ({
     args: {
         _id: {
             type: new GraphQLNonNull(MongoID),
-            description: 'The ID of the user that you wanna update',
+            description: 'The ID of the user that you want to delete',
+            required: true,
         },
     },
     resolve: (_, args) => {

@@ -4,6 +4,7 @@ import { BEM } from '../../../services/BEMService'
 
 interface Props {
     className?: string
+    isExtraSmall?: boolean
     isRound?: boolean
     isSmall?: boolean
     src?: string
@@ -11,6 +12,7 @@ interface Props {
 
 export class Icon extends React.Component<Props> {
     private bem = new BEM('Icon', () => ({
+        'is-extra-small': this.props.isExtraSmall,
         'is-small': this.props.isSmall,
         'is-round': this.props.isRound,
         'is-placeholder': !this.props.src,

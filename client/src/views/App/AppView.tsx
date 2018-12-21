@@ -14,11 +14,11 @@ export class AppView extends React.Component<Props> {
     private bem = new BEM('AppView')
 
     public render() {
-        const { className } = this.props
+        const { className, history } = this.props
 
         return (
             <View className={this.bem.getClassName(className)}>
-                <PageHeader />
+                <PageHeader history={history} />
                 <Switch>
                     <Route path={routes.app.inbox.index} component={InboxView}/>
                     <Redirect

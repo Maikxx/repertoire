@@ -12,11 +12,19 @@ export const UserType = new GraphQLObjectType({
         },
         email: {
             type: new GraphQLNonNull(GraphQLString),
-            description: 'User email',
+            description: 'The email address of the user',
+        },
+        name: {
+            type: GraphQLString,
+            description: 'The name of the user',
         },
         password: {
             type: new GraphQLNonNull(GraphQLString),
-            description: 'Encrypted password',
+            description: 'The encrypted password of the user',
+        },
+        profileImage: {
+            type: GraphQLString,
+            description: 'A base64 profile image of the user',
         },
         isAdmin: {
             type: GraphQLBoolean,
@@ -24,12 +32,12 @@ export const UserType = new GraphQLObjectType({
         },
         createdAt: {
             type: GraphQLString,
-            description: 'Created date in ISO format',
+            description: 'Date of creation as ISO date',
             resolve: user => getISOStringFromDate(user.createdAt),
         },
         updatedAt: {
             type: GraphQLString,
-            description: 'Updated date in ISO format',
+            description: 'Date of the last update as ISO date',
             resolve: user => getISOStringFromDate(user.updatedAt),
         },
     }),
@@ -41,15 +49,23 @@ export const UserInputType = new GraphQLInputObjectType({
     fields: {
         email: {
             type: GraphQLString,
-            description: 'User email',
+            description: 'The email address of the user',
         },
         password: {
             type: GraphQLString,
-            description: 'Encrypted password',
+            description: 'The encrypted password of the user',
         },
         isAdmin: {
             type: GraphQLBoolean,
             description: 'A switch whether or not the user is an admin',
+        },
+        name: {
+            type: GraphQLString,
+            description: 'The name of the user',
+        },
+        profileImage: {
+            type: GraphQLString,
+            description: 'A base64 profile image of the user',
         },
     },
 })

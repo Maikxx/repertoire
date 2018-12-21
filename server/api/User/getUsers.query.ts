@@ -3,7 +3,7 @@ import { UserType } from './User.type'
 
 export const getUsers = () => ({
     type: UserType,
-    resolve: async (root, args) => {
+    resolve: async (_, args) => {
         const userService = UserService()
 
         const users = await userService.GetUsers()
