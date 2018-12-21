@@ -20,7 +20,6 @@ export const Song = mongoose.model('Song', new mongoose.Schema({
         type:  Date,
     },
     location: {
-        required: true,
         type: String,
     },
     publishers: {
