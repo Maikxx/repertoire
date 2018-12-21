@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose'
 
-export const Artist = mongoose.model('Artist', new mongoose.Schema({
+export const PerformanceRightsOrganization = mongoose.model('PerformanceRightsOrganization', new mongoose.Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
     },
@@ -8,13 +8,12 @@ export const Artist = mongoose.model('Artist', new mongoose.Schema({
         required: true,
         type: Date,
     },
+    name: {
+        required: true,
+        type: String,
+    },
     updatedAt: {
         required: true,
         type: Date,
-    },
-    user: {
-        ref: 'User',
-        required: true,
-        type: mongoose.Schema.Types.ObjectId,
     },
 }))

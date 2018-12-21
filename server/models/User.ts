@@ -1,10 +1,37 @@
 import * as mongoose from 'mongoose'
 
 export const User = mongoose.model('User', new mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
-    email: { type: String, required: true },
-    isAdmin: { type: Boolean, default: false },
-    password: { type: String, required: true },
-    createdAt: { type: Date, required: true },
-    updatedAt: { type: Date, required: true },
+    _id: {
+        type: mongoose.Schema.Types.ObjectId,
+    },
+    createdAt: {
+        required: true,
+        type: Date,
+    },
+    email: {
+        required: true,
+        type: String,
+    },
+    isAdmin: {
+        default: false,
+        type: Boolean,
+    },
+    name: {
+        type: String,
+    },
+    password: {
+        required: true,
+        type: String,
+    },
+    performanceRightsOrganization: {
+        ref: 'PerformanceRightsOrganization',
+        type: mongoose.Schema.Types.ObjectId,
+    },
+    profileImage: {
+        type: String,
+    },
+    updatedAt: {
+        required: true,
+        type: Date,
+    },
 }))

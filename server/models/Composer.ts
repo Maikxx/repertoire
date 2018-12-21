@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose'
 
-export const Artist = mongoose.model('Artist', new mongoose.Schema({
+export const Composer = mongoose.model('Composer', new mongoose.Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
     },
