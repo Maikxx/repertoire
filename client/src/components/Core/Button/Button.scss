@@ -31,7 +31,6 @@
         &:active {
             &::after {
                 transform: translateY(-90%);
-                transition: transform .1s;
             }
         }
     }
