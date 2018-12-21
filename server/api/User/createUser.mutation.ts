@@ -1,6 +1,11 @@
 import { GraphQLNonNull } from 'graphql'
 import { UserInputType, AuthType } from './User.type'
 import { UserService } from '../../domains/User/UserService'
+import { UserInputTypeInterface } from '../../types/User'
+
+export interface CreateUserArgs {
+    user: UserInputTypeInterface
+}
 
 export const createUser = () => ({
     type: AuthType,
@@ -12,7 +17,7 @@ export const createUser = () => ({
             required: true,
         },
     },
-    resolve: (_, args) => {
+    resolve: (_, args: CreateUserArgs) => {
         const userService = UserService()
         return userService.CreateUser(args)
     },

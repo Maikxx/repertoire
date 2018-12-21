@@ -19,6 +19,7 @@ export const userLogin = () => ({
     },
     resolve: (_, args: AuthArgs) => {
         const userService = UserService()
+
         return userService.UserLogin(args)
     },
 })

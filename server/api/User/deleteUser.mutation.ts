@@ -3,6 +3,10 @@ import { MongoID } from '../../scalars/MongoID'
 import { UserType } from './User.type'
 import { UserService } from '../../domains/User/UserService'
 
+export interface DeleteUserArgs {
+    _id: string
+}
+
 export const deleteUser = () => ({
     type: UserType,
     description: 'Deletes a user on database',
@@ -13,7 +17,7 @@ export const deleteUser = () => ({
             required: true,
         },
     },
-    resolve: (_, args) => {
+    resolve: (_, args: DeleteUserArgs) => {
         const userService = UserService()
         return userService.DeleteUser(args)
     },

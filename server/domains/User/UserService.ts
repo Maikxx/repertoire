@@ -6,22 +6,11 @@ import { User } from '../../models/User'
 import { AuthArgs } from '../../api/User/userLogin.mutation'
 import * as mongoose from 'mongoose'
 import { UpdateUserArgs } from '../../api/User/updateUser.mutation'
-
-interface UserDataArgs {
-    _id: string
-    user: {
-        email: string
-        // isAdmin?: boolean
-        password: string
-    }
-}
-
-interface DeleteUserArgs {
-    _id: string
-}
+import { CreateUserArgs } from '../../api/User/createUser.mutation'
+import { DeleteUserArgs } from '../../api/User/deleteUser.mutation'
 
 export const UserService = () => {
-    const GetUserData = (args?: UpdateUserArgs, update = false) => {
+    const GetUserData = (args?: CreateUserArgs | UpdateUserArgs, update = false) => {
         if (!args) {
             throw new ApolloError('No arguments were found', '400')
         }
@@ -92,7 +81,7 @@ export const UserService = () => {
         }
     }
 
-    const CreateUser = async (args: UserDataArgs) => {
+    const CreateUser = async (args: CreateUserArgs) => {
         const newUserData = GetUserData(args)
         try {
             const newUser = new User(newUserData)
