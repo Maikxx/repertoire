@@ -8,15 +8,38 @@
     padding: 16px 32px;
     border: 0;
     transition: .005s all ease-in-out;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 
     // Types //
 
-    &--is-brand {
-        background-color: $color-brand;
-        border-bottom: 4px solid $color-dark-green;
+    &--is-brand,
+    &--is-secondary {
+        &::after {
+            content: "";
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 90%;
+            transition: transform .1s;
+            width: 100%;
+            z-index: -2;
+        }
 
         &:hover,
         &:active {
+            &::after {
+                transform: translateY(-90%);
+                transition: transform .1s;
+            }
+        }
+    }
+
+    &--is-brand {
+        background-color: $color-brand;
+
+        &::after {
             background-color: $color-dark-green;
         }
     }
@@ -24,10 +47,8 @@
     &--is-secondary {
         color: $color-white;
         background-color: $color-secondary;
-        border-bottom: 4px solid $color-purple;
 
-        &:hover,
-        &:active {
+        &::after {
             background-color: $color-purple;
         }
     }
