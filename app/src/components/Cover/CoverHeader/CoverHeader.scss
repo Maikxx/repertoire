@@ -1,0 +1,15 @@
+.rpa-CoverHeader {
+    @import '../../../scss/variables/colors';
+
+    .rpa-Image {
+        height: 180px;
+        margin: 0 auto 12px;
+    }
+
+    .rpa-Heading {
+        font-size: 24px;
+        font-weight: 500;
+        color: $color-white;
+        text-align: center;
+    }
+}

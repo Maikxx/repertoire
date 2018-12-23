@@ -1,0 +1,100 @@
+.rpa-Button {
+    @import '../../../scss/variables/colors';
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px;
+    border: 0;
+    transition: .005s all ease-in-out;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    outline: none;
+
+    // Types //
+
+    &--is-brand,
+    &--is-secondary {
+        &::after {
+            content: "";
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 90%;
+            transition: transform .1s;
+            width: 100%;
+            z-index: -2;
+        }
+
+        &:hover,
+        &:active {
+            &::after {
+                transform: translateY(-90%);
+            }
+        }
+    }
+
+    &--is-brand {
+        background-color: $color-brand;
+
+        &::after {
+            background-color: $color-dark-green;
+        }
+    }
+
+    &--is-secondary {
+        color: $color-white;
+        background-color: $color-secondary;
+
+        &::after {
+            background-color: $color-purple;
+        }
+    }
+
+    &--is-default {
+        color: $color-grey;
+        background-color: transparent;
+        border-bottom: 0;
+
+        &:hover,
+        &:active {
+            color: $color-dark-grey;
+        }
+    }
+
+    &--is-disabled {
+        background-color: $color-dark-grey;
+        pointer-events: none;
+        cursor: not-allowed;
+
+        &::after {
+            content: "";
+            height: unset;
+            left: unset;
+            position: unset;
+            top: unset;
+            transition: unset;
+            width: unset;
+            z-index: unset;
+        }
+
+        &:hover,
+        &:active {
+            &::after {
+                transform: unset;
+            }
+        }
+    }
+
+    // Style adjustments //
+
+    &--is-full-width {
+        width: 100%;
+    }
+
+    &--is-small {
+        padding: 8px 16px;
+    }
+}

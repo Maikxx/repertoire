@@ -1,0 +1,8 @@
+.rpa-FieldCollection {
+    display: flex;
+    flex-direction: column;
+
+    > .rpa-Field + .rpa-Field {
+        margin-top: 12px;
+    }
+}

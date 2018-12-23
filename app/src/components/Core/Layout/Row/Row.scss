@@ -1,0 +1,13 @@
+.rpa-Row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &--should-align-default {
+        align-items: flex-start;
+    }
+
+    &--should-justify-end {
+        justify-content: flex-end;
+    }
+}

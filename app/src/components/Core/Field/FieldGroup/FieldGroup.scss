@@ -1,0 +1,46 @@
+.rpa-FieldGroup {
+    @import '../../../../scss/variables/colors';
+
+    > .rpa-Row {
+        align-items: unset;
+    }
+
+    &__title {
+        font-weight: 600;
+        flex: 1;
+        font-size: 1.3rem;
+        color: $color-text;
+    }
+
+    &__content {
+        padding-top: 12px;
+        flex: 5;
+        margin-left: 24px;
+    }
+
+    .rpa-Field + .rpa-Field {
+        margin-top: 36px;
+    }
+
+    &:not(.rpa-FieldGroup--has-title) {
+        .rpa-FieldGroup__content {
+            margin-left: 0;
+            padding-top: 0;
+        }
+    }
+
+    &--is-vertical {
+        .rpa-FieldGroup__content {
+            padding-top: unset;
+            margin-left: unset;
+            flex: unset;
+        }
+
+        .rpa-Field {
+            &,
+            & + .rpa-Field {
+                margin-top: 12px;
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+.rpa-Field {
+    &__container {
+        width: 100%;
+    }
+
+    &__title {
+        font-weight: normal;
+        font-size: 1.25rem;
+        flex: 1;
+    }
+
+    &__content {
+        flex: 5;
+        font-size: 1rem;
+    }
+
+    .rpa-Column > .rpa-Field__content {
+        margin-top: 8px;
+    }
+
+    &--is-inverse {
+        .rpa-Field__title {
+            font-size: 1rem;
+        }
+
+        .rpa-Field__content {
+            font-size: 1.25rem;
+        }
+    }
+}

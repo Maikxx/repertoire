@@ -1,0 +1,19 @@
+.rpa-Form {
+    width: 100%;
+
+    > .rpa-Text {
+        margin-bottom: 24px;
+        font-size: 36px;
+        font-weight: 500;
+    }
+
+    > .rpa-Button {
+        margin-top: 36px;
+    }
+
+    > .rpa-TextLink {
+        margin: 24px auto 0;
+        text-align: center;
+        width: 100%;
+    }
+}
