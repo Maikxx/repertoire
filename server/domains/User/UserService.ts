@@ -1,7 +1,7 @@
 import { ApolloError } from 'apollo-server-express'
 import { encrypt, compare } from '../../services/Encrypter'
 import { encodeToken } from '../../services/TokenManager'
-import { getCurrentISOStringDate, getDateFromISOString } from '../../services/DateFormatter'
+import { getCurrentISOStringDate } from '../../services/DateFormatter'
 import { User } from '../../models/User'
 import { AuthArgs } from '../../api/User/userLogin.mutation'
 import * as mongoose from 'mongoose'
@@ -15,9 +15,17 @@ export const UserService = () => {
             throw new ApolloError('No arguments were found', '400')
         }
 
-        const email = args.user.email
-        const password = encrypt(args.user.password)
-        // const isAdmin = args.user.isAdmin
+        const {
+            email,
+            password,
+            isAdmin,
+            isArtist,
+            name,
+            isPublisher,
+            profileImage,
+        } = args.user
+
+        const encryptedPassword = encrypt(password)
 
         const createdAt = getCurrentISOStringDate()
         const updatedAt = getCurrentISOStringDate()
@@ -25,23 +33,43 @@ export const UserService = () => {
         const userData = {
             _id: null,
             email: null,
+            name: null,
             password: null,
             createdAt: null,
             updatedAt: null,
-            // isAdmin: null,
+            isAdmin: null,
+            isArtist: null,
+            isPublisher: null,
+            profileImage: null,
         }
 
         if (email) {
             userData.email = email
         }
 
-        if (password) {
-            userData.password = password
+        if (encryptedPassword) {
+            userData.password = encryptedPassword
         }
 
-        // if (isAdmin === true || isAdmin === false) {
-        //     userData.isAdmin = isAdmin
-        // }
+        if (name) {
+            userData.name = name
+        }
+
+        if (profileImage) {
+            userData.profileImage = profileImage
+        }
+
+        if (isAdmin === true || isAdmin === false) {
+            userData.isAdmin = isAdmin
+        }
+
+        if (isArtist === true || isArtist === false) {
+            userData.isArtist = isArtist
+        }
+
+        if (isPublisher === true || isPublisher === false) {
+            userData.isPublisher = isPublisher
+        }
 
         if (update) {
             userData.updatedAt = updatedAt

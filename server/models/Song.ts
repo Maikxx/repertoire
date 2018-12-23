@@ -4,10 +4,6 @@ export const Song = mongoose.model('Song', new mongoose.Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
     },
-    composers: {
-        required: true,
-        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Composer' }],
-    },
     coverImage: {
         type: String,
     },
@@ -21,9 +17,6 @@ export const Song = mongoose.model('Song', new mongoose.Schema({
     },
     location: {
         type: String,
-    },
-    publishers: {
-        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Publisher' }],
     },
     name: {
         required: true,

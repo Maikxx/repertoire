@@ -16,16 +16,20 @@ export const User = mongoose.model('User', new mongoose.Schema({
         default: false,
         type: Boolean,
     },
+    isArtist: {
+        default: false,
+        type: Boolean,
+    },
+    isPublisher: {
+        default: false,
+        type: Boolean,
+    },
     name: {
         type: String,
     },
     password: {
         required: true,
         type: String,
-    },
-    performanceRightsOrganization: {
-        ref: 'PerformanceRightsOrganization',
-        type: mongoose.Schema.Types.ObjectId,
     },
     profileImage: {
         type: String,
