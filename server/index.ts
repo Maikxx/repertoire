@@ -10,24 +10,26 @@ if (process.env.NODE !== 'production') {
     require('dotenv').load()
 }
 
-connectToMongoAtlas()
+(async () => {
+    connectToMongoAtlas()
 
-const auth = jwt({
-    secret: process.env.SECRET_KEY,
-    credentialsRequired: false,
-})
+    const auth = jwt({
+        secret: process.env.SECRET_KEY,
+        credentialsRequired: false,
+    })
 
-const app = express()
-app.use(helmet())
-app.use(cors())
-app.use(auth)
+    const app = express()
+    app.use(helmet())
+    app.use(cors())
+    app.use(auth)
 
-const server = new ApolloServer({
-    schema: createSchema(),
-    context: ({ req }) => ({ user: req.user }),
-})
-server.applyMiddleware({ app })
+    const server = new ApolloServer({
+        schema: createSchema(),
+        context: ({ req }) => ({ user: req.user }),
+    })
+    server.applyMiddleware({ app })
 
-app.listen(({ port: 5000 }), () => {
-    console.info(`GraphQL is now running on http://localhost:5000${server.graphqlPath}`)
-})
+    app.listen(({ port: 5000 }), () => {
+        console.info(`GraphQL is now running on http://localhost:5000${server.graphqlPath}`)
+    })
+})()
