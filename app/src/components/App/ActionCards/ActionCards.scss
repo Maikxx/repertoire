@@ -1,0 +1,14 @@
+.rpa-ActionCards {
+    position: relative;
+    z-index: 5;
+    padding: 24px;
+
+    .rpa-Card {
+        min-height: 140px;
+        padding: 12px;
+
+        & + .rpa-Card {
+            margin-top: 24px;
+        }
+    }
+}
