@@ -1,0 +1,46 @@
+.rpa-PageHeader {
+    @import '../../../scss/variables/colors';
+
+    width: 100%;
+    background-image: linear-gradient(to bottom, #42eadc, #6b47fe);
+    padding: 13px 0;
+
+    &__logo {
+        height: 60px;
+    }
+
+    &__logout-button {
+        margin-left: auto;
+        margin-right: -12px;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+
+        &::after {
+            content: '';
+            height: 100%;
+            left: 32px;
+            right: 32px;
+            position: absolute;
+            background-color: $color-brand;
+            top: 100%;
+            transition: transform .1s;
+            z-index: -2;
+        }
+
+        .rpa-Icon {
+            margin-left: 12px;
+        }
+
+        &:hover {
+            &::after {
+                transform: translateY(-4px);
+            }
+        }
+
+        &,
+        &:hover {
+            color: $color-white;
+        }
+    }
+}
