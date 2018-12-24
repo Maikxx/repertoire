@@ -5,6 +5,7 @@ import { Row } from '../../Core/Layout/Row/Row'
 import { Wrap } from '../../Core/Layout/Wrap/Wrap'
 import { Button, ButtonStyleType } from '../../Core/Button/Button'
 import { Query } from 'react-apollo'
+import MenuIcon from '../../../../public/images/icons/menu-button.svg'
 import gql from 'graphql-tag'
 import { Icon } from '../../Core/Icon/Icon'
 import LogoutIcon from '../../../../public/images/icons/logout.svg'
@@ -43,6 +44,10 @@ export class PageHeader extends React.Component<Props> {
             <header className={this.bem.getClassName(className)}>
                 <Wrap>
                     <Row>
+                        <Icon
+                            className={this.bem.getElement('menu-icon')}
+                            src={MenuIcon}
+                        />
                         <Query<CurrentUserResponse> query={GET_CURRENT_USER_QUERY}>
                             {({ data, loading, refetch, error }) => {
                                 const contentToShow = data && data.me && (data.me.name || data.me.email)

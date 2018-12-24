@@ -5,13 +5,14 @@
     background-image: linear-gradient(to bottom, #42eadc, #6b47fe);
     padding: 13px 0;
 
-    &__logo {
-        height: 60px;
+    & &__menu-icon {
+        height: 20px;
+        min-width: 30px;
     }
 
     &__logout-button {
         margin-left: auto;
-        margin-right: -12px;
+        margin-right: -20px;
         position: relative;
         z-index: 1;
         overflow: hidden;
