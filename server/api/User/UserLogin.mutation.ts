@@ -1,6 +1,6 @@
 import { AuthType, AuthInputType } from './User.type'
 import { GraphQLNonNull } from 'graphql'
-import { UserService } from '../../domains/User/UserService'
+import { UserLogin } from '../../domains/User/UserLoginService'
 
 export interface AuthArgs {
     auth: {
@@ -18,8 +18,6 @@ export const userLogin = () => ({
         },
     },
     resolve: (_, args: AuthArgs) => {
-        const userService = UserService()
-
-        return userService.UserLogin(args)
+        return UserLogin(args)
     },
 })

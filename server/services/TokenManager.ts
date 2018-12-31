@@ -6,7 +6,7 @@ require('dotenv').load()
 const secretKey = process.env.SECRET_KEY
 
 interface TokenPayload {
-    id: string
+    id: number
     email?: string
     createdAt?: string
 }

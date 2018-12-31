@@ -1,7 +1,6 @@
 export interface Song {
-    _id: string
+    _id: number
     createdAt: string | Date
-    updatedAt: string | Date
     coverImage?: string
     dateOfRecording: string | Date
     location?: string

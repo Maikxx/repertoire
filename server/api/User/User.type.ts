@@ -1,5 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLBoolean, GraphQLInputObjectType } from 'graphql'
-import { MongoID } from '../../scalars/MongoID'
+import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLBoolean, GraphQLInputObjectType, GraphQLInt } from 'graphql'
 import { getISOStringFromDate } from '../../services/DateFormatter'
 
 export const UserType = new GraphQLObjectType({
@@ -7,7 +6,7 @@ export const UserType = new GraphQLObjectType({
     description: 'A user',
     fields: () => ({
         _id: {
-            type: new GraphQLNonNull(MongoID),
+            type: new GraphQLNonNull(GraphQLInt),
             description: 'The id of the user',
         },
         email: {
@@ -34,11 +33,6 @@ export const UserType = new GraphQLObjectType({
             type: GraphQLString,
             description: 'Date of creation as ISO date',
             resolve: user => getISOStringFromDate(user.createdAt),
-        },
-        updatedAt: {
-            type: GraphQLString,
-            description: 'Date of the last update as ISO date',
-            resolve: user => getISOStringFromDate(user.updatedAt),
         },
     }),
 })

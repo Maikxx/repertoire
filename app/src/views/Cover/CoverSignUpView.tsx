@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { BEM } from '../../services/BEMService'
 import { FieldCollection } from '../../components/Core/Field/FieldCollection/FieldCollection'
 import { FieldGroup } from '../../components/Core/Field/FieldGroup/FieldGroup'
 import { Field } from '../../components/Core/Field/Field/Field'
@@ -24,8 +23,8 @@ const SIGN_UP_USER_MUTATION = gql`
 
 interface SignUpMutationVariables {
     user: {
-        email?: string
-        password?: string
+        email: string
+        password: string
         isAdmin?: boolean
     }
 }
@@ -34,9 +33,7 @@ interface SignUpMutationResponse {
     token: string
 }
 
-interface Props extends RouteComponentProps {
-    className?: string
-}
+interface Props extends RouteComponentProps {}
 
 interface State {
     email?: string
@@ -55,10 +52,7 @@ export class CoverSignUpView extends React.Component<Props, State> {
         canSubmitForm: false,
     }
 
-    private bem = new BEM('CoverSignUpView')
-
     public render() {
-        const { className } = this.props
         const { redirectToReferrer, canSubmitForm } = this.state
 
         if (redirectToReferrer) {
@@ -69,9 +63,9 @@ export class CoverSignUpView extends React.Component<Props, State> {
         }
 
         return (
-            <View className={this.bem.getClassName(className)}>
+            <View>
                 <Mutation<SignUpMutationResponse, SignUpMutationVariables> mutation={SIGN_UP_USER_MUTATION}>
-                    {(mutate, { loading, data, error }) => (
+                    {mutate => (
                         <Form
                             renderFormTitle={this.renderFormTitle}
                             onSubmit={this.onSubmit(mutate)}
@@ -131,7 +125,7 @@ export class CoverSignUpView extends React.Component<Props, State> {
         )
     }
 
-    private renderFormTitle = () => {
+    private renderFormTitle = (): JSX.Element => {
         return (
             <Text element={`legend`}>
                 Sign up
@@ -145,7 +139,7 @@ export class CoverSignUpView extends React.Component<Props, State> {
         return (!!email && !!password && (!!confirmPassword && password === confirmPassword))
     }
 
-    private onChangeInput: React.ChangeEventHandler<HTMLInputElement> = (event): null | void => {
+    private onChangeInput: React.ChangeEventHandler<HTMLInputElement> = (event): void => {
         const { target: { value, name }} = event
 
         this.setState({
@@ -155,7 +149,7 @@ export class CoverSignUpView extends React.Component<Props, State> {
         })
     }
 
-    private onSubmit = (userSignUp: MutationFn) => (event: React.FormEvent<HTMLFormElement>) => {
+    private onSubmit = (userSignUp: MutationFn) => (event: React.FormEvent<HTMLFormElement>): void => {
         const { email, password } = this.state
 
         if (!email || !password) {

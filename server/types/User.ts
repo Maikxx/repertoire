@@ -1,5 +1,5 @@
 export interface UserTypeInterface {
-    _id: string
+    _id: number
     createdAt: Date
     email: string
     isAdmin?: boolean
@@ -7,7 +7,6 @@ export interface UserTypeInterface {
     name?: string
     password: string
     profileImage?: string
-    updatedAt: Date
 }
 
 export interface UserInputTypeInterface {

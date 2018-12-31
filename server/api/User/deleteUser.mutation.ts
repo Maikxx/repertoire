@@ -1,10 +1,9 @@
-import { GraphQLNonNull } from 'graphql'
-import { MongoID } from '../../scalars/MongoID'
+import { GraphQLNonNull, GraphQLInt } from 'graphql'
 import { UserType } from './User.type'
-import { UserService } from '../../domains/User/UserService'
+import { DeleteUser } from '../../domains/User/DeleteUserService'
 
 export interface DeleteUserArgs {
-    _id: string
+    _id: number
 }
 
 export const deleteUser = () => ({
@@ -12,13 +11,12 @@ export const deleteUser = () => ({
     description: 'Deletes a user on database',
     args: {
         _id: {
-            type: new GraphQLNonNull(MongoID),
+            type: new GraphQLNonNull(GraphQLInt),
             description: 'The ID of the user that you want to delete',
             required: true,
         },
     },
     resolve: (_, args: DeleteUserArgs) => {
-        const userService = UserService()
-        return userService.DeleteUser(args)
+        return DeleteUser(args)
     },
 })

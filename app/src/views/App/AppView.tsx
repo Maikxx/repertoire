@@ -6,18 +6,16 @@ import { PageHeader } from '../../components/Chrome/PageHeader/PageHeader'
 import { Background } from '../../components/Core/Background/Background'
 import { ActionCards } from '../../components/App/ActionCards/ActionCards'
 
-interface Props extends RouteComponentProps {
-    className?: string
-}
+interface Props extends RouteComponentProps {}
 
 export class AppView extends React.Component<Props> {
     private bem = new BEM('AppView')
 
     public render() {
-        const { className, history } = this.props
+        const { history } = this.props
 
         return (
-            <View className={this.bem.getClassName(className)}>
+            <View className={this.bem.getClassName()}>
                 <Background />
                 <PageHeader history={history} />
                 <ActionCards />

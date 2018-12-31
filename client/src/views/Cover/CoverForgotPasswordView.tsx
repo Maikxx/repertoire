@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { BEM } from '../../services/BEMService'
 import { FieldCollection } from '../../components/Core/Field/FieldCollection/FieldCollection'
 import { FieldGroup } from '../../components/Core/Field/FieldGroup/FieldGroup'
 import { Field } from '../../components/Core/Field/Field/Field'
@@ -12,9 +11,7 @@ import { routes } from '../routes'
 import { RouteComponentProps } from 'react-router-dom'
 import { View } from '../../components/Core/Layout/View/View'
 
-interface Props extends RouteComponentProps {
-    className?: string
-}
+interface Props extends RouteComponentProps {}
 
 interface State {
     email?: string
@@ -27,14 +24,11 @@ export class CoverForgotPasswordView extends React.Component<Props, State> {
         canSubmitForm: false,
     }
 
-    private bem = new BEM('CoverForgotPasswordView')
-
     public render() {
-        const { className } = this.props
         const { canSubmitForm } = this.state
 
         return (
-            <View className={this.bem.getClassName(className)}>
+            <View>
                 <Form renderFormTitle={this.renderFormTitle}>
                     <FieldCollection>
                         <FieldGroup>
@@ -67,7 +61,7 @@ export class CoverForgotPasswordView extends React.Component<Props, State> {
         )
     }
 
-    private renderFormTitle = () => {
+    private renderFormTitle = (): JSX.Element => {
         return (
             <Text element={`legend`}>
                 Reset password
@@ -81,7 +75,7 @@ export class CoverForgotPasswordView extends React.Component<Props, State> {
         return !!email
     }
 
-    private onChangeInput: React.ChangeEventHandler<HTMLInputElement> = (event): null | void => {
+    private onChangeInput: React.ChangeEventHandler<HTMLInputElement> = (event): void => {
         const { target: { value, name }} = event
 
         this.setState({

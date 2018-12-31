@@ -1,11 +1,10 @@
-import { GraphQLNonNull } from 'graphql'
+import { GraphQLNonNull, GraphQLInt } from 'graphql'
 import { UserType, UserInputType } from './User.type'
-import { UserService } from '../../domains/User/UserService'
-import { MongoID } from '../../scalars/MongoID'
 import { UserInputTypeInterface } from '../../types/User'
+import { UpdateUser } from '../../domains/User/UpdateUserService'
 
 export interface UpdateUserArgs {
-    _id: string
+    _id: number
     user: UserInputTypeInterface
 }
 
@@ -14,7 +13,7 @@ export const updateUser = () => ({
     description: 'Updates a user on database',
     args: {
         _id: {
-            type: new GraphQLNonNull(MongoID),
+            type: new GraphQLNonNull(GraphQLInt),
             description: 'The ID of the user that you want to update',
             required: true,
         },
@@ -25,8 +24,6 @@ export const updateUser = () => ({
         },
     },
     resolve: (_, args: UpdateUserArgs) => {
-        const userService = UserService()
-
-        return userService.UpdateUser(args)
+        return UpdateUser(args)
     },
 })

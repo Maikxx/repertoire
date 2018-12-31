@@ -1,6 +1,6 @@
-import { UserService } from '../domains/User/UserService'
+import { CreateUser } from '../../domains/User/CreateUserService'
 
-export const seedAdminUser = async () => {
+export const seedAdminUser = async (): Promise<void> => {
     const user = {
         name: 'Admin',
         email: 'admin@repertoire.org',
@@ -12,6 +12,5 @@ export const seedAdminUser = async () => {
         profileImage: 'https://avataaars.io/?avatarStyle=Transparent&topType=Hat&accessoriesType=Prescription01&hatColor=Red&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light',
     }
 
-    const userService = UserService()
-    await userService.CreateUser({ user: { ...user }})
+    await CreateUser({ user: { ...user }})
 }

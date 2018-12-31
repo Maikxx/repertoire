@@ -1,5 +1,4 @@
-import { getCurrentISOStringDate } from '../services/DateFormatter'
-import { UserService } from '../domains/User/UserService'
+import { CreateUser } from '../../domains/User/CreateUserService'
 
 const artists = [
     {
@@ -104,7 +103,6 @@ const artists = [
     },
 ]
 
-export const seedArtists = async () => {
-    const userService = UserService()
-    await Promise.all(artists.map(artist => userService.CreateUser({ user: { ...artist }})))
+export const seedArtists = async (): Promise<void> => {
+    await Promise.all(artists.map(artist => CreateUser({ user: { ...artist }})))
 }

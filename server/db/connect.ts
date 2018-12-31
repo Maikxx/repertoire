@@ -1,7 +1,52 @@
-import * as mongoose from 'mongoose'
+import { Client } from 'pg'
+require('dotenv').load()
 
-export const connectToMongoAtlas = (): void => {
-    const connectionLink = `mongodb://${process.env.MONGO_ATLAS_NAME}:${process.env.MONGO_ATLAS_PW}${process.env.MONGO_ATLAS_CLUSTER}`
+export const database = new Client({
+    host: process.env.PG_HOST,
+    database: process.env.PG_DATABASE,
+    port: Number(process.env.PG_PORT),
+    password: process.env.PG_PASSWORD,
+})
 
-    mongoose.connect(connectionLink, { useNewUrlParser: true })
+export const connectToDatabase = async (): Promise<void> => {
+    await database.connect()
+    await database.query(
+        `CREATE TABLE IF NOT EXISTS public.users
+        (
+            _id serial PRIMARY KEY,
+            name character varying(150) COLLATE pg_catalog."default" NOT NULL,
+            email text NOT NULL UNIQUE,
+            password text NOT NULL,
+            "profileImage" text,
+            "isAdmin" boolean DEFAULT false,
+            "isArtist" boolean DEFAULT false,
+            "isPublisher" boolean DEFAULT false,
+            "createdAt" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+        )
+        WITH (
+            OIDS = FALSE
+        )
+        TABLESPACE pg_default;
+
+        ALTER TABLE public.users
+            OWNER to admin;
+
+        CREATE TABLE IF NOT EXISTS public.songs
+        (
+            _id serial PRIMARY KEY,
+            name character varying(150) COLLATE pg_catalog."default" NOT NULL,
+            location character varying(150),
+            "coverImage" text,
+            "dateOfRecording" timestamp,
+            "createdAt" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+        )
+        WITH (
+            OIDS = FALSE
+        )
+        TABLESPACE pg_default;
+
+        ALTER TABLE public.songs
+            OWNER to admin;
+        `
+    )
 }

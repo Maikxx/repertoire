@@ -1,17 +1,19 @@
 import * as express from 'express'
 import * as helmet from 'helmet'
 import * as cors from 'helmet'
+import * as jwt from 'express-jwt'
+require('dotenv').load()
 import { ApolloServer } from 'apollo-server-express'
 import { createSchema } from './api/schema'
-import { connectToMongoAtlas } from './db/connect'
-import * as jwt from 'express-jwt'
+import { connectToDatabase } from './db/connect'
+import { runSeeders } from './db/seeders/runSeeders'
 
-if (process.env.NODE !== 'production') {
-    require('dotenv').load()
-}
+; (async () => {
+    await connectToDatabase()
 
-(async () => {
-    connectToMongoAtlas()
+    if (process.env.RUN_SEEDERS === 'true') {
+        await runSeeders()
+    }
 
     const auth = jwt({
         secret: process.env.SECRET_KEY,
