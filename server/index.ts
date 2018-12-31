@@ -7,6 +7,7 @@ import { ApolloServer } from 'apollo-server-express'
 import { createSchema } from './api/schema'
 import { connectToDatabase } from './db/connect'
 import { runSeeders } from './db/seeders/runSeeders'
+import { spawn } from 'child_process'
 
 ; (async () => {
     await connectToDatabase()
@@ -34,4 +35,10 @@ import { runSeeders } from './db/seeders/runSeeders'
     app.listen(({ port: 5000 }), () => {
         console.info(`GraphQL is now running on http://localhost:5000${server.graphqlPath}`)
     })
+
+    if (process.env.NODE !== 'production') {
+        app.on('sigterm', () => {
+            spawn('sh', ['./db/stop_db.sh'])
+        })
+    }
 })()
