@@ -1,8 +1,14 @@
 #react-root {
+    @import './variables/colors.scss';
+
     display: flex;
     flex: 1;
 
     .rpa-RootView {
         flex: 1 0;
+    }
+
+    .rpa-AppView {
+        background-color: $color-white;
     }
 }

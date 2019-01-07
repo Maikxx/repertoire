@@ -6,13 +6,16 @@ import { CoverLoginView } from './CoverLoginView'
 import { CoverSignUpView } from './CoverSignUpView'
 import { CoverForgotPasswordView } from './CoverForgotPasswordView'
 import { CenterView } from '../../components/Chrome/CenterView/CenterView'
+import { BEM } from '../../services/BEMService'
 
 interface Props extends RouteComponentProps {}
 
 export class CoverView extends React.Component<Props> {
+    private bem = new BEM('CoverView')
+
     public render() {
         return (
-            <CenterView>
+            <CenterView className={this.bem.getClassName()}>
                 <CoverHeader />
                 <Switch>
                     <Route path={routes.cover.login} component={CoverLoginView}/>
