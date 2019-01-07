@@ -5,6 +5,7 @@ import { Column } from '../../Core/Layout/Column/Column'
 import { RegisterSongCard } from './Cards/RegisterSongCard'
 import { History } from 'history'
 import { AddMusicCreatorCard } from './Cards/AddMusicCreatorCard'
+import { AddPublisherCard } from './Cards/AddPublisherCard'
 
 interface Props {
     className?: string
@@ -21,6 +22,7 @@ export class ActionCards extends React.Component<Props> {
             <Column className={this.bem.getClassName(className)}>
                 <RegisterSongCard history={history} />
                 <AddMusicCreatorCard history={history} />
+                <AddPublisherCard history={history} />
             </Column>
         )
     }
