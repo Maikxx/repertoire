@@ -1,7 +1,7 @@
 import './Card.scss'
 import * as React from 'react'
 import { BEM } from '../../../../services/BEMService'
-import { Icon } from '../../Icon/Icon'
+import { Icon, IconType } from '../../Icon/Icon'
 import { Column } from '../../Layout/Column/Column'
 import { Heading } from '../../Text/Heading/Heading'
 import { Text } from '../../Text/Text/Text'
@@ -10,7 +10,7 @@ import { Row } from '../../Layout/Row/Row'
 interface Props {
     className?: string
     description: string
-    icon?: string
+    iconType?: IconType
     onClick?: React.MouseEventHandler<HTMLDivElement>
     title: string
 }
@@ -21,7 +21,7 @@ export class Card extends React.Component<Props> {
     }))
 
     public render() {
-        const { className, description, icon, onClick, title } = this.props
+        const { className, description, iconType, onClick, title } = this.props
 
         return (
             <div
@@ -29,10 +29,10 @@ export class Card extends React.Component<Props> {
                 onClick={onClick}
             >
                 <Row>
-                    {icon && (
+                    {iconType && (
                         <Icon
                             className={this.bem.getElement('icon')}
-                            src={icon}
+                            type={iconType}
                             isSmall={true}
                         />
                     )}

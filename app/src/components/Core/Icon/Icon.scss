@@ -4,6 +4,10 @@
     height: 60px;
     min-width: 60px;
 
+    svg {
+        margin-right: 0;
+    }
+
     &--is-placeholder {
         border: 1px solid $color-dark-grey;
     }

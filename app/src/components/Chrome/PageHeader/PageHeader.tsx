@@ -5,11 +5,8 @@ import { Row } from '../../Core/Layout/Row/Row'
 import { Wrap } from '../../Core/Layout/Wrap/Wrap'
 import { Button, ButtonStyleType } from '../../Core/Button/Button'
 import { Query } from 'react-apollo'
-import MenuIcon from '../../../../public/images/icons/menu-button.svg'
-import BackArrowIcon from '../../../../public/images/icons/left-arrow.svg'
 import gql from 'graphql-tag'
-import { Icon } from '../../Core/Icon/Icon'
-import LogoutIcon from '../../../../public/images/icons/logout.svg'
+import { Icon, IconType } from '../../Core/Icon/Icon'
 import { logOut } from '../../../services/UserService'
 import { History, Location } from 'history'
 import { Heading } from '../../Core/Text/Heading/Heading'
@@ -71,7 +68,7 @@ export class PageHeader extends React.Component<Props> {
                                             {userInformationToShow}
                                             <Icon
                                                 isExtraSmall={true}
-                                                src={LogoutIcon}
+                                                type={IconType.LogOut}
                                             />
                                         </Row>
                                     </Button>
@@ -92,7 +89,7 @@ export class PageHeader extends React.Component<Props> {
                 <Link to={routes.app.dashboard.index}>
                     <Icon
                         className={this.bem.getElement('menu-icon')}
-                        src={BackArrowIcon}
+                        type={IconType.LeftArrow}
                     />
                 </Link>
             )
@@ -101,7 +98,7 @@ export class PageHeader extends React.Component<Props> {
         return (
             <Icon
                 className={this.bem.getElement('menu-icon')}
-                src={MenuIcon}
+                type={IconType.Menu}
             />
         )
     }

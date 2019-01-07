@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Card } from '../../../Core/DataDisplay/Card/Card'
-import AddCreatorIcon from '../../../../../public/images/icons/add-creator.svg'
 import { History } from 'history'
 import { routes } from '../../../../views/routes'
+import { IconType } from '../../../Core/Icon/Icon'
 
 interface Props {
     history: History
@@ -16,7 +16,7 @@ export class AddMusicCreatorCard extends React.Component<Props> {
             <Card
                 title={`Add Music Creator`}
                 description={`On this page you will be able to add a music creator to an existing song that you made`}
-                icon={AddCreatorIcon}
+                iconType={IconType.AddCreator}
                 onClick={() => history.push(routes.app.dashboard.addCreator)}
             />
         )
