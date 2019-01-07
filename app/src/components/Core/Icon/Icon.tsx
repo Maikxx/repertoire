@@ -14,17 +14,11 @@ export enum IconType {
 
 interface Props {
     className?: string
-    isExtraSmall?: boolean
-    isRound?: boolean
-    isSmall?: boolean
     type?: IconType
 }
 
 export class Icon extends React.Component<Props> {
     private bem = new BEM('Icon', () => ({
-        'is-extra-small': this.props.isExtraSmall,
-        'is-small': this.props.isSmall,
-        'is-round': this.props.isRound,
         'is-placeholder': !this.props.type,
     }))
 

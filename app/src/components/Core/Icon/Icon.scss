@@ -1,8 +1,8 @@
 .rpa-Icon {
     @import '../../../scss/variables/colors';
 
-    height: 60px;
-    min-width: 60px;
+    height: 16px;
+    width: 16px;
 
     svg {
         margin-right: 0;
@@ -10,19 +10,5 @@
 
     &--is-placeholder {
         border: 1px solid $color-dark-grey;
-    }
-
-    &--is-small {
-        height: 36px;
-        min-width: 36px;
-    }
-
-    &--is-round {
-        border-radius: 50%;
-    }
-
-    &--is-extra-small {
-        height: 16px;
-        min-width: 16px;
     }
 }

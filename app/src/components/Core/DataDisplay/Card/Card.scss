@@ -13,17 +13,18 @@
 
     & &__icon {
         height: 20px;
-        color: #3768d1;
+        color: $color-blue;
+        margin-right: 12px;
     }
 
     &__heading {
         font-size: 1.3rem;
         margin-bottom: 12px;
-        color: #3768d1;
+        color: $color-blue;
     }
 
     &__description {
-        color: #949494;
+        color: $color-soft-brown;
         font-size: .8rem;
     }
 

@@ -33,7 +33,6 @@ export class Card extends React.Component<Props> {
                         <Icon
                             className={this.bem.getElement('icon')}
                             type={iconType}
-                            isSmall={true}
                         />
                     )}
                     <Column>
