@@ -4,10 +4,11 @@
   "private": true,
   "author": "Maikel van Veen <maikeloo10@hotmail.com>",
   "scripts": {
-    "build": "yarn clear-dist && parcel build public/index.html --no-source-maps && yarn move-html-file",
+    "build": "yarn clear-dist && parcel build public/index.html --no-source-maps",
     "clear-dist": "rm -rf dist/",
-    "move-html-file": "mv dist/index.html ./index.html",
-    "start-app": "yarn clear-dist && parcel public/index.html -p 4000"
+    "open-chrome": "wait-on http://localhost:4000 && open -a \"Google Chrome\" http://localhost:4000",
+    "start-app": "yarn clear-dist && concurrently \"yarn watch-app\" \"yarn open-chrome\" --raw",
+    "watch-app": "parcel public/index.html -p 4000"
   },
   "license": "MIT",
   "devDependencies": {
@@ -21,11 +22,13 @@
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "concurrently": "^4.1.0",
     "json5": "^2.1.0",
     "parcel-bundler": "^1.10.3",
     "sass": "^1.15.2",
     "tslint": "^5.12.0",
-    "typescript": "^3.2.2"
+    "typescript": "^3.2.2",
+    "wait-on": "^3.2.0"
   },
   "dependencies": {
     "apollo-boost": "^0.1.22",
