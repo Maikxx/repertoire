@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { BEM } from '../../services/BEMService'
 import { View } from '../../components/Core/Layout/View/View'
-import { RouteComponentProps } from 'react-router-dom'
-import { PageHeader } from '../../components/Chrome/PageHeader/PageHeader'
-import { Background } from '../../components/Core/Background/Background'
-import { ActionCards } from '../../components/App/ActionCards/ActionCards'
+import { RouteComponentProps, Switch, Redirect, Route } from 'react-router-dom'
+import { routes } from '../routes'
+import { DashboardView } from './Dashboard/DashboardView'
 
 interface Props extends RouteComponentProps {}
 
@@ -12,13 +11,12 @@ export class AppView extends React.Component<Props> {
     private bem = new BEM('AppView')
 
     public render() {
-        const { history } = this.props
-
         return (
             <View className={this.bem.getClassName()}>
-                <Background />
-                <PageHeader history={history} />
-                <ActionCards />
+                <Switch>
+                    <Route path={routes.app.dashboard.index} component={DashboardView}/>
+                    <Redirect from={routes.app.index} to={routes.app.dashboard.index}/>
+                </Switch>
             </View>
         )
     }

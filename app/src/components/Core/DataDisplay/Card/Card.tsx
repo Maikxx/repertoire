@@ -1,20 +1,50 @@
 import './Card.scss'
 import * as React from 'react'
 import { BEM } from '../../../../services/BEMService'
+import { Icon } from '../../Icon/Icon'
+import { Column } from '../../Layout/Column/Column'
+import { Heading } from '../../Text/Heading/Heading'
+import { Text } from '../../Text/Text/Text'
+import { Row } from '../../Layout/Row/Row'
 
 interface Props {
     className?: string
+    description: string
+    icon?: string
+    onClick?: React.MouseEventHandler<HTMLDivElement>
+    title: string
 }
 
 export class Card extends React.Component<Props> {
-    private bem = new BEM('Card')
+    private bem = new BEM('Card', () => ({
+        'is-clickable': !!this.props.onClick,
+    }))
 
     public render() {
-        const { children, className } = this.props
+        const { className, description, icon, onClick, title } = this.props
 
         return (
-            <div className={this.bem.getClassName(className)}>
-                {children}
+            <div
+                className={this.bem.getClassName(className)}
+                onClick={onClick}
+            >
+                <Row>
+                    {icon && (
+                        <Icon
+                            className={this.bem.getElement('icon')}
+                            src={icon}
+                            isSmall={true}
+                        />
+                    )}
+                    <Column>
+                        <Heading level={2} className={this.bem.getElement('heading')}>
+                            {title}
+                        </Heading>
+                        <Text element={`p`} className={this.bem.getElement('description')}>
+                            {description}
+                        </Text>
+                    </Column>
+                </Row>
             </div>
         )
     }

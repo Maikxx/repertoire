@@ -81,7 +81,9 @@
         "ter-arrow-parens": [true, "as-needed"],
         "ter-arrow-spacing": [true],
         "ter-func-call-spacing": [true],
-        "ter-indent": [true, 4],
+        "ter-indent": [true, 4, {
+            "SwitchCase": 1
+        }],
         "ter-max-len": [true, 150],
         "ter-no-irregular-whitespace": true,
         "ter-no-sparse-arrays": true,

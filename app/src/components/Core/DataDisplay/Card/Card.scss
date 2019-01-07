@@ -5,4 +5,32 @@
     border-radius: 4px;
     box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.19);
     background-color: $color-white;
+    padding: 12px;
+
+    .rpa-Row {
+        align-items: flex-start;
+    }
+
+    & &__icon {
+        height: 20px;
+    }
+
+    &__heading {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+        color: #3768d1;
+    }
+
+    &__description {
+        color: #949494;
+        font-size: .8rem;
+    }
+
+    & + .rpa-Card {
+        margin-top: 24px;
+    }
+
+    &--is-clickable {
+        cursor: pointer;
+    }
 }
