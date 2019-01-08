@@ -6,6 +6,7 @@ import { FieldCollection } from '../../../../components/Core/Field/FieldCollecti
 import { Field } from '../../../../components/Core/Field/Field/Field'
 import { Wrap } from '../../../../components/Core/Layout/Wrap/Wrap'
 import { TextInput } from '../../../../components/Core/DataEntry/Input/TextInput'
+import { Checkbox } from '../../../../components/Core/DataEntry/Form/Checkbox'
 require('dotenv').load()
 
 interface Props extends RouteComponentProps {}
@@ -52,6 +53,13 @@ export class RegisterSongView extends React.Component<Props, State> {
                                     type={`text`}
                                     placeholder={`Title of the new song`}
                                 />
+                            </Field>
+                            <Field
+                                title={`Multiple creators`}
+                                smallTitle={true}
+                                isLabel={true}
+                            >
+                                <Checkbox name={`hasMultipleCreators`} />
                             </Field>
                         </FieldCollection>
                     </Form>

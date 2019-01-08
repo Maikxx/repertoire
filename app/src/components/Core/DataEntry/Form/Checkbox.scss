@@ -1,0 +1,70 @@
+.rpa-Checkbox {
+    @import '../../../../scss/variables/colors.scss';
+
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+
+    &__input {
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &__checkbox {
+        width: 16px;
+        height: 16px;
+        border-radius: 3px;
+        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.07), rgba(0, 0, 0, 0));
+        border: 1px solid #b7b7b7;
+        display: flex;
+        flex-shrink: 0;
+        justify-content: center;
+        align-items: center;
+        transition: all .3s;
+    }
+
+    &__label {
+        margin-left: 12px;
+        font-size: 14px;
+        color: $color-text;
+        user-select: none;
+    }
+
+    &:hover &__checkbox {
+        border-color: darken(#b7b7b7, 10%)
+    }
+
+    &__mark {
+        color: $color-white;
+        height: unset;
+        width: unset;
+        opacity: 0;
+        transform: scale(0.75);
+        transition: opacity .3s, transform .3s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+    }
+
+    &--is-checked &__mark {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    &--is-checked &__checkbox {
+        background-color: $color-blue;
+        border-color: darken($color-blue, 5%);
+        background-image: none;
+    }
+
+    &--is-checked:hover &__checkbox {
+        border-color: darken($color-blue, 5%);
+    }
+
+    &--is-disabled {
+        cursor: default;
+        .rpa-Checkbox__checkbox {
+            opacity:0.3
+        }
+    }
+}

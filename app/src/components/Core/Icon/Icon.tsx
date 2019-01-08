@@ -10,6 +10,7 @@ export enum IconType {
     LogOut = 'logOut',
     Menu = 'menu',
     RegisterSong = 'registerSong',
+    Check = 'check',
 }
 
 interface Props {
