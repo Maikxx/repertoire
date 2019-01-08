@@ -7,21 +7,29 @@ import { Field } from '../../../../components/Core/Field/Field/Field'
 import { Wrap } from '../../../../components/Core/Layout/Wrap/Wrap'
 import { TextInput } from '../../../../components/Core/DataEntry/Input/TextInput'
 import { Checkbox } from '../../../../components/Core/DataEntry/Form/Checkbox'
-require('dotenv').load()
+import { getArtistToPreview } from '../../../../services/APIService'
 
 interface Props extends RouteComponentProps {}
 
 interface State {
     previewArtistName?: string
+    hasMultpleCreators: boolean
+    hasSplitRevenue: boolean
+    hasPublishers: boolean
+    hasPRO: boolean
 }
 
 export class RegisterSongView extends React.Component<Props, State> {
     public state: State = {
         previewArtistName: '',
+        hasMultpleCreators: true,
+        hasSplitRevenue: true,
+        hasPublishers: true,
+        hasPRO: true,
     }
 
     public render() {
-        const { previewArtistName } = this.state
+        const { previewArtistName, hasMultpleCreators, hasSplitRevenue, hasPublishers, hasPRO } = this.state
 
         return (
             <View>
@@ -54,13 +62,58 @@ export class RegisterSongView extends React.Component<Props, State> {
                                     placeholder={`Title of the new song`}
                                 />
                             </Field>
-                            <Field
-                                title={`Multiple creators`}
-                                smallTitle={true}
-                                isLabel={true}
-                            >
-                                <Checkbox name={`hasMultipleCreators`} />
+                            <Field>
+                                <Checkbox
+                                    name={`hasMultipleCreators`}
+                                    label={`Multiple creators`}
+                                    defaultChecked={true}
+                                    onChange={() => this.setState({ hasMultpleCreators: !hasMultpleCreators })}
+                                />
                             </Field>
+                            {hasMultpleCreators && (
+                                <Field>
+                                    TODO
+                                </Field>
+                            )}
+                            <Field>
+                                <Checkbox
+                                    name={`hasSplitRevenue`}
+                                    label={`Split revenue`}
+                                    defaultChecked={true}
+                                    onChange={() => this.setState({ hasSplitRevenue: !hasSplitRevenue })}
+                                />
+                            </Field>
+                            {hasSplitRevenue && (
+                                <Field>
+                                    TODO
+                                </Field>
+                            )}
+                            <Field>
+                                <Checkbox
+                                    name={`hasPublishers`}
+                                    label={`Publishers`}
+                                    defaultChecked={true}
+                                    onChange={() => this.setState({ hasPublishers: !hasPublishers })}
+                                />
+                            </Field>
+                            {hasPublishers && (
+                                <Field>
+                                    TODO
+                                </Field>
+                            )}
+                            <Field>
+                                <Checkbox
+                                    name={`hasPRO`}
+                                    label={`PRO`}
+                                    defaultChecked={true}
+                                    onChange={() => this.setState({ hasPRO: !hasPRO })}
+                                />
+                            </Field>
+                            {hasPRO && (
+                                <Field>
+                                    TODO
+                                </Field>
+                            )}
                         </FieldCollection>
                     </Form>
                 </Wrap>
@@ -75,18 +128,13 @@ export class RegisterSongView extends React.Component<Props, State> {
                 return
             }
 
-            const lastFmUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${value}&api_key=${process.env.LAST_FM_KEY}&format=json`
-            const response = await fetch(lastFmUrl)
-            const { results: { artistmatches: { artist: artists }}} = await response.json()
-            const [artistToPreview] = artists
+            const artistToPreview = await getArtistToPreview(value)
 
             if (!artistToPreview) {
                 return
             }
 
-            const { name } = artistToPreview
-
-            this.setState({ previewArtistName: name })
+            this.setState({ previewArtistName: artistToPreview.name })
         } catch (error) {
             throw new Error(error)
         }

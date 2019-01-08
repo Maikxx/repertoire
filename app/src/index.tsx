@@ -7,6 +7,7 @@ import { ApolloProvider } from 'react-apollo'
 import { client } from './services/ApolloService'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { routes } from './views/routes'
+require('dotenv').load()
 
 const App: React.SFC = () => (
     <BrowserRouter>

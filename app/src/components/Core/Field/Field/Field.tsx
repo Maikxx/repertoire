@@ -10,7 +10,7 @@ interface Props {
     isInverse?: boolean
     smallTitle?: boolean
     isVertical?: boolean
-    title: string
+    title?: string
 }
 
 export class Field extends React.Component<Props> {
@@ -48,12 +48,12 @@ export class Field extends React.Component<Props> {
     }
 
     private renderContent = () => {
-        const { children, isVertical } = this.props
+        const { children, isVertical, title } = this.props
 
         if (isVertical) {
             return (
                 <Column>
-                    {this.renderTitle()}
+                    {title && this.renderTitle()}
                     <div className={this.bem.getElement('content')}>
                         {children}
                     </div>
@@ -63,7 +63,7 @@ export class Field extends React.Component<Props> {
 
         return (
             <Row>
-                {this.renderTitle()}
+                {title && this.renderTitle()}
                 <div className={this.bem.getElement('content')}>
                     {children}
                 </div>
