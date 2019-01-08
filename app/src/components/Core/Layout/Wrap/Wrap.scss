@@ -1,3 +1,7 @@
 .rpa-Wrap {
-    padding: 0 12px;
+    padding: 0 24px;
+
+    &--all-sides {
+        padding: 24px;
+    }
 }

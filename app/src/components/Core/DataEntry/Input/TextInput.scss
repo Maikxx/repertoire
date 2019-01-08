@@ -1,0 +1,23 @@
+.rpa-TextInput {
+    @import '../../../../scss/variables/colors';
+    @import '../../../../scss/variables/fonts';
+
+    width: 340px;
+    background-color: $color-white;
+    border: 0;
+    padding: 6px 0 12px;
+    color: $color-black;
+    font-size: 1rem;
+    border-bottom: 1px solid;
+    border-bottom-color: #E6E6E6;
+    transition: .1s border-bottom-color;
+
+    &::placeholder {
+        color: $color-text;
+    }
+
+    &:focus {
+        outline: none;
+        border-bottom-color: #83A9F4;
+    }
+}

@@ -8,6 +8,7 @@ interface Props {
     className?: string
     isLabel?: boolean
     isInverse?: boolean
+    smallTitle?: boolean
     isVertical?: boolean
     title: string
 }
@@ -15,6 +16,7 @@ interface Props {
 export class Field extends React.Component<Props> {
     private bem = new BEM('Field', () => ({
         'is-inverse': this.props.isInverse,
+        'small-title': this.props.smallTitle,
     }))
 
     public render() {
