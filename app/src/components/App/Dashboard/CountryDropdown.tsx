@@ -3,6 +3,8 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Select } from '../../Core/DataEntry/Form/Select'
 import { Country } from '../../../types/Country'
+import { Loader } from '../../Core/Feedback/Loader/Loader'
+import { Text } from '../../Core/Text/Text/Text'
 
 const GET_COUNTRIES_QUERY = gql`
     query getCountries {
@@ -22,27 +24,37 @@ interface QueryData {
 export class CountryDropdown extends React.Component<Props> {
     public render() {
         return (
-            <Query<QueryData, {}> query={GET_COUNTRIES_QUERY}>
-                {({ loading, data }) => {
+            <Query<QueryData> query={GET_COUNTRIES_QUERY}>
+                {({ loading, data, error }) => {
                     if (loading) {
-                        return <span>Loading...</span>
+                        return <Loader />
                     }
 
-                    if (!data) {
-                        return <span>No results</span>
+                    if (!data || error) {
+                        return this.renderNotFoundText()
                     }
 
-                    const options = data.getCountries.map(country => ({ value: country._id, label: country.name }))
-
-                    return (
-                        <Select
-                            name={`location`}
-                            options={options}
-                            placeholder={`This song is recorded in`}
-                        />
-                    )
+                    return this.renderWithData(data)
                 }}
             </Query>
+        )
+    }
+
+    private renderNotFoundText = () => (
+        <Text element={`span`} isSubtle={true}>
+            There were no countries found
+        </Text>
+    )
+
+    private renderWithData = (data: QueryData) => {
+        const options = data.getCountries.map(country => ({ value: country._id, label: country.name }))
+
+        return (
+            <Select
+                name={`location`}
+                options={options}
+                placeholder={`This song is recorded in`}
+            />
         )
     }
 }
