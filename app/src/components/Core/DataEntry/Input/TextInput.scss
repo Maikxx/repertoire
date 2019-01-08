@@ -2,7 +2,6 @@
     @import '../../../../scss/variables/colors';
     @import '../../../../scss/variables/fonts';
 
-    width: 340px;
     background-color: $color-white;
     border: 0;
     padding: 6px 0 12px;
@@ -11,9 +10,11 @@
     border-bottom: 1px solid;
     border-bottom-color: #E6E6E6;
     transition: .1s border-bottom-color;
+    width: 100%;
 
     &__wrapper {
         position: relative;
+        width: 100%;
     }
 
     &::placeholder {
