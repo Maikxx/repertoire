@@ -1,6 +1,6 @@
 import './Icon.scss'
 import * as React from 'react'
-import { BEM } from '../../../services/BEMService'
+import { BEM, ClassValue } from '../../../services/BEMService'
 import { IconTypes } from './IconTypes'
 
 export enum IconType {
@@ -16,7 +16,7 @@ export enum IconType {
 }
 
 interface Props {
-    className?: string
+    className?: ClassValue
     type?: IconType
 }
 

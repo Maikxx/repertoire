@@ -1,10 +1,10 @@
 import './CenterView.scss'
 import * as React from 'react'
-import { BEM } from '../../../services/BEMService'
+import { BEM, ClassValue } from '../../../services/BEMService'
 import { View } from '../../Core/Layout/View/View'
 
 interface Props {
-    className?: string
+    className?: ClassValue
 }
 
 export class CenterView extends React.Component<Props> {

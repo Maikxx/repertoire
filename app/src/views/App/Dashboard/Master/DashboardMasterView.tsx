@@ -2,7 +2,6 @@ import * as React from 'react'
 import { View } from '../../../../components/Core/Layout/View/View'
 import { ActionCards } from '../../../../components/App/ActionCards/ActionCards'
 import { RouteComponentProps } from 'react-router'
-import { Background } from '../../../../components/Core/Background/Background'
 
 interface Props extends RouteComponentProps {}
 
@@ -12,7 +11,6 @@ export class DashboardMasterView extends React.Component<Props> {
 
         return (
             <View>
-                <Background />
                 <ActionCards history={history} />
             </View>
         )

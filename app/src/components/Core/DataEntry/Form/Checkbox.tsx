@@ -5,11 +5,11 @@ import { Icon, IconType } from '../../Icon/Icon'
 
 interface Props {
     className?: ClassValue
+    defaultChecked?: boolean
+    disabled?: boolean
+    label?: string | JSX.Element
     name: string
     onChange?: (checked: boolean, name: string) => void
-    defaultChecked?: boolean
-    label?: string | JSX.Element
-    disabled?: boolean
 }
 
 interface State {
@@ -42,7 +42,10 @@ export class Checkbox extends React.PureComponent<Props, State> {
                     disabled={disabled}
                 />
                 <div className={this.bem.getElement('checkbox')}>
-                    <Icon type={IconType.Check} className={this.bem.getElement('mark')}/>
+                    <Icon
+                        type={IconType.Check}
+                        className={this.bem.getElement('mark')}
+                    />
                 </div>
                 <div className={this.bem.getElement('label')}>
                     {label}

@@ -10,21 +10,21 @@ import { ClassValue, BEM } from '../../../../services/BEMService'
 import { Icon, IconType } from '../../Icon/Icon'
 
 interface Props {
-    className?: ClassValue
-    name: string
-    multi?: boolean
     addable?: boolean
-    placeholder?: string
-    options?: SelectOption[]
-    defaultValue?: SelectOption[]
-    onEndReached?: () => void
-    onChange?: (selectedOptions: SelectOption | SelectOption[] | null, name: string) => void
-    onSearch?: (query: string) => void
-    loadingMore?: boolean
-    loading?: boolean
+    className?: ClassValue
     clearable?: boolean
-    searchable?: boolean
+    defaultValue?: SelectOption[]
     disabled?: boolean
+    loading?: boolean
+    loadingMore?: boolean
+    multi?: boolean
+    name: string
+    onChange?: (selectedOptions: SelectOption | SelectOption[] | null, name: string) => void
+    onEndReached?: () => void
+    onSearch?: (query: string) => void
+    options?: SelectOption[]
+    placeholder?: string
+    searchable?: boolean
 }
 
 export interface SelectOption {

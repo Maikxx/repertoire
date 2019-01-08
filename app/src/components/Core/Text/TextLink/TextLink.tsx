@@ -5,7 +5,6 @@ import { Link, LinkProps } from 'react-router-dom'
 
 interface Props extends LinkProps {
     className?: string
-
 }
 
 export class TextLink extends React.Component<Props> {

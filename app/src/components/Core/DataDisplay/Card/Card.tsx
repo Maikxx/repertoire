@@ -1,6 +1,6 @@
 import './Card.scss'
 import * as React from 'react'
-import { BEM } from '../../../../services/BEMService'
+import { BEM, ClassValue } from '../../../../services/BEMService'
 import { Icon, IconType } from '../../Icon/Icon'
 import { Column } from '../../Layout/Column/Column'
 import { Heading } from '../../Text/Heading/Heading'
@@ -8,7 +8,7 @@ import { Text } from '../../Text/Text/Text'
 import { Row } from '../../Layout/Row/Row'
 
 interface Props {
-    className?: string
+    className?: ClassValue
     description: string
     iconType?: IconType
     onClick?: React.MouseEventHandler<HTMLDivElement>

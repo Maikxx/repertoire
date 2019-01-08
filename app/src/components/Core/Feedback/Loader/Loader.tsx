@@ -1,9 +1,9 @@
 import './Loader.scss'
 import * as React from 'react'
-import { BEM } from '../../../../services/BEMService'
+import { BEM, ClassValue } from '../../../../services/BEMService'
 
 interface Props {
-    className?: string
+    className?: ClassValue
 }
 
 export class Loader extends React.Component<Props> {

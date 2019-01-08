@@ -1,15 +1,15 @@
 import './Field.scss'
 import * as React from 'react'
-import { BEM } from '../../../../services/BEMService'
+import { BEM, ClassValue } from '../../../../services/BEMService'
 import { Row } from '../../Layout/Row/Row'
 import { Column } from '../../Layout/Column/Column'
 
 interface Props {
-    className?: string
-    isLabel?: boolean
+    className?: ClassValue
     isInverse?: boolean
-    smallTitle?: boolean
+    isLabel?: boolean
     isVertical?: boolean
+    smallTitle?: boolean
     title?: string
 }
 

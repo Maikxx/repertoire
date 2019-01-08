@@ -1,11 +1,11 @@
 import './Image.scss'
 import * as React from 'react'
-import { BEM } from '../../../services/BEMService'
+import { BEM, ClassValue } from '../../../services/BEMService'
 
 interface Props {
-    className?: string
-    src: string
     alt?: string
+    className?: ClassValue
+    src: string
 }
 
 export class Image extends React.Component<Props> {
