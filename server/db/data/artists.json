@@ -1,0 +1,92 @@
+[
+    {
+        "name": "Linkin Park",
+        "email": "linkinpark@repertoire.org",
+        "isAdmin": false,
+        "isArtist": true,
+        "isPublisher": false,
+        "password": "linkinpark",
+        "profileImage": "https://avataaars.io/?avatarStyle=Transparent&topType=Hat&accessoriesType=Prescription01&hatColor=Red&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
+    },
+    {
+        "name": "Avenged Sevenfold",
+        "email": "avengedsevenfold@repertoire.org",
+        "isAdmin": false,
+        "isArtist": true,
+        "isPublisher": false,
+        "password": "avengedsevenfold",
+        "profileImage": "https://avataaars.io/?avatarStyle=Transparent&topType=Hat&accessoriesType=Prescription01&hatColor=Red&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
+    },
+    {
+        "name": "Davina Michelle",
+        "email": "davinamichelle@repertoire.org",
+        "isAdmin": false,
+        "isArtist": true,
+        "isPublisher": false,
+        "password": "davinamichelle",
+        "profileImage": "https://avataaars.io/?avatarStyle=Transparent&topType=Hat&accessoriesType=Prescription01&hatColor=Red&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
+    },
+    {
+        "name": "Coldplay",
+        "email": "coldplay@repertoire.org",
+        "isAdmin": false,
+        "isArtist": true,
+        "isPublisher": false,
+        "password": "coldplay",
+        "profileImage": "https://avataaars.io/?avatarStyle=Transparent&topType=Hat&accessoriesType=Prescription01&hatColor=Red&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
+    },
+    {
+        "name": "Imagine Dragons",
+        "email": "imaginedragons@repertoire.org",
+        "isAdmin": false,
+        "isArtist": true,
+        "isPublisher": false,
+        "password": "imaginedragons",
+        "profileImage": "https://avataaars.io/?avatarStyle=Transparent&topType=Hat&accessoriesType=Prescription01&hatColor=Red&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
+    },
+    {
+        "name": "Illenium",
+        "email": "illenium@repertoire.org",
+        "isAdmin": false,
+        "isArtist": true,
+        "isPublisher": false,
+        "password": "illenium",
+        "profileImage": "https://avataaars.io/?avatarStyle=Transparent&topType=Hat&accessoriesType=Prescription01&hatColor=Red&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
+    },
+    {
+        "name": "Kygo",
+        "email": "kygo@repertoire.org",
+        "isAdmin": false,
+        "isArtist": true,
+        "isPublisher": false,
+        "password": "kygo",
+        "profileImage": "https://avataaars.io/?avatarStyle=Transparent&topType=Hat&accessoriesType=Prescription01&hatColor=Red&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
+    },
+    {
+        "name": "Lumidelic",
+        "email": "lumidelic@repertoire.org",
+        "isAdmin": false,
+        "isArtist": true,
+        "isPublisher": false,
+        "password": "lumidelic",
+        "profileImage": "https://avataaars.io/?avatarStyle=Transparent&topType=Hat&accessoriesType=Prescription01&hatColor=Red&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
+    },
+    {
+        "name": "Armin van Buuren",
+        "email": "arminvanbuuren@repertoire.org",
+        "isAdmin": false,
+        "isArtist": true,
+        "isPublisher": false,
+        "password": "arminvanbuuren",
+        "profileImage": "https://avataaars.io/?avatarStyle=Transparent&topType=Hat&accessoriesType=Prescription01&hatColor=Red&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
+    },
+    {
+        "name": "Estiva",
+        "email": "estiva@repertoire.org",
+        "isAdmin": false,
+        "isArtist": true,
+        "isPublisher": false,
+        "password": "estiva",
+        "profileImage": "https://avataaars.io/?avatarStyle=Transparent&topType=Hat&accessoriesType=Prescription01&hatColor=Red&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
+    },
+]
