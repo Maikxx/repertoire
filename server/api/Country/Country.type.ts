@@ -1,4 +1,5 @@
 import { GraphQLObjectType, GraphQLNonNull, GraphQLInt, GraphQLString, GraphQLInputObjectType } from 'graphql'
+import { getISOStringFromDate } from '../../services/DateFormatter'
 
 export const CountryType = new GraphQLObjectType({
     name: 'CountryType',
@@ -15,6 +16,11 @@ export const CountryType = new GraphQLObjectType({
         code: {
             type: new GraphQLNonNull(GraphQLString),
             description: 'The country code of the country',
+        },
+        createdAt: {
+            type: new GraphQLNonNull(GraphQLString),
+            description: 'Date of creation as ISO date',
+            resolve: country => getISOStringFromDate(country.createdAt),
         },
     }),
 })

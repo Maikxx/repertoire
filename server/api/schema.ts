@@ -6,24 +6,28 @@ import { getUsers } from './User/getUsers.query'
 import { updateUser } from './User/updateUser.mutation'
 import { userLogin } from './User/userLogin.mutation'
 import { getMe } from './User/getMe.query'
+import { createCountry } from './Country/createCountry.mutation'
+import { getCountries } from './Country/getCountries.query'
 
 export const createSchema = () => new GraphQLSchema({
     query: new GraphQLObjectType({
         name: 'Query',
         description: 'The root for all queries available.',
         fields: () => ({
-            me: getMe(),
+            getCountries: getCountries(),
             getUser: getUser(),
             getUsers: getUsers(),
+            me: getMe(),
         }),
     }),
     mutation: new GraphQLObjectType({
         name: 'Mutation',
         description: 'The root for all mutations available.',
         fields: () => ({
+            createCountry: createCountry(),
             createUser: createUser(),
-            updateUser: updateUser(),
             deleteUser: deleteUser(),
+            updateUser: updateUser(),
             userLogin: userLogin(),
         }),
     }),

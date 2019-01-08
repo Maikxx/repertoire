@@ -8,6 +8,7 @@ import { Wrap } from '../../../../components/Core/Layout/Wrap/Wrap'
 import { TextInput } from '../../../../components/Core/DataEntry/Input/TextInput'
 import { Checkbox } from '../../../../components/Core/DataEntry/Form/Checkbox'
 import { getArtistToPreview } from '../../../../services/APIService'
+import { CountryDropdown } from '../../../../components/App/Dashboard/CountryDropdown'
 
 interface Props extends RouteComponentProps {}
 
@@ -114,6 +115,12 @@ export class RegisterSongView extends React.Component<Props, State> {
                                     TODO
                                 </Field>
                             )}
+                            <Field
+                                title={`Location`}
+                                smallTitle={true}
+                            >
+                                <CountryDropdown />
+                            </Field>
                         </FieldCollection>
                     </Form>
                 </Wrap>
