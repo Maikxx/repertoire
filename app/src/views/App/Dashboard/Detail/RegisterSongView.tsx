@@ -28,7 +28,7 @@ export class RegisterSongView extends React.Component<Props, State> {
                     <Form>
                         <FieldCollection>
                             <Field
-                                title={`Writer/Composer`}
+                                title={`Writer / Composer`}
                                 smallTitle={true}
                                 isLabel={true}
                                 isVertical={true}
