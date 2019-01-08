@@ -12,6 +12,10 @@
     border-bottom-color: #E6E6E6;
     transition: .1s border-bottom-color;
 
+    &__wrapper {
+        position: relative;
+    }
+
     &::placeholder {
         color: $color-text;
     }
@@ -19,5 +23,13 @@
     &:focus {
         outline: none;
         border-bottom-color: #83A9F4;
+    }
+
+    &__prefill {
+        position: absolute;
+        top: 17%;
+        left: 0;
+        color: $color-text;
+        font-size: 1rem;
     }
 }

@@ -9,6 +9,7 @@ interface Props {
     name: string
     onChange?: React.ChangeEventHandler<HTMLInputElement>
     placeholder?: string
+    prefill?: string
     type: string
 }
 
@@ -16,13 +17,20 @@ export class TextInput extends React.Component<Props> {
     private bem = new BEM('TextInput')
 
     public render() {
-        const { className, ...restProps } = this.props
+        const { className, prefill, ...restProps } = this.props
 
         return (
-            <input
-                className={this.bem.getClassName(className)}
-                {...restProps}
-            />
+            <div className={this.bem.getElement('wrapper')}>
+                <input
+                    className={this.bem.getClassName(className)}
+                    {...restProps}
+                />
+                {(prefill && prefill.length > 0) && (
+                    <span className={this.bem.getElement('prefill')}>
+                        {prefill}
+                    </span>
+                )}
+            </div>
         )
     }
 }
