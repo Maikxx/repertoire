@@ -34,10 +34,8 @@ export const connectToDatabase = async (): Promise<void> => {
         CREATE TABLE IF NOT EXISTS public.songs
         (
             _id serial PRIMARY KEY,
-            name character varying(150) COLLATE pg_catalog."default" NOT NULL,
-            location character varying(150),
-            "coverImage" text,
-            "dateOfRecording" timestamp,
+            title character varying(150) COLLATE pg_catalog."default" NOT NULL,
+            composer character varying(150) NOT NULL,
             "createdAt" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
         )
         WITH (

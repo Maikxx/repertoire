@@ -1,14 +1,39 @@
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { View } from '../../../../components/Core/Layout/View/View'
-import { Form } from '../../../../components/Core/DataEntry/Form/Form'
+import { Form, getFieldsFromSubmitEvent } from '../../../../components/Core/DataEntry/Form/Form'
 import { FieldCollection } from '../../../../components/Core/Field/FieldCollection/FieldCollection'
 import { Field } from '../../../../components/Core/Field/Field/Field'
 import { Wrap } from '../../../../components/Core/Layout/Wrap/Wrap'
 import { TextInput } from '../../../../components/Core/DataEntry/Input/TextInput'
 import { Checkbox } from '../../../../components/Core/DataEntry/Form/Checkbox'
 import { getArtistToPreview } from '../../../../services/APIService'
-import { CountryDropdown } from '../../../../components/App/Dashboard/CountryDropdown'
+// import { CountryDropdown } from '../../../../components/App/Dashboard/CountryDropdown'
+import { Mutation, MutationFn } from 'react-apollo'
+import gql from 'graphql-tag'
+import { Button, ButtonStyleType } from '../../../../components/Core/Button/Button'
+import { routes } from '../../../routes'
+
+const CREATE_SONG_MUTATION = gql`
+    mutation createSong($song: SongInputType!) {
+        createSong(song: $song) {
+            _id
+        }
+    }
+`
+
+interface MutationResponse {
+    createSong: {
+        _id: number
+    }
+}
+
+interface MutationVariables {
+    song: {
+        title: string
+        composer: string
+    }
+}
 
 interface Props extends RouteComponentProps {}
 
@@ -35,97 +60,125 @@ export class RegisterSongView extends React.Component<Props, State> {
         return (
             <View>
                 <Wrap allSides={true}>
-                    <Form>
-                        <FieldCollection>
-                            <Field
-                                title={`Writer / Composer`}
-                                smallTitle={true}
-                                isLabel={true}
-                                isVertical={true}
-                            >
-                                <TextInput
-                                    name={`writer`}
-                                    type={`text`}
-                                    onChange={this.onArtistInputChange}
-                                    placeholder={`Name of an artist`}
-                                    prefill={previewArtistName}
-                                />
-                            </Field>
-                            <Field
-                                title={`Song title`}
-                                smallTitle={true}
-                                isLabel={true}
-                                isVertical={true}
-                            >
-                                <TextInput
-                                    name={`songTitle`}
-                                    type={`text`}
-                                    placeholder={`Title of the new song`}
-                                />
-                            </Field>
-                            <Field>
-                                <Checkbox
-                                    name={`hasMultipleCreators`}
-                                    label={`Multiple creators`}
-                                    defaultChecked={true}
-                                    onChange={() => this.setState({ hasMultpleCreators: !hasMultpleCreators })}
-                                />
-                            </Field>
-                            {hasMultpleCreators && (
-                                <Field>
-                                    TODO
-                                </Field>
-                            )}
-                            <Field>
-                                <Checkbox
-                                    name={`hasSplitRevenue`}
-                                    label={`Split revenue`}
-                                    defaultChecked={true}
-                                    onChange={() => this.setState({ hasSplitRevenue: !hasSplitRevenue })}
-                                />
-                            </Field>
-                            {hasSplitRevenue && (
-                                <Field>
-                                    TODO
-                                </Field>
-                            )}
-                            <Field>
-                                <Checkbox
-                                    name={`hasPublishers`}
-                                    label={`Publishers`}
-                                    defaultChecked={true}
-                                    onChange={() => this.setState({ hasPublishers: !hasPublishers })}
-                                />
-                            </Field>
-                            {hasPublishers && (
-                                <Field>
-                                    TODO
-                                </Field>
-                            )}
-                            <Field>
-                                <Checkbox
-                                    name={`hasPRO`}
-                                    label={`PRO`}
-                                    defaultChecked={true}
-                                    onChange={() => this.setState({ hasPRO: !hasPRO })}
-                                />
-                            </Field>
-                            {hasPRO && (
-                                <Field>
-                                    TODO
-                                </Field>
-                            )}
-                            <Field
-                                title={`Location`}
-                                smallTitle={true}
-                            >
-                                <CountryDropdown />
-                            </Field>
-                        </FieldCollection>
-                    </Form>
+                    <Mutation<MutationResponse, MutationVariables> mutation={CREATE_SONG_MUTATION}>
+                        {(mutate, { data, loading }) => (
+                            <Form onSubmit={this.onSubmit(mutate)}>
+                                <FieldCollection>
+                                    <Field
+                                        title={`Writer / Composer`}
+                                        smallTitle={true}
+                                        isLabel={true}
+                                        isVertical={true}
+                                    >
+                                        <TextInput
+                                            name={`composer`}
+                                            type={`text`}
+                                            required={true}
+                                            onChange={this.onArtistInputChange}
+                                            placeholder={`Name of an artist`}
+                                            typeAhead={previewArtistName}
+                                        />
+                                    </Field>
+                                    <Field
+                                        title={`Song title`}
+                                        smallTitle={true}
+                                        isLabel={true}
+                                        isVertical={true}
+                                    >
+                                        <TextInput
+                                            name={`title`}
+                                            type={`text`}
+                                            required={true}
+                                            placeholder={`Title of the new song`}
+                                        />
+                                    </Field>
+                                    <Field>
+                                        <Checkbox
+                                            label={`Multiple creators`}
+                                            defaultChecked={true}
+                                            onChange={() => this.setState({ hasMultpleCreators: !hasMultpleCreators })}
+                                        />
+                                    </Field>
+                                    {hasMultpleCreators && (
+                                        <Field>
+                                            TODO
+                                        </Field>
+                                    )}
+                                    <Field>
+                                        <Checkbox
+                                            label={`Split revenue`}
+                                            defaultChecked={true}
+                                            onChange={() => this.setState({ hasSplitRevenue: !hasSplitRevenue })}
+                                        />
+                                    </Field>
+                                    {hasSplitRevenue && (
+                                        <Field>
+                                            TODO
+                                        </Field>
+                                    )}
+                                    <Field>
+                                        <Checkbox
+                                            label={`Publishers`}
+                                            defaultChecked={true}
+                                            onChange={() => this.setState({ hasPublishers: !hasPublishers })}
+                                        />
+                                    </Field>
+                                    {hasPublishers && (
+                                        <Field>
+                                            TODO
+                                        </Field>
+                                    )}
+                                    <Field>
+                                        <Checkbox
+                                            label={`PRO`}
+                                            defaultChecked={true}
+                                            onChange={() => this.setState({ hasPRO: !hasPRO })}
+                                        />
+                                    </Field>
+                                    {hasPRO && (
+                                        <Field>
+                                            TODO
+                                        </Field>
+                                    )}
+                                    {/* <Field
+                                        title={`Location`}
+                                        smallTitle={true}
+                                    >
+                                        <CountryDropdown />
+                                    </Field> */}
+                                    <Field>
+                                        <Button
+                                            type={`submit`}
+                                            buttonStyle={ButtonStyleType.Secondary}
+                                            isFullWidth={true}
+                                        >
+                                            Add song
+                                        </Button>
+                                    </Field>
+                                </FieldCollection>
+                            </Form>
+                        )}
+                    </Mutation>
                 </Wrap>
             </View>
         )
+    }
+
+    private onSubmit = (mutateFunction: MutationFn) => async (event: React.FormEvent<HTMLFormElement>) => {
+        const { history } = this.props
+
+        const fields = getFieldsFromSubmitEvent(event)
+        const response = await mutateFunction({
+            variables: {
+                song: {
+                    ...fields,
+                },
+            },
+        })
+
+        if (response && response.data && response.data.createSong) {
+            history.push(routes.app.dashboard.index)
+        }
     }
 
     private onArtistInputChange: React.ChangeEventHandler<HTMLInputElement> = async ({ target: { value }}) => {
@@ -137,7 +190,8 @@ export class RegisterSongView extends React.Component<Props, State> {
 
             const artistToPreview = await getArtistToPreview(value)
 
-            if (!artistToPreview) {
+            if (!artistToPreview || !artistToPreview.name.startsWith(value)) {
+                this.setState({ previewArtistName: '' })
                 return
             }
 

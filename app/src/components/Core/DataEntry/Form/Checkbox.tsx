@@ -8,8 +8,8 @@ interface Props {
     defaultChecked?: boolean
     disabled?: boolean
     label?: string | JSX.Element
-    name: string
-    onChange?: (checked: boolean, name: string) => void
+    name?: string
+    onChange?: (checked: boolean, name?: string) => void
 }
 
 interface State {

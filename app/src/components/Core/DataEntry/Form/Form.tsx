@@ -26,6 +26,15 @@ interface Props {
     target?: FormTarget
 }
 
+export const getFieldsFromSubmitEvent = (event: React.FormEvent<HTMLFormElement>) => {
+    return Array.prototype.slice.call(event.target)
+        .filter((el: HTMLInputElement | HTMLTextAreaElement) => el.name)
+        .reduce((form: any, el: HTMLInputElement | HTMLTextAreaElement) => ({
+            ...form,
+            [el.name]: el.value.trim(),
+        }), {})
+}
+
 export class Form extends React.Component<Props> {
     public static defaultProps = {
         shouldPreventDefault: true,

@@ -1,8 +1,11 @@
-export interface Song {
+export interface SongInterface {
     _id: number
+    composer: string
+    title: string
     createdAt: string | Date
-    coverImage?: string
-    dateOfRecording: string | Date
-    location?: string
-    name: string
+}
+
+export interface SongInputTypeInterface {
+    title: string
+    composer: string
 }

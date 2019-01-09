@@ -8,6 +8,7 @@ import { userLogin } from './User/userLogin.mutation'
 import { getMe } from './User/getMe.query'
 import { createCountry } from './Country/createCountry.mutation'
 import { getCountries } from './Country/getCountries.query'
+import { createSong } from './Song/createSong.mutation'
 
 export const createSchema = () => new GraphQLSchema({
     query: new GraphQLObjectType({
@@ -29,6 +30,7 @@ export const createSchema = () => new GraphQLSchema({
             deleteUser: deleteUser(),
             updateUser: updateUser(),
             userLogin: userLogin(),
+            createSong: createSong(),
         }),
     }),
 })
