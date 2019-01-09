@@ -1,6 +1,6 @@
 import './InboxItem.scss'
 import * as React from 'react'
-import { BEM } from '../../../../services/BEMService'
+import { BEM, ClassValue } from '../../../../services/BEMService'
 import { Card } from '../../../Core/DataDisplay/Card/Card'
 import { SidebarListItem } from '../../../Chrome/Sidebar/SidebarListItem'
 import { Row } from '../../../Core/Layout/Row/Row'
@@ -10,7 +10,7 @@ import { Heading } from '../../../Core/Text/Heading/Heading'
 import { Text } from '../../../Core/Text/Text/Text'
 
 interface Props {
-    className?: string
+    className?: ClassValue
 }
 
 export class InboxItem extends React.Component<Props> {

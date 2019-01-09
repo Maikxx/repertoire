@@ -1,9 +1,9 @@
 import './Heading.scss'
 import * as React from 'react'
-import { BEM } from '../../../../../src/services/BEMService'
+import { BEM, ClassValue } from '../../../../../src/services/BEMService'
 
 interface Props {
-    className?: string
+    className?: ClassValue
     level: number
 }
 

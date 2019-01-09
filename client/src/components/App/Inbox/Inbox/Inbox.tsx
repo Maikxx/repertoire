@@ -1,6 +1,6 @@
 import './Inbox.scss'
 import * as React from 'react'
-import { BEM } from '../../../../services/BEMService'
+import { BEM, ClassValue } from '../../../../services/BEMService'
 import { Heading } from '../../../Core/Text/Heading/Heading'
 import { Card } from '../../../Core/DataDisplay/Card/Card'
 import { Column } from '../../../Core/Layout/Column/Column'
@@ -10,7 +10,7 @@ import { FieldGroup } from '../../../Core/Field/FieldGroup/FieldGroup'
 import { Button, ButtonStyleType } from '../../../Core/Button/Button'
 
 interface Props {
-    className?: string
+    className?: ClassValue
 }
 
 export class Inbox extends React.Component<Props> {

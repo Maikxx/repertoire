@@ -1,6 +1,6 @@
 import './Button.scss'
 import * as React from 'react'
-import { BEM } from '../../../services/BEMService'
+import { BEM, ClassValue } from '../../../services/BEMService'
 
 export enum ButtonStyleType {
     Brand = 'brand',
@@ -10,7 +10,7 @@ export enum ButtonStyleType {
 
 interface Props {
     buttonStyle: ButtonStyleType
-    className?: string
+    className?: ClassValue
     disabled?: boolean
     isFullWidth?: boolean
     onClick?: React.MouseEventHandler<HTMLButtonElement>

@@ -33,9 +33,7 @@ interface SignUpMutationResponse {
     token: string
 }
 
-interface Props extends RouteComponentProps {
-    className?: string
-}
+interface Props extends RouteComponentProps {}
 
 interface State {
     email?: string

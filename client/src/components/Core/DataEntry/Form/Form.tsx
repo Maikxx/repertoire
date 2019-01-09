@@ -1,6 +1,6 @@
 import './Form.scss'
 import * as React from 'react'
-import { BEM } from '../../../../services/BEMService'
+import { BEM, ClassValue } from '../../../../services/BEMService'
 
 type FormAutoCapitalizeType = 'none' | 'sentences' | 'words' | 'characters'
 type FormAutoCompleteType = 'off' | 'on'
@@ -13,7 +13,7 @@ interface Props {
     action?: string
     autoCapitalize?: FormAutoCapitalizeType
     autocomplete?: FormAutoCompleteType
-    className?: string
+    className?: ClassValue
     encType?: FormEncTypeType
     id?: string
     method?: FormMethodType

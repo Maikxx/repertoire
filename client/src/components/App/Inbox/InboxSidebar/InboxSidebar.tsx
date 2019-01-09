@@ -1,6 +1,6 @@
 import './InboxSidebar.scss'
 import * as React from 'react'
-import { BEM } from '../../../../services/BEMService'
+import { BEM, ClassValue } from '../../../../services/BEMService'
 import { Sidebar } from '../../../Chrome/SideBar/SideBar'
 import { SidebarList } from '../../../Chrome/SideBar/SideBarList'
 import { SidebarListHeader } from '../../../Chrome/Sidebar/SidebarListHeader'
@@ -8,7 +8,7 @@ import { InboxItem } from './InboxItem'
 import { ArtistItem } from './ArtistItem'
 
 interface Props {
-    className?: string
+    className?: ClassValue
 }
 
 export class InboxSidebar extends React.Component<Props> {

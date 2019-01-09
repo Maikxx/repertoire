@@ -1,10 +1,10 @@
 import './SidebarList.scss'
 import * as React from 'react'
-import { BEM } from '../../../services/BEMService'
+import { BEM, ClassValue } from '../../../services/BEMService'
 import { Column } from '../../Core/Layout/Column/Column'
 
 interface Props {
-    className?: string
+    className?: ClassValue
 }
 
 export class SidebarList extends React.Component<Props> {

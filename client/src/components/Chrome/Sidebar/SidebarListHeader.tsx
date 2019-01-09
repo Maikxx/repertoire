@@ -1,10 +1,10 @@
 import './SidebarListHeader.scss'
 import * as React from 'react'
-import { BEM } from '../../../services/BEMService'
+import { BEM, ClassValue } from '../../../services/BEMService'
 import { Heading } from '../../Core/Text/Heading/Heading'
 
 interface Props {
-    className?: string
+    className?: ClassValue
     level: number
 }
 
