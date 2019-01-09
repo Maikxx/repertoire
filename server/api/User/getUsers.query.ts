@@ -1,9 +1,8 @@
 import { UserType } from './User.type'
 import { GetUsers } from '../../domains/User/GetUsersService'
+import { GraphQLList } from 'graphql'
 
 export const getUsers = () => ({
-    type: UserType,
-    resolve: async () => {
-        return GetUsers()
-    },
+    type: new GraphQLList(UserType),
+    resolve: () => GetUsers(),
 })

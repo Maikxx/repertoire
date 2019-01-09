@@ -15,7 +15,5 @@ export const getUser = () => ({
             required: true,
         },
     },
-    resolve: async (_, args: GetUserArgs) => {
-        return GetUserById(args._id)
-    },
+    resolve: (_, args: GetUserArgs) => GetUserById(args._id),
 })

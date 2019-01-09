@@ -16,7 +16,5 @@ export const deleteUser = () => ({
             required: true,
         },
     },
-    resolve: (_, args: DeleteUserArgs) => {
-        return DeleteUser(args)
-    },
+    resolve: (_, args: DeleteUserArgs) => DeleteUser(args),
 })

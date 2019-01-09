@@ -9,6 +9,8 @@ import { getMe } from './User/getMe.query'
 import { createCountry } from './Country/createCountry.mutation'
 import { getCountries } from './Country/getCountries.query'
 import { createSong } from './Song/createSong.mutation'
+import { getSong } from './Song/getSong.query'
+import { getSongs } from './Song/getSongs.query'
 
 export const createSchema = () => new GraphQLSchema({
     query: new GraphQLObjectType({
@@ -16,6 +18,8 @@ export const createSchema = () => new GraphQLSchema({
         description: 'The root for all queries available.',
         fields: () => ({
             getCountries: getCountries(),
+            getSong: getSong(),
+            getSongs: getSongs(),
             getUser: getUser(),
             getUsers: getUsers(),
             me: getMe(),
@@ -26,11 +30,11 @@ export const createSchema = () => new GraphQLSchema({
         description: 'The root for all mutations available.',
         fields: () => ({
             createCountry: createCountry(),
+            createSong: createSong(),
             createUser: createUser(),
             deleteUser: deleteUser(),
             updateUser: updateUser(),
             userLogin: userLogin(),
-            createSong: createSong(),
         }),
     }),
 })

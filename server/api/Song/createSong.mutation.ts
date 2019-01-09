@@ -17,7 +17,5 @@ export const createSong = () => ({
             required: true,
         },
     },
-    resolve: (_, args: CreateSongArgs) => {
-        return CreateSong(args)
-    },
+    resolve: (_, args: CreateSongArgs) => CreateSong(args),
 })

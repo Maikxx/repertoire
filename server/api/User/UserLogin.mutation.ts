@@ -17,7 +17,5 @@ export const userLogin = () => ({
             type: new GraphQLNonNull(AuthInputType),
         },
     },
-    resolve: (_, args: AuthArgs) => {
-        return UserLogin(args)
-    },
+    resolve: (_, args: AuthArgs) => UserLogin(args),
 })

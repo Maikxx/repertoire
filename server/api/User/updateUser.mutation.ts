@@ -23,7 +23,5 @@ export const updateUser = () => ({
             required: true,
         },
     },
-    resolve: (_, args: UpdateUserArgs) => {
-        return UpdateUser(args)
-    },
+    resolve: (_, args: UpdateUserArgs) => UpdateUser(args),
 })

@@ -17,7 +17,5 @@ export const createUser = () => ({
             required: true,
         },
     },
-    resolve: (_, args: CreateUserArgs) => {
-        return CreateUser(args)
-    },
+    resolve: (_, args: CreateUserArgs) => CreateUser(args),
 })
