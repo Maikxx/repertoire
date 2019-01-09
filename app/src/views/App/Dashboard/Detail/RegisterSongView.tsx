@@ -1,19 +1,24 @@
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { View } from '../../../../components/Core/Layout/View/View'
-import { Form, getFieldsFromSubmitEvent } from '../../../../components/Core/DataEntry/Form/Form'
+import { Form, Fields } from '../../../../components/Core/DataEntry/Form/Form'
 import { FieldCollection } from '../../../../components/Core/Field/FieldCollection/FieldCollection'
 import { Field } from '../../../../components/Core/Field/Field/Field'
 import { Wrap } from '../../../../components/Core/Layout/Wrap/Wrap'
 import { TextInput } from '../../../../components/Core/DataEntry/Input/TextInput'
 import { Checkbox } from '../../../../components/Core/DataEntry/Form/Checkbox'
-import { getArtistToPreview } from '../../../../services/APIService'
 // import { CountryDropdown } from '../../../../components/App/Dashboard/CountryDropdown'
 import { Mutation, MutationFn } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Button, ButtonStyleType } from '../../../../components/Core/Button/Button'
 import { routes } from '../../../routes'
 import { MultiInput, MultiInputType } from '../../../../components/Core/DataEntry/MultiInput/MultiInput'
+import { VariableMultiInputField } from '../../../../components/Core/DataEntry/VariableMultiInput/VariableMultiInputField'
+import { FieldTitle } from '../../../../components/Core/Field/FieldTitle/FieldTitle'
+import { Text } from '../../../../components/Core/Text/Text/Text'
+import { Row } from '../../../../components/Core/Layout/Row/Row'
+import { IconType } from '../../../../components/Core/Icon/Icon'
+import { ComposerFieldInput } from '../../../../components/App/Dashboard/ComposerFieldInput'
 
 const CREATE_SONG_MUTATION = gql`
     mutation createSong($song: SongInputType!) {
@@ -32,14 +37,16 @@ interface MutationResponse {
 interface MutationVariables {
     song: {
         title: string
-        composer: string
+        composer: {
+            name: string
+            share: number
+        }
     }
 }
 
 interface Props extends RouteComponentProps {}
 
 interface State {
-    previewArtistName?: string
     hasMultpleCreators: boolean
     hasSplitRevenue: boolean
     hasPublishers: boolean
@@ -48,7 +55,6 @@ interface State {
 
 export class RegisterSongView extends React.Component<Props, State> {
     public state: State = {
-        previewArtistName: '',
         hasMultpleCreators: true,
         hasSplitRevenue: true,
         hasPublishers: true,
@@ -56,14 +62,14 @@ export class RegisterSongView extends React.Component<Props, State> {
     }
 
     public render() {
-        const { previewArtistName, hasMultpleCreators, hasSplitRevenue, hasPublishers, hasPRO } = this.state
+        const { hasMultpleCreators, hasSplitRevenue, hasPublishers, hasPRO } = this.state
 
         return (
             <View>
                 <Wrap allSides={true}>
                     <Mutation<MutationResponse, MutationVariables> mutation={CREATE_SONG_MUTATION}>
-                        {(mutate, { data, loading }) => (
-                            <Form onSubmit={this.onSubmit(mutate)}>
+                        {mutate => (
+                            <Form onSubmit={this.onSubmit(mutate)} method={`post`}>
                                 <FieldCollection>
                                     <Field
                                         title={`Song title`}
@@ -85,22 +91,9 @@ export class RegisterSongView extends React.Component<Props, State> {
                                         isVertical={true}
                                     >
                                         <MultiInput type={MultiInputType.Suffix}>
-                                            <TextInput
-                                                name={`composer`}
-                                                type={`text`}
+                                            <ComposerFieldInput
+                                                baseName={`composer`}
                                                 required={true}
-                                                onChange={this.onArtistInputChange}
-                                                placeholder={`Name of an artist`}
-                                                typeAhead={previewArtistName}
-                                            />
-                                            <TextInput
-                                                type={`number`}
-                                                name={`composerShare`}
-                                                required={true}
-                                                step={0.1}
-                                                min={0}
-                                                max={100}
-                                                postFix={`%`}
                                             />
                                         </MultiInput>
                                     </Field>
@@ -112,9 +105,31 @@ export class RegisterSongView extends React.Component<Props, State> {
                                         />
                                     </Field>
                                     {hasMultpleCreators && (
-                                        <Field>
-                                            TODO
-                                        </Field>
+                                        <VariableMultiInputField
+                                            getFieldTitle={onAdd => (
+                                                <FieldTitle>
+                                                    <Row>
+                                                        <Text element={`span`}>
+                                                            Fellow composers
+                                                        </Text>
+                                                        <Button
+                                                            type={`button`}
+                                                            iconType={IconType.Add}
+                                                            buttonStyle={ButtonStyleType.Icon}
+                                                            onClick={() => onAdd()}
+                                                        />
+                                                    </Row>
+                                                </FieldTitle>
+                                            )}
+                                            getNewInput={(index: number) => (
+                                                <MultiInput
+                                                    type={MultiInputType.Suffix}
+                                                    key={index}
+                                                >
+                                                    <ComposerFieldInput baseName={`creators[${index}]`}/>
+                                                </MultiInput>
+                                            )}
+                                        />
                                     )}
                                     <Field>
                                         <Checkbox
@@ -176,41 +191,19 @@ export class RegisterSongView extends React.Component<Props, State> {
         )
     }
 
-    private onSubmit = (mutateFunction: MutationFn) => async (event: React.FormEvent<HTMLFormElement>) => {
+    private onSubmit = (mutateFunction: MutationFn) => async (fields: Fields) => {
         const { history } = this.props
-
-        const fields = getFieldsFromSubmitEvent(event)
         const response = await mutateFunction({
             variables: {
                 song: {
-                    ...fields,
-                    composerShare: Number(fields.composerShare),
+                    title: fields.title,
+                    composer: fields.composer,
                 },
             },
         })
 
         if (response && response.data && response.data.createSong) {
             history.push(routes.app.dashboard.index)
-        }
-    }
-
-    private onArtistInputChange: React.ChangeEventHandler<HTMLInputElement> = async ({ target: { value }}) => {
-        try {
-            if (!value || !value.length) {
-                this.setState({ previewArtistName: '' })
-                return
-            }
-
-            const artistToPreview = await getArtistToPreview(value)
-
-            if (!artistToPreview || !artistToPreview.name.startsWith(value)) {
-                this.setState({ previewArtistName: '' })
-                return
-            }
-
-            this.setState({ previewArtistName: artistToPreview.name })
-        } catch (error) {
-            throw new Error(error)
         }
     }
 }

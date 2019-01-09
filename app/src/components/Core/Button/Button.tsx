@@ -1,11 +1,13 @@
 import './Button.scss'
 import * as React from 'react'
 import { BEM, ClassValue } from '../../../services/BEMService'
+import { IconType, Icon } from '../Icon/Icon'
 
 export enum ButtonStyleType {
     Brand = 'brand',
     Secondary = 'secondary',
     Default = 'default',
+    Icon = 'icon',
 }
 
 interface Props {
@@ -16,6 +18,7 @@ interface Props {
     onClick?: React.MouseEventHandler<HTMLButtonElement>
     isSmall?: boolean
     type: string
+    iconType?: IconType
 }
 
 export class Button extends React.Component<Props> {
@@ -27,16 +30,21 @@ export class Button extends React.Component<Props> {
     }))
 
     public render() {
-        const { children, className, buttonStyle, isFullWidth, isSmall, ...restProps } = this.props
+        const { children, className, buttonStyle, isFullWidth, isSmall, iconType, ...restProps } = this.props
 
         return (
             <button
                 className={this.bem.getClassName(className)}
                 {...restProps}
             >
-                <div className={this.bem.getElement('content')}>
-                    {children}
-                </div>
+                {!!children && (
+                    <div className={this.bem.getElement('content')}>
+                        {children}
+                    </div>
+                )}
+                {iconType && (
+                    <Icon type={iconType} className={this.bem.getElement('icon')}/>
+                )}
             </button>
         )
     }

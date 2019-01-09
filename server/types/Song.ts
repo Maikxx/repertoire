@@ -1,12 +1,30 @@
-export interface SongInterface {
+export interface ArtistShareInterface {
     _id: number
-    composer: string
+    name: string
+    share: number
+    createdAt: string
+}
+
+export interface ArtistShareInputInterface {
+    name: string
+    share: number
+}
+
+export interface DatabaseSongInterface {
+    _id: number
+    composerShareId: number
+    createdAt: string
+}
+
+export interface GraphQLSongInterface {
+    _id: number
+    composer: ArtistShareInterface
     title: string
     createdAt: string
 }
 
 export interface SongInputTypeInterface {
     title: string
-    composer: string
+    composer: ArtistShareInputInterface
     composerShare: number
 }

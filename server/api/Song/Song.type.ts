@@ -14,12 +14,8 @@ export const SongType = new GraphQLObjectType({
             description: 'The title of the song',
         },
         composer: {
-            type: new GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(ArtistShareType),
             description: 'The composer / writer of the song',
-        },
-        composerShare: {
-            type: new GraphQLNonNull(GraphQLFloat),
-            description: 'The composer / writer of the song his share',
         },
         createdAt: {
             type: new GraphQLNonNull(GraphQLString),
@@ -37,10 +33,44 @@ export const SongInputType = new GraphQLInputObjectType({
             type: new GraphQLNonNull(GraphQLString),
         },
         composer: {
-            type: new GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(ArtistShareInputType),
         },
-        composerShare: {
+    }),
+})
+
+export const ArtistShareType = new GraphQLObjectType({
+    name: 'ArtistShareType',
+    fields: () => ({
+        _id: {
+            type: new GraphQLNonNull(GraphQLInt),
+            description: 'The id of the artist share',
+        },
+        name: {
+            type: new GraphQLNonNull(GraphQLString),
+            description: 'The name of the artist',
+        },
+        share: {
             type: new GraphQLNonNull(GraphQLFloat),
+            description: 'The share of the artist',
+        },
+        createdAt: {
+            type: new GraphQLNonNull(GraphQLString),
+            description: 'Date of creation as ISO date',
+            resolve: country => getISOStringFromDate(country.createdAt),
+        },
+    }),
+})
+
+export const ArtistShareInputType = new GraphQLInputObjectType({
+    name: 'ArtistShareInputType',
+    fields: () => ({
+        name: {
+            type: new GraphQLNonNull(GraphQLString),
+            description: 'The name of the artist',
+        },
+        share: {
+            type: new GraphQLNonNull(GraphQLFloat),
+            description: 'The share of the artist',
         },
     }),
 })

@@ -36,7 +36,7 @@ export class Checkbox extends React.PureComponent<Props, State> {
                     onChange={this.handleOnChange}
                     type="checkbox"
                     name={name}
-                    id={`input-${name}`}
+                    id={name && `input-${name}`}
                     checked={isChecked}
                     className={this.bem.getElement('input')}
                     disabled={disabled}

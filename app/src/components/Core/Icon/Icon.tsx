@@ -4,6 +4,7 @@ import { BEM, ClassValue } from '../../../services/BEMService'
 import { IconTypes } from './IconTypes'
 
 export enum IconType {
+    Add = 'add',
     AddCreator = 'addCreator',
     AddPublisher = 'addPublisher',
     LeftArrow = 'leftArrow',
@@ -13,6 +14,7 @@ export enum IconType {
     Check = 'check',
     DownArrow = 'downArrow',
     Close = 'close',
+    Trash = 'trash',
 }
 
 interface Props {

@@ -3,6 +3,7 @@ import * as React from 'react'
 import { BEM, ClassValue } from '../../../../services/BEMService'
 import { Row } from '../../Layout/Row/Row'
 import { Column } from '../../Layout/Column/Column'
+import { FieldTitle } from '../FieldTitle/FieldTitle'
 
 interface Props {
     className?: ClassValue
@@ -75,9 +76,9 @@ export class Field extends React.Component<Props> {
         const { title } = this.props
 
         return (
-            <span className={this.bem.getElement('title')}>
+            <FieldTitle>
                 {title}
-            </span>
+            </FieldTitle>
         )
     }
 }
