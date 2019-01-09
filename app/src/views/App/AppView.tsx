@@ -8,7 +8,9 @@ import { DashboardView } from './Dashboard/DashboardView'
 interface Props extends RouteComponentProps {}
 
 export class AppView extends React.Component<Props> {
-    private bem = new BEM('AppView')
+    private bem = new BEM('AppView', () => ({
+        'highlight-background': this.isCurrentLocationHighlighted(),
+    }))
 
     public render() {
         return (
@@ -19,5 +21,15 @@ export class AppView extends React.Component<Props> {
                 </Switch>
             </View>
         )
+    }
+
+    private isCurrentLocationHighlighted = () => {
+        const { location } = this.props
+
+        if (location.pathname !== routes.app.dashboard.index) {
+            return false
+        }
+
+        return true
     }
 }

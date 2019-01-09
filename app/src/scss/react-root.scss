@@ -9,7 +9,11 @@
     }
 
     .rpa-AppView {
-        background-color: $color-grey-light;
+        background-color: $color-white;
         min-height: 100vh;
+
+        &--highlight-background {
+            background-color: $color-grey-light;
+        }
     }
 }
