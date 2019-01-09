@@ -2,8 +2,9 @@
     @import '../../../scss/variables/colors';
 
     width: 100%;
-    background-image: linear-gradient(to bottom, #42eadc, #6b47fe);
+    background-image: linear-gradient(to bottom, #3CE5D3, #42A1E1);
     padding: 13px 0;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.27);
 
     & &__menu-icon {
         height: 20px;
