@@ -36,6 +36,7 @@ export const connectToDatabase = async (): Promise<void> => {
             _id serial PRIMARY KEY,
             title character varying(150) COLLATE pg_catalog."default" NOT NULL,
             composer character varying(150) NOT NULL,
+            "composerShare" numeric NOT NULL,
             "createdAt" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
         )
         WITH (

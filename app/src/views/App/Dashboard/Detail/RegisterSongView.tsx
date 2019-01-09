@@ -13,6 +13,7 @@ import { Mutation, MutationFn } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Button, ButtonStyleType } from '../../../../components/Core/Button/Button'
 import { routes } from '../../../routes'
+import { MultiInput, MultiInputType } from '../../../../components/Core/DataEntry/MultiInput/MultiInput'
 
 const CREATE_SONG_MUTATION = gql`
     mutation createSong($song: SongInputType!) {
@@ -83,14 +84,25 @@ export class RegisterSongView extends React.Component<Props, State> {
                                         isLabel={true}
                                         isVertical={true}
                                     >
-                                        <TextInput
-                                            name={`composer`}
-                                            type={`text`}
-                                            required={true}
-                                            onChange={this.onArtistInputChange}
-                                            placeholder={`Name of an artist`}
-                                            typeAhead={previewArtistName}
-                                        />
+                                        <MultiInput type={MultiInputType.Suffix}>
+                                            <TextInput
+                                                name={`composer`}
+                                                type={`text`}
+                                                required={true}
+                                                onChange={this.onArtistInputChange}
+                                                placeholder={`Name of an artist`}
+                                                typeAhead={previewArtistName}
+                                            />
+                                            <TextInput
+                                                type={`number`}
+                                                name={`composerShare`}
+                                                required={true}
+                                                step={0.1}
+                                                min={0}
+                                                max={100}
+                                                postFix={`%`}
+                                            />
+                                        </MultiInput>
                                     </Field>
                                     <Field>
                                         <Checkbox
@@ -172,6 +184,7 @@ export class RegisterSongView extends React.Component<Props, State> {
             variables: {
                 song: {
                     ...fields,
+                    composerShare: Number(fields.composerShare),
                 },
             },
         })

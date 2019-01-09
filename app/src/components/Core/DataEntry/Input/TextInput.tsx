@@ -11,7 +11,11 @@ interface Props {
     placeholder?: string
     typeAhead?: string
     required?: boolean
+    min?: number
+    max?: number
+    step?: number
     type: string
+    postFix?: string
 }
 
 export class TextInput extends React.Component<Props> {
@@ -20,7 +24,7 @@ export class TextInput extends React.Component<Props> {
     private typeAheadRef = React.createRef<HTMLSpanElement>()
 
     public render() {
-        const { className, typeAhead, ...restProps } = this.props
+        const { className, typeAhead, postFix, ...restProps } = this.props
 
         return (
             <div className={this.bem.getElement('wrapper')}>
@@ -36,6 +40,11 @@ export class TextInput extends React.Component<Props> {
                         ref={this.typeAheadRef}
                     >
                         {typeAhead}
+                    </span>
+                )}
+                {postFix && (
+                    <span className={this.bem.getElement('postfix')}>
+                        {postFix}
                     </span>
                 )}
             </div>

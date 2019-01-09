@@ -8,7 +8,7 @@
     color: $color-black;
     font-size: 1rem;
     border-bottom: 1px solid;
-    border-bottom-color: #E6E6E6;
+    border-bottom-color: #CFCCCC;
     transition: .1s border-bottom-color;
     width: 100%;
 
@@ -18,7 +18,7 @@
     }
 
     &::placeholder {
-        color: $color-text;
+        color: #CFCCCC;
     }
 
     &:focus {
@@ -30,7 +30,15 @@
         position: absolute;
         top: 17%;
         left: 0;
-        color: $color-text;
+        color: #CFCCCC;
+        font-size: 1rem;
+    }
+
+    &__postfix {
+        position: absolute;
+        top: 17%;
+        right: 0;
+        color: #CFCCCC;
         font-size: 1rem;
     }
 }
