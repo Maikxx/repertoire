@@ -11,7 +11,6 @@ export interface AuthArgs {
 
 export const userLogin = () => ({
     type: AuthType,
-    description: 'Authenticate user',
     args: {
         auth: {
             type: new GraphQLNonNull(AuthInputType),

@@ -4,7 +4,5 @@ import { GetCountries } from '../../domains/Country/GetCountriesService'
 
 export const getCountries = () => ({
     type: new GraphQLList(CountryType),
-    resolve: () => {
-        return GetCountries()
-    },
+    resolve: () => GetCountries(),
 })

@@ -9,11 +9,9 @@ export interface CreateUserArgs {
 
 export const createUser = () => ({
     type: AuthType,
-    description: 'Create a user on database',
     args: {
         user: {
             type: new GraphQLNonNull(UserInputType),
-            description: 'The input type required to create a user, includes email and password',
             required: true,
         },
     },

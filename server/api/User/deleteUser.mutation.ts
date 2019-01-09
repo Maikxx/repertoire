@@ -8,11 +8,9 @@ export interface DeleteUserArgs {
 
 export const deleteUser = () => ({
     type: UserType,
-    description: 'Deletes a user on database',
     args: {
         _id: {
             type: new GraphQLNonNull(GraphQLInt),
-            description: 'The ID of the user that you want to delete',
             required: true,
         },
     },

@@ -9,15 +9,11 @@ export interface CreateCountryArgs {
 
 export const createCountry = () => ({
     type: CountryType,
-    description: 'Create a country on database',
     args: {
         country: {
             type: new GraphQLNonNull(CountryInputType),
-            description: 'The input type required to create a country',
             required: true,
         },
     },
-    resolve: (_, args: CreateCountryArgs) => {
-        return CreateCountry(args)
-    },
+    resolve: (_, args: CreateCountryArgs) => CreateCountry(args),
 })

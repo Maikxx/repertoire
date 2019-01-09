@@ -11,7 +11,6 @@ export const getUser = () => ({
     args: {
         _id: {
             type: new GraphQLNonNull(GraphQLInt),
-            description: 'ID of the user that you wanna get',
             required: true,
         },
     },

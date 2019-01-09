@@ -11,7 +11,6 @@ export const getSong = () => ({
     args: {
         _id: {
             type: new GraphQLNonNull(GraphQLInt),
-            description: 'ID of the song that you want to get',
             required: true,
         },
     },

@@ -14,12 +14,10 @@ export const updateUser = () => ({
     args: {
         _id: {
             type: new GraphQLNonNull(GraphQLInt),
-            description: 'The ID of the user that you want to update',
             required: true,
         },
         user: {
             type: new GraphQLNonNull(UserInputType),
-            description: 'The fields of a user that you want to update',
             required: true,
         },
     },

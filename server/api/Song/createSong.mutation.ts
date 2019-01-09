@@ -9,11 +9,9 @@ export interface CreateSongArgs {
 
 export const createSong = () => ({
     type: SongType,
-    description: 'Create a country on database',
     args: {
         song: {
             type: new GraphQLNonNull(SongInputType),
-            description: 'The input type required to create a song',
             required: true,
         },
     },
