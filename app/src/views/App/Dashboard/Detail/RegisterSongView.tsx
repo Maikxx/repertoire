@@ -65,6 +65,19 @@ export class RegisterSongView extends React.Component<Props, State> {
                             <Form onSubmit={this.onSubmit(mutate)}>
                                 <FieldCollection>
                                     <Field
+                                        title={`Song title`}
+                                        smallTitle={true}
+                                        isLabel={true}
+                                        isVertical={true}
+                                    >
+                                        <TextInput
+                                            name={`title`}
+                                            type={`text`}
+                                            required={true}
+                                            placeholder={`Title of the new song`}
+                                        />
+                                    </Field>
+                                    <Field
                                         title={`Writer / Composer`}
                                         smallTitle={true}
                                         isLabel={true}
@@ -77,19 +90,6 @@ export class RegisterSongView extends React.Component<Props, State> {
                                             onChange={this.onArtistInputChange}
                                             placeholder={`Name of an artist`}
                                             typeAhead={previewArtistName}
-                                        />
-                                    </Field>
-                                    <Field
-                                        title={`Song title`}
-                                        smallTitle={true}
-                                        isLabel={true}
-                                        isVertical={true}
-                                    >
-                                        <TextInput
-                                            name={`title`}
-                                            type={`text`}
-                                            required={true}
-                                            placeholder={`Title of the new song`}
                                         />
                                     </Field>
                                     <Field>
