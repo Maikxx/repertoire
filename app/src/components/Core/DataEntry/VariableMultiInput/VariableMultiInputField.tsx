@@ -65,17 +65,17 @@ export class VariableMultiInputField extends React.Component<Props, State> {
         const { amountOfInputs } = this.state
 
         return times(amountOfInputs, n => {
-            const haveButton = (!!(n > 0 && n + 1 === amountOfInputs)) || n === amountOfInputs - (amountOfPrefilledInputs || 0)
+            const hasButton = (!!(n > 0 && n + 1 === amountOfInputs)) || n === amountOfInputs - (amountOfPrefilledInputs || 0)
 
             return (
                 <div
                     key={n}
-                    className={c('rpa-VariableMultiInputField__item', { 'rpa-VariableMultiInputField__item--has-button': haveButton })}
+                    className={c('rpa-VariableMultiInputField__item', { 'rpa-VariableMultiInputField__item--has-button': hasButton })}
                 >
                     <div className={'rpa-VariableMultiInputField__item__content'}>
                         {getNewInput(n)}
                     </div>
-                    {haveButton && (
+                    {hasButton && (
                         <Button
                             className={'rpa-VariableMultiInputField__item__remove'}
                             type={`button`}

@@ -14,15 +14,17 @@
 
         &__content, &__remove {
             display: inline-block;
-            vertical-align: top;
+            vertical-align: middle;
         }
 
         &__content {
             width: 100%;
+
             > * + * {
                 margin-top: 6px;
             }
         }
+
         &__remove {
             width: $button-width;
             padding: 12px;
@@ -33,6 +35,10 @@
                 width: calc(100% - #{6px + $button-width});
                 margin-right: 6px;
             }
+        }
+
+        & + .rpa-VariableMultiInputField__item {
+            margin-top: 24px;
         }
     }
 }

@@ -4,6 +4,7 @@ export const createArtistShareTable = `
         _id serial PRIMARY KEY,
         name character varying(150) NOT NULL,
         share numeric NOT NULL,
+        role character varying(25) NOT NULL,
         "createdAt" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
     )
     WITH (

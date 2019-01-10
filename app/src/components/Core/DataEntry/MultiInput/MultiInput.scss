@@ -6,12 +6,15 @@
     }
 
     &--suffix {
-        *:first-child {
-            flex: 3;
-        }
+        .rpa-TextInput {
+            &:not(.rpa-TextInput--has-suffix) {
+                flex: 3;
+                width: 240px;
+            }
 
-        *:nth-child(2) {
-            flex: 1;
+            &--has-suffix {
+                flex: 1;
+            }
         }
     }
 }

@@ -19,6 +19,7 @@ import { Text } from '../../../../components/Core/Text/Text/Text'
 import { Row } from '../../../../components/Core/Layout/Row/Row'
 import { IconType } from '../../../../components/Core/Icon/Icon'
 import { ComposerFieldInput } from '../../../../components/App/Dashboard/ComposerFieldInput'
+import { ArtistRoleDropdown } from '../../../../components/App/Dashboard/ArtistRoleDropdown'
 
 const CREATE_SONG_MUTATION = gql`
     mutation createSong($song: SongInputType!) {
@@ -122,12 +123,15 @@ export class RegisterSongView extends React.Component<Props, State> {
                                                 </FieldTitle>
                                             )}
                                             getNewInput={(index: number) => (
-                                                <MultiInput
-                                                    type={MultiInputType.Suffix}
-                                                    key={index}
-                                                >
-                                                    <ComposerFieldInput baseName={`creators[${index}]`}/>
-                                                </MultiInput>
+                                                <React.Fragment>
+                                                    <MultiInput
+                                                        type={MultiInputType.Suffix}
+                                                        key={index}
+                                                    >
+                                                        <ComposerFieldInput baseName={`creators[${index}]`}/>
+                                                    </MultiInput>
+                                                    <ArtistRoleDropdown name={`creators[${index}].role`} />
+                                                </React.Fragment>
                                             )}
                                         />
                                     )}

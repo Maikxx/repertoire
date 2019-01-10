@@ -2,7 +2,7 @@ import './TextInput.scss'
 import * as React from 'react'
 import { BEM, ClassValue } from '../../../../services/BEMService'
 
-interface Props {
+export interface TextInputProps {
     className?: ClassValue
     defaultValue?: string
     disabled?: boolean
@@ -18,8 +18,10 @@ interface Props {
     suffix?: string
 }
 
-export class TextInput extends React.Component<Props> {
-    private bem = new BEM('TextInput')
+export class TextInput extends React.Component<TextInputProps> {
+    private bem = new BEM('TextInput', () => ({
+        'has-suffix': !!this.props.suffix,
+    }))
     private inputRef = React.createRef<HTMLInputElement>()
     private typeAheadRef = React.createRef<HTMLSpanElement>()
 

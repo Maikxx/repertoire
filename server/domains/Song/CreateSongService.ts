@@ -10,11 +10,12 @@ export const CreateSong = async (args: CreateSongArgs) => {
         const { rows: [composerShare] } = await database.query(
             `INSERT INTO "artistShare" (
                 name,
-                share
+                share,
+                role
             ) VALUES (
-                $1, $2
+                $1, $2, $3
             ) RETURNING _id;`,
-            [ artistName, share ]
+            [ artistName, share, 'composer' ]
         )
 
         if (!composerShare) {
@@ -27,11 +28,12 @@ export const CreateSong = async (args: CreateSongArgs) => {
                 const { rows: [creatorShare] } = await database.query(
                     `INSERT INTO "artistShare" (
                         name,
-                        share
+                        share,
+                        role
                     ) VALUES (
-                        $1, $2
+                        $1, $2, $3
                     ) RETURNING _id;`,
-                    [ creator.name, creator.share ]
+                    [ creator.name, creator.share, creator.role ]
                 )
 
                 return creatorShare._id

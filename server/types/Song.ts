@@ -2,12 +2,14 @@ export interface ArtistShareInterface {
     _id: number
     name: string
     share: number
+    role: string
     createdAt: string
 }
 
 export interface ArtistShareInputInterface {
     name: string
     share: number
+    role?: string
 }
 
 export interface DatabaseSongInterface {
