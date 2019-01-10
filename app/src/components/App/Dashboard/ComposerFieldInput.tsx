@@ -37,7 +37,8 @@ export class ComposerFieldInput extends React.Component<Props, State> {
                     step={0.1}
                     min={0}
                     max={100}
-                    postFix={`%`}
+                    placeholder={`Share`}
+                    suffix={`%`}
                 />
             </React.Fragment>
         )
