@@ -20,6 +20,8 @@ import { Row } from '../../../../components/Core/Layout/Row/Row'
 import { IconType } from '../../../../components/Core/Icon/Icon'
 import { ComposerFieldInput } from '../../../../components/App/Dashboard/ComposerFieldInput'
 import { ArtistRoleDropdown } from '../../../../components/App/Dashboard/ArtistRoleDropdown'
+import { PRODropdown } from '../../../../components/App/Dashboard/PRODropdown'
+import { CountryDropdown } from '../../../../components/App/Dashboard/CountryDropdown'
 
 const CREATE_SONG_MUTATION = gql`
     mutation createSong($song: SongInputType!) {
@@ -167,16 +169,23 @@ export class RegisterSongView extends React.Component<Props, State> {
                                         />
                                     </Field>
                                     {hasPRO && (
-                                        <Field>
-                                            TODO
+                                        <Field
+                                            title={`PRO`}
+                                            smallTitle={true}
+                                            isLabel={true}
+                                            isVertical={true}
+                                        >
+                                            <PRODropdown name={`pro`}/>
                                         </Field>
                                     )}
-                                    {/* <Field
+                                    <Field
                                         title={`Location`}
                                         smallTitle={true}
+                                        isVertical={true}
+                                        isLabel={true}
                                     >
                                         <CountryDropdown />
-                                    </Field> */}
+                                    </Field>
                                     <Field>
                                         <Button
                                             type={`submit`}

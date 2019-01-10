@@ -11,7 +11,9 @@ import { View } from '../components/Core/Layout/View/View'
 interface Props extends RouteComponentProps {}
 
 export class RootView extends React.Component<Props> {
-    private bem = new BEM('RootView')
+    private bem = new BEM('RootView', () => ({
+        'gradient-background': this.props.location.pathname.includes(routes.cover.index),
+    }))
 
     public render() {
         const token = getAuthToken()

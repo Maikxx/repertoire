@@ -63,12 +63,13 @@ html, body {
 
 body {
     @import './variables/fonts';
+    @import './variables/colors';
 
     display: flex;
     line-height: 1;
     overflow-x: hidden;
     font-family: $font-muli;
-    background-image: linear-gradient(125deg, #42eadc, #6b47fe);
+    background-image: $color-white;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -ms-overflow-style: -ms-autohiding-scrollbar;

@@ -6,6 +6,10 @@
 
     .rpa-RootView {
         flex: 1 0;
+
+        &--gradient-background {
+            background-image: linear-gradient(125deg, #42eadc, #6b47fe);
+        }
     }
 
     .rpa-AppView {
