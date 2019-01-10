@@ -26,5 +26,5 @@ export interface GraphQLSongInterface {
 export interface SongInputTypeInterface {
     title: string
     composer: ArtistShareInputInterface
-    composerShare: number
+    creators: ArtistShareInputInterface[]
 }

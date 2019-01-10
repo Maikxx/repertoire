@@ -198,6 +198,7 @@ export class RegisterSongView extends React.Component<Props, State> {
                 song: {
                     title: fields.title,
                     composer: fields.composer,
+                    creators: fields.creators,
                 },
             },
         })
