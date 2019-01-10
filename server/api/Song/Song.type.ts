@@ -42,5 +42,6 @@ export const ArtistShareInputType = new GraphQLInputObjectType({
     fields: () => ({
         name: { type: new GraphQLNonNull(GraphQLString) },
         share: { type: new GraphQLNonNull(GraphQLFloat) },
+        role: { type: GraphQLString },
     }),
 })

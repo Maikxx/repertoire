@@ -1,5 +1,4 @@
 import './Select.scss'
-
 import {
     default as ReactSelect,
     Creatable as ReactSelectCreatable,
@@ -33,7 +32,6 @@ export interface SelectOption {
 }
 
 export class Select extends React.PureComponent<Props> {
-
     public state = {
         selectedOption: this.props.defaultValue ? this.props.multi ? this.props.defaultValue : this.props.defaultValue[0] : undefined,
     }
@@ -64,6 +62,7 @@ export class Select extends React.PureComponent<Props> {
             optionClassName: this.bem.getElement('option'),
             name: name,
             value: selectedOption,
+            classNamePrefix: 'rpa',
             onChange: this.handleOnChange,
             options: options,
             multi: multi,
