@@ -109,6 +109,8 @@ export class RegisterSongView extends React.Component<Props, State> {
                                     </Field>
                                     {hasMultpleCreators && (
                                         <VariableMultiInputField
+                                            smallTitle={true}
+                                            isVertical={true}
                                             getFieldTitle={onAdd => (
                                                 <FieldTitle>
                                                     <Row>

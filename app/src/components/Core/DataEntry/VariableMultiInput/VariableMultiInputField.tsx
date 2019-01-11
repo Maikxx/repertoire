@@ -4,10 +4,10 @@ import { BEM, ClassValue } from '../../../../services/BEMService'
 import times from 'lodash-es/times'
 import { Button, ButtonStyleType } from '../../Button/Button'
 import c from 'classnames'
-import { Field } from '../../Field/Field/Field'
+import { Field, FieldProps } from '../../Field/Field/Field'
 import { IconType } from '../../Icon/Icon'
 
-interface Props {
+interface Props extends FieldProps {
     addButtonLabel?: string
     baseAmount?: number
     className?: ClassValue
@@ -33,10 +33,14 @@ export class VariableMultiInputField extends React.Component<Props, State> {
     private bem = new BEM('VariableMultiInputField')
 
     public render() {
-        const { className, getFieldTitle } = this.props
+        const { className, getFieldTitle, smallTitle, isVertical } = this.props
 
         return (
-            <Field className={this.bem.getClassName(className)}>
+            <Field
+                className={this.bem.getClassName(className)}
+                smallTitle={smallTitle}
+                isVertical={isVertical}
+            >
                 {getFieldTitle(this.onAdd)}
                 {this.renderInputs()}
             </Field>

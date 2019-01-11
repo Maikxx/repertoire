@@ -5,7 +5,7 @@ import { Row } from '../../Layout/Row/Row'
 import { Column } from '../../Layout/Column/Column'
 import { FieldTitle } from '../FieldTitle/FieldTitle'
 
-interface Props {
+export interface FieldProps {
     className?: ClassValue
     isInverse?: boolean
     isLabel?: boolean
@@ -14,7 +14,7 @@ interface Props {
     title?: string
 }
 
-export class Field extends React.Component<Props> {
+export class Field extends React.Component<FieldProps> {
     private bem = new BEM('Field', () => ({
         'is-inverse': this.props.isInverse,
         'small-title': this.props.smallTitle,
