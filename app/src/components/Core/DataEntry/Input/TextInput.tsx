@@ -56,6 +56,10 @@ export class TextInput extends React.Component<TextInputProps> {
     private onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = event => {
         const { typeAhead } = this.props
 
+        if ((this.inputRef.current && this.typeAheadRef.current) && this.inputRef.current.value === typeAhead) {
+            this.typeAheadRef.current.innerText = ''
+        }
+
         if (event.key !== 'ArrowRight') {
             return
         }

@@ -6,6 +6,7 @@ export const PublisherType = new GraphQLObjectType({
     fields: () => ({
         _id: { type: new GraphQLNonNull(GraphQLInt) },
         name: { type: new GraphQLNonNull(GraphQLString) },
+        role: { type: GraphQLString },
         createdAt: {
             type: new GraphQLNonNull(GraphQLString),
             resolve: country => getISOStringFromDate(country.createdAt),
@@ -17,5 +18,6 @@ export const PublisherInputType = new GraphQLInputObjectType({
     name: 'PublisherInputType',
     fields: () => ({
         name: { type: new GraphQLNonNull(GraphQLString) },
+        role: { type: GraphQLString },
     }),
 })

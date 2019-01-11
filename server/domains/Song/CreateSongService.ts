@@ -3,7 +3,7 @@ import { ApolloError } from 'apollo-server-core'
 import { CreateSongArgs } from '../../api/Song/createSong.mutation'
 
 export const CreateSong = async (args: CreateSongArgs) => {
-    const { title, composer, creators, country, pro } = args.song
+    const { title, composer, creators, country, pro, publisher } = args.song
     const { name: artistName, share } = composer
 
     try {
@@ -42,17 +42,28 @@ export const CreateSong = async (args: CreateSongArgs) => {
             creatorShares = ids
         }
 
+        if (publisher) {
+            await database.query(
+                `UPDATE publishers
+                SET role = $1
+                WHERE _id = $2
+                RETURNING *;`,
+                [ publisher.role, publisher._id ]
+            )
+        }
+
         const { rows: insertRows } = await database.query(
             `INSERT INTO songs (
                 title,
                 "composerShare",
                 "creatorShares",
                 country,
-                pro
+                pro,
+                publisher
             ) VALUES (
-                $1, $2, $3, $4, $5
+                $1, $2, $3, $4, $5, $6
             ) RETURNING *;`,
-            [ title, composerShare._id, creatorShares, country, pro ]
+            [ title, composerShare._id, creatorShares, country, pro, publisher && publisher._id ]
         )
 
         const song = insertRows[0]

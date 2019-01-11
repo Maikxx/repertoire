@@ -5,5 +5,7 @@ export interface GraphQLPublisherInterface {
 }
 
 export interface PublisherInputTypeInterface {
+    _id: number
     name: string
+    role: string
 }

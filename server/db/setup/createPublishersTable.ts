@@ -3,6 +3,7 @@ export const createPublishersTable = `
     (
         _id serial PRIMARY KEY,
         name character varying(300) UNIQUE COLLATE pg_catalog."default" NOT NULL,
+        role character varying(100) UNIQUE,
         "createdAt" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
     )
     WITH (

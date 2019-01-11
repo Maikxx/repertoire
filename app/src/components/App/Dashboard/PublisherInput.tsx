@@ -68,7 +68,7 @@ export class PublisherInput extends React.Component<Props> {
         return (
             <MultiInput type={MultiInputType.Double}>
                 <Select
-                    name={`${baseName}.id`}
+                    name={`${baseName}._id`}
                     options={options}
                 />
                 <Select

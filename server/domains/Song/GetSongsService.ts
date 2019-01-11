@@ -25,6 +25,11 @@ export const GetSongs = async () => {
                 [country]
             )
 
+            const { rows: [publisherRow] } = await database.query(
+                `SELECT * FROM publishers WHERE _id = $1;`,
+                [song.publisher]
+            )
+
             const creatorSharesData = await Promise.all(creatorShares.map(async creatorShare => {
                 const { rows: [composerShareRow] } = await database.query(
                     `SELECT * FROM "artistShare" WHERE _id = $1;`,
@@ -40,12 +45,14 @@ export const GetSongs = async () => {
 
             delete song.composerShare
             delete song.country
+            delete song.publisher
 
             return {
                 ...song,
                 country: countryRow,
                 composer: composerShareRow,
                 creators: creatorSharesData,
+                publisher: publisherRow,
             }
         }))
 

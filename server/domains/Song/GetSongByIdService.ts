@@ -36,14 +36,21 @@ export const GetSongById = async (id: number) => {
                 return composerShareRow
             }))
 
+            const { rows: [publisherRow] } = await database.query(
+                `SELECT * FROM publishers WHERE _id = $1;`,
+                [song.publisher]
+            )
+
             delete song.composerShare
             delete song.creatorShares
+            delete song.publisher
 
             return {
                 ...song,
                 composer: composerShareRow,
                 creators: creatorSharesData,
                 country: countryRow,
+                publisher: publisherRow,
             }
         }
 

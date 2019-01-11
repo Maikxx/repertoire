@@ -59,7 +59,7 @@ interface State {
 export class RegisterSongView extends React.Component<Props, State> {
     public state: State = {
         hasMultpleCreators: true,
-        hasSplitRevenue: true,
+        hasSplitRevenue: false,
         hasPublishers: true,
         hasPRO: true,
     }
@@ -140,7 +140,7 @@ export class RegisterSongView extends React.Component<Props, State> {
                                     <Field>
                                         <Checkbox
                                             label={`Split revenue`}
-                                            defaultChecked={true}
+                                            defaultChecked={false}
                                             onChange={() => this.setState({ hasSplitRevenue: !hasSplitRevenue })}
                                         />
                                     </Field>
@@ -209,7 +209,7 @@ export class RegisterSongView extends React.Component<Props, State> {
 
     private onSubmit = (mutateFunction: MutationFn) => async (fields: Fields) => {
         const { history } = this.props
-        const { title, composer, creators, country, pro } = fields
+        const { title, composer, creators, country, pro, publisher } = fields
 
         const response = await mutateFunction({
             variables: {
@@ -219,6 +219,10 @@ export class RegisterSongView extends React.Component<Props, State> {
                     creators,
                     country: Number(country),
                     pro,
+                    publisher: {
+                        ...publisher,
+                        _id: Number(publisher._id),
+                    },
                 },
             },
         })

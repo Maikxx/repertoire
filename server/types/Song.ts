@@ -1,3 +1,4 @@
+import { PublisherInputTypeInterface, GraphQLPublisherInterface } from './Publisher'
 import { GraphQLCountryInterface } from './Country'
 
 export interface ArtistShareInterface {
@@ -21,6 +22,7 @@ export interface DatabaseSongInterface {
     creatorShares: number[]
     country: number
     pro?: string
+    publisher?: number
     createdAt: string
 }
 
@@ -31,6 +33,7 @@ export interface GraphQLSongInterface {
     creators?: ArtistShareInterface[]
     country?: GraphQLCountryInterface
     pro?: string
+    publisher?: GraphQLPublisherInterface
     createdAt: string
 }
 
@@ -39,5 +42,6 @@ export interface SongInputTypeInterface {
     composer: ArtistShareInputInterface
     creators?: ArtistShareInputInterface[]
     country?: number
+    publisher?: PublisherInputTypeInterface
     pro?: string
 }

@@ -17,9 +17,9 @@ export const connectToDatabase = async (): Promise<void> => {
     await database.connect()
     await database.query(`
         ${createUsersTable}
+        ${createPublishersTable}
         ${createArtistShareTable}
         ${createSongsTable}
         ${createCountriesTable}
-        ${createPublishersTable}
     `)
 }
