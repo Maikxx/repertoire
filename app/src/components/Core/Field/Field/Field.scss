@@ -6,6 +6,10 @@
     &__content {
         flex: 5;
         font-size: 1rem;
+
+        > * + * {
+            margin-top: 6px;
+        }
     }
 
     .rpa-Column > .rpa-Field__content {

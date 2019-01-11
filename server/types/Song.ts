@@ -43,5 +43,6 @@ export interface SongInputTypeInterface {
     creators?: ArtistShareInputInterface[]
     country?: number
     publisher?: PublisherInputTypeInterface
+    createdAt?: string
     pro?: string
 }

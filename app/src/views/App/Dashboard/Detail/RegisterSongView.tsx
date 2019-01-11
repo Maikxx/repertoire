@@ -22,6 +22,7 @@ import { ArtistRoleDropdown } from '../../../../components/App/Dashboard/ArtistR
 import { PRODropdown } from '../../../../components/App/Dashboard/PRODropdown'
 import { CountryDropdown } from '../../../../components/App/Dashboard/CountryDropdown'
 import { PublisherInput } from '../../../../components/App/Dashboard/PublisherInput'
+import { RecordedOnInput } from '../../../../components/App/Dashboard/RecordedOnField'
 
 const CREATE_SONG_MUTATION = gql`
     mutation createSong($song: SongInputType!) {
@@ -181,6 +182,17 @@ export class RegisterSongView extends React.Component<Props, State> {
                                         </Field>
                                     )}
                                     <Field
+                                        title={`Recorded on`}
+                                        smallTitle={true}
+                                        isVertical={true}
+                                        isLabel={true}
+                                    >
+                                        <RecordedOnInput
+                                            name={`recordedOn`}
+                                            placeholder={`Song is recorded on`}
+                                        />
+                                    </Field>
+                                    <Field
                                         title={`Location`}
                                         smallTitle={true}
                                         isVertical={true}
@@ -211,7 +223,7 @@ export class RegisterSongView extends React.Component<Props, State> {
 
     private onSubmit = (mutateFunction: MutationFn) => async (fields: Fields) => {
         const { history } = this.props
-        const { title, composer, creators, country, pro, publisher } = fields
+        const { title, composer, creators, country, pro, publisher, createdAt } = fields
 
         const response = await mutateFunction({
             variables: {
@@ -221,6 +233,7 @@ export class RegisterSongView extends React.Component<Props, State> {
                     creators,
                     country: Number(country),
                     pro,
+                    createdAt: createdAt || null,
                     publisher: {
                         ...publisher,
                         _id: Number(publisher._id),

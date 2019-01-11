@@ -23,7 +23,7 @@ export const SongType = new GraphQLObjectType({
         publisher: { type: PublisherType },
         createdAt: {
             type: new GraphQLNonNull(GraphQLString),
-            resolve: country => getISOStringFromDate(country.createdAt),
+            resolve: song => getISOStringFromDate(song.createdAt),
         },
     }),
 })
@@ -36,6 +36,7 @@ export const SongInputType = new GraphQLInputObjectType({
         creators: { type: new GraphQLList(ArtistShareInputType) },
         pro: { type: GraphQLString },
         publisher: { type: SongPublisherInputType },
+        createdAt: { type: GraphQLString },
         country: { type: GraphQLInt },
     }),
 })
@@ -48,7 +49,7 @@ export const ArtistShareType = new GraphQLObjectType({
         share: { type: new GraphQLNonNull(GraphQLFloat) },
         createdAt: {
             type: new GraphQLNonNull(GraphQLString),
-            resolve: country => getISOStringFromDate(country.createdAt),
+            resolve: artistShare => getISOStringFromDate(artistShare.createdAt),
         },
     }),
 })

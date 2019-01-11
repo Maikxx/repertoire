@@ -11,8 +11,8 @@ export interface TextInputProps {
     placeholder?: string
     typeAhead?: string
     required?: boolean
-    min?: number
-    max?: number
+    min?: number | string
+    max?: number | string
     step?: number
     type: string
     suffix?: string

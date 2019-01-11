@@ -12,19 +12,21 @@ interface Props {
     addable?: boolean
     className?: ClassValue
     clearable?: boolean
-    defaultValue?: SelectOption[]
+    defaultValue?: SelectOption | SelectOption[]
     disabled?: boolean
     loading?: boolean
     loadingMore?: boolean
     multi?: boolean
     name: string
-    onChange?: (selectedOptions: SelectOption | SelectOption[] | null, name: string) => void
+    onChange?: SelectChangeHandler
     onEndReached?: () => void
     onSearch?: (query: string) => void
     options?: SelectOption[]
     placeholder?: string
     searchable?: boolean
 }
+
+export type SelectChangeHandler = (selectedOptions: SelectOption | SelectOption[] | null, name: string) => void
 
 export interface SelectOption {
     value: string | number
