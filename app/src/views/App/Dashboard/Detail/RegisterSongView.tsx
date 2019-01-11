@@ -7,7 +7,6 @@ import { Field } from '../../../../components/Core/Field/Field/Field'
 import { Wrap } from '../../../../components/Core/Layout/Wrap/Wrap'
 import { TextInput } from '../../../../components/Core/DataEntry/Input/TextInput'
 import { Checkbox } from '../../../../components/Core/DataEntry/Form/Checkbox'
-// import { CountryDropdown } from '../../../../components/App/Dashboard/CountryDropdown'
 import { Mutation, MutationFn } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Button, ButtonStyleType } from '../../../../components/Core/Button/Button'
@@ -22,6 +21,7 @@ import { ComposerFieldInput } from '../../../../components/App/Dashboard/Compose
 import { ArtistRoleDropdown } from '../../../../components/App/Dashboard/ArtistRoleDropdown'
 import { PRODropdown } from '../../../../components/App/Dashboard/PRODropdown'
 import { CountryDropdown } from '../../../../components/App/Dashboard/CountryDropdown'
+import { PublisherInput } from '../../../../components/App/Dashboard/PublisherInput'
 
 const CREATE_SONG_MUTATION = gql`
     mutation createSong($song: SongInputType!) {
@@ -158,7 +158,7 @@ export class RegisterSongView extends React.Component<Props, State> {
                                     </Field>
                                     {hasPublishers && (
                                         <Field>
-                                            TODO
+                                            <PublisherInput baseName={`publisher`}/>
                                         </Field>
                                     )}
                                     <Field>

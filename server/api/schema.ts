@@ -11,6 +11,7 @@ import { getCountries } from './Country/getCountries.query'
 import { createSong } from './Song/createSong.mutation'
 import { getSong } from './Song/getSong.query'
 import { getSongs } from './Song/getSongs.query'
+import { getPublishers } from './Publisher/getPublishers.query'
 
 export const createSchema = () => new GraphQLSchema({
     query: new GraphQLObjectType({
@@ -23,6 +24,7 @@ export const createSchema = () => new GraphQLSchema({
             getUser: getUser(),
             getUsers: getUsers(),
             me: getMe(),
+            getPublishers: getPublishers(),
         }),
     }),
     mutation: new GraphQLObjectType({

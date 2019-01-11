@@ -3,6 +3,7 @@ import { createSongsTable } from './setup/createSongsTable'
 import { createCountriesTable } from './setup/createCountriesTable'
 import { createUsersTable } from './setup/createUsersTable'
 import { createArtistShareTable } from './setup/createArtistShareTable'
+import { createPublishersTable } from './setup/createPublishersTable'
 require('dotenv').load()
 
 export const database = new Client({
@@ -19,5 +20,6 @@ export const connectToDatabase = async (): Promise<void> => {
         ${createArtistShareTable}
         ${createSongsTable}
         ${createCountriesTable}
+        ${createPublishersTable}
     `)
 }

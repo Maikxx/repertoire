@@ -17,4 +17,15 @@
             }
         }
     }
+
+    &--double {
+        > * + * {
+            margin-left: 12px;
+        }
+
+        .rpa-Select,
+        .rpa-TextInput {
+            flex: 1;
+        }
+    }
 }

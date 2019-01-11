@@ -5,6 +5,7 @@ import { Row } from '../../Layout/Row/Row'
 
 export enum MultiInputType {
     Suffix = 'suffix',
+    Double = 'double',
 }
 
 interface Props {
