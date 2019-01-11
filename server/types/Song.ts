@@ -20,6 +20,7 @@ export interface DatabaseSongInterface {
     composerShare: number
     creatorShares: number[]
     country: number
+    pro?: string
     createdAt: string
 }
 
@@ -29,6 +30,7 @@ export interface GraphQLSongInterface {
     composer: ArtistShareInterface
     creators?: ArtistShareInterface[]
     country?: GraphQLCountryInterface
+    pro?: string
     createdAt: string
 }
 
@@ -37,4 +39,5 @@ export interface SongInputTypeInterface {
     composer: ArtistShareInputInterface
     creators?: ArtistShareInputInterface[]
     country?: number
+    pro?: string
 }

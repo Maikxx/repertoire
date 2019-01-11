@@ -209,7 +209,7 @@ export class RegisterSongView extends React.Component<Props, State> {
 
     private onSubmit = (mutateFunction: MutationFn) => async (fields: Fields) => {
         const { history } = this.props
-        const { title, composer, creators, country } = fields
+        const { title, composer, creators, country, pro } = fields
 
         const response = await mutateFunction({
             variables: {
@@ -218,6 +218,7 @@ export class RegisterSongView extends React.Component<Props, State> {
                     composer,
                     creators,
                     country: Number(country),
+                    pro,
                 },
             },
         })

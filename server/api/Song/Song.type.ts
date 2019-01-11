@@ -10,6 +10,7 @@ export const SongType = new GraphQLObjectType({
         composer: { type: new GraphQLNonNull(ArtistShareType) },
         creators: { type: new GraphQLList(ArtistShareType) },
         country: { type: CountryType },
+        pro: { type: GraphQLString },
         createdAt: {
             type: new GraphQLNonNull(GraphQLString),
             resolve: country => getISOStringFromDate(country.createdAt),
@@ -23,6 +24,7 @@ export const SongInputType = new GraphQLInputObjectType({
         title: { type: new GraphQLNonNull(GraphQLString) },
         composer: { type: new GraphQLNonNull(ArtistShareInputType) },
         creators: { type: new GraphQLList(ArtistShareInputType) },
+        pro: { type: GraphQLString },
         country: { type: GraphQLInt },
     }),
 })

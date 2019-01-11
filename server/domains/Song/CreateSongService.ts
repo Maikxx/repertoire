@@ -3,7 +3,7 @@ import { ApolloError } from 'apollo-server-core'
 import { CreateSongArgs } from '../../api/Song/createSong.mutation'
 
 export const CreateSong = async (args: CreateSongArgs) => {
-    const { title, composer, creators, country } = args.song
+    const { title, composer, creators, country, pro } = args.song
     const { name: artistName, share } = composer
 
     try {
@@ -47,11 +47,12 @@ export const CreateSong = async (args: CreateSongArgs) => {
                 title,
                 "composerShare",
                 "creatorShares",
-                country
+                country,
+                pro
             ) VALUES (
-                $1, $2, $3, $4
+                $1, $2, $3, $4, $5
             ) RETURNING *;`,
-            [ title, composerShare._id, creatorShares, country ]
+            [ title, composerShare._id, creatorShares, country, pro ]
         )
 
         const song = insertRows[0]

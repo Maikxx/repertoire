@@ -6,6 +6,7 @@ export const createSongsTable = `
         "composerShare" integer REFERENCES "artistShare"(_id),
         "creatorShares" integer[],
         country integer REFERENCES countries(_id),
+        pro character varying(100),
         "createdAt" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
     )
     WITH (
