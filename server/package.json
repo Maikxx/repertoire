@@ -21,7 +21,8 @@
     "jsonwebtoken": "^8.4.0",
     "moment": "^2.23.0",
     "nodemon": "^1.18.9",
-    "pg": "^7.7.1"
+    "pg": "^7.7.1",
+    "pg-format": "^1.0.4"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
@@ -37,6 +38,7 @@
     "@types/moment": "^2.13.0",
     "@types/node": "^10.12.18",
     "@types/pg": "^7.4.11",
+    "@types/pg-format": "^1.0.0",
     "ts-node": "^7.0.1",
     "typescript": "^3.2.2"
   }

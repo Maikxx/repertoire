@@ -58,7 +58,7 @@ interface State {
 
 export class RegisterSongView extends React.Component<Props, State> {
     public state: State = {
-        hasMultpleCreators: true,
+        hasMultpleCreators: false,
         hasSplitRevenue: false,
         hasPublishers: true,
         hasPRO: true,
@@ -103,7 +103,7 @@ export class RegisterSongView extends React.Component<Props, State> {
                                     <Field>
                                         <Checkbox
                                             label={`Multiple creators`}
-                                            defaultChecked={true}
+                                            defaultChecked={false}
                                             onChange={() => this.setState({ hasMultpleCreators: !hasMultpleCreators })}
                                         />
                                     </Field>
