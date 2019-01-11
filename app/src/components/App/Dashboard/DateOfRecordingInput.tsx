@@ -11,7 +11,7 @@ interface State {
     isAlternativeDateSelected: boolean
 }
 
-export class RecordedOnInput extends React.Component<Props, State> {
+export class DateOfRecordingInput extends React.Component<Props, State> {
     public state: State = {
         isAlternativeDateSelected: false,
     }

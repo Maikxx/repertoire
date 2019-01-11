@@ -15,7 +15,7 @@ import { IconType } from '../../Core/Icon/Icon'
 import { ArtistRoleDropdown } from './ArtistRoleDropdown'
 import { PublisherInput } from './PublisherInput'
 import { PRODropdown } from './PRODropdown'
-import { RecordedOnInput } from './RecordedOnInput'
+import { DateOfRecordingInput } from './DateOfRecordingInput'
 import { CountryDropdown } from './CountryDropdown'
 import gql from 'graphql-tag'
 import { Text } from '../../Core/Text/Text/Text'
@@ -181,15 +181,12 @@ export class RegisterSongForm extends React.Component<Props> {
                                 </Field>
                             )}
                             <Field
-                                title={`Recorded on`}
+                                title={`Date of recording`}
                                 smallTitle={true}
                                 isVertical={true}
                                 isLabel={true}
                             >
-                                <RecordedOnInput
-                                    name={`recordedOn`}
-                                    placeholder={`Song is recorded on`}
-                                />
+                                <DateOfRecordingInput name={`recordedOn`}/>
                             </Field>
                             <Field
                                 title={`Location`}
