@@ -62,7 +62,7 @@ export class Select extends React.PureComponent<Props> {
             optionClassName: this.bem.getElement('option'),
             name: name,
             value: selectedOption,
-            classNamePrefix: 'rpa',
+            classNamePrefix: 'rpa-Select',
             onChange: this.handleOnChange,
             options: options,
             multi: multi,
