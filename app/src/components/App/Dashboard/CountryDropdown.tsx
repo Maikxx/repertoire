@@ -15,7 +15,10 @@ const GET_COUNTRIES_QUERY = gql`
     }
 `
 
-interface Props {}
+interface Props {
+    name: string
+    placeholder?: string
+}
 
 interface QueryData {
     getCountries: Country[]
@@ -47,13 +50,13 @@ export class CountryDropdown extends React.Component<Props> {
     )
 
     private renderWithData = (data: QueryData) => {
+        const { ...restProps } = this.props
         const options = data.getCountries.map(country => ({ value: country._id, label: country.name }))
 
         return (
             <Select
-                name={`location`}
                 options={options}
-                placeholder={`This song is recorded in`}
+                {...restProps}
             />
         )
     }

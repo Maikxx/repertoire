@@ -3,8 +3,9 @@ export const createSongsTable = `
     (
         _id serial PRIMARY KEY,
         title character varying(150) COLLATE pg_catalog."default" NOT NULL,
-        "composerShareId" integer REFERENCES "artistShare"(_id),
-        "creatorShareIds" integer[],
+        "composerShare" integer REFERENCES "artistShare"(_id),
+        "creatorShares" integer[],
+        country integer REFERENCES countries(_id),
         "createdAt" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
     )
     WITH (

@@ -1,5 +1,6 @@
 import { GraphQLObjectType, GraphQLNonNull, GraphQLInt, GraphQLString, GraphQLInputObjectType, GraphQLFloat, GraphQLList } from 'graphql'
 import { getISOStringFromDate } from '../../services/DateFormatter'
+import { CountryType } from '../Country/Country.type'
 
 export const SongType = new GraphQLObjectType({
     name: 'SongType',
@@ -8,6 +9,7 @@ export const SongType = new GraphQLObjectType({
         title: { type: new GraphQLNonNull(GraphQLString) },
         composer: { type: new GraphQLNonNull(ArtistShareType) },
         creators: { type: new GraphQLList(ArtistShareType) },
+        country: { type: CountryType },
         createdAt: {
             type: new GraphQLNonNull(GraphQLString),
             resolve: country => getISOStringFromDate(country.createdAt),
@@ -21,6 +23,7 @@ export const SongInputType = new GraphQLInputObjectType({
         title: { type: new GraphQLNonNull(GraphQLString) },
         composer: { type: new GraphQLNonNull(ArtistShareInputType) },
         creators: { type: new GraphQLList(ArtistShareInputType) },
+        country: { type: GraphQLInt },
     }),
 })
 

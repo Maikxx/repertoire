@@ -3,7 +3,7 @@ import { ApolloError } from 'apollo-server-core'
 import { CreateSongArgs } from '../../api/Song/createSong.mutation'
 
 export const CreateSong = async (args: CreateSongArgs) => {
-    const { title, composer, creators } = args.song
+    const { title, composer, creators, country } = args.song
     const { name: artistName, share } = composer
 
     try {
@@ -22,7 +22,7 @@ export const CreateSong = async (args: CreateSongArgs) => {
             throw new ApolloError('Artist share insertion failed', '500')
         }
 
-        let creatorShareIds: number[] | null = null
+        let creatorShares: number[] | null = null
         if (creators && creators.length > 0) {
             const ids = await Promise.all(creators.map(async creator => {
                 const { rows: [creatorShare] } = await database.query(
@@ -39,18 +39,19 @@ export const CreateSong = async (args: CreateSongArgs) => {
                 return creatorShare._id
             }))
 
-            creatorShareIds = ids
+            creatorShares = ids
         }
 
         const { rows: insertRows } = await database.query(
             `INSERT INTO songs (
                 title,
-                "composerShareId",
-                "creatorShareIds"
+                "composerShare",
+                "creatorShares",
+                country
             ) VALUES (
-                $1, $2, $3
+                $1, $2, $3, $4
             ) RETURNING *;`,
-            [ title, composerShare._id, creatorShareIds ]
+            [ title, composerShare._id, creatorShares, country ]
         )
 
         const song = insertRows[0]

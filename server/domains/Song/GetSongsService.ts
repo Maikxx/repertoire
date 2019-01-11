@@ -12,21 +12,40 @@ export const GetSongs = async () => {
             throw new ApolloError('There are no songs in the database', '404')
         }
 
-        const songs = await Promise.all(songRows.map(async (songRow: DatabaseSongInterface) => {
-            const { rows: [composerShare] } = await database.query(
+        const songs = await Promise.all(songRows.map(async (song: DatabaseSongInterface) => {
+            const { creatorShares, composerShare, country } = song
+
+            const { rows: [composerShareRow] } = await database.query(
                 `SELECT * FROM "artistShare" WHERE _id = $1;`,
-                [songRow.composerShareId]
+                [composerShare]
             )
 
-            if (!composerShare) {
+            const { rows: [countryRow] } = await database.query(
+                `SELECT * FROM countries WHERE _id = $1;`,
+                [country]
+            )
+
+            const creatorSharesData = await Promise.all(creatorShares.map(async creatorShare => {
+                const { rows: [composerShareRow] } = await database.query(
+                    `SELECT * FROM "artistShare" WHERE _id = $1;`,
+                    [creatorShare]
+                )
+
+                return composerShareRow
+            }))
+
+            if (!composerShareRow) {
                 throw new ApolloError('No composer share found for the main author', '400')
             }
 
-            delete songRow.composerShareId
+            delete song.composerShare
+            delete song.country
 
             return {
-                ...songRow,
-                composer: composerShare,
+                ...song,
+                country: countryRow,
+                composer: composerShareRow,
+                creators: creatorSharesData,
             }
         }))
 

@@ -184,7 +184,10 @@ export class RegisterSongView extends React.Component<Props, State> {
                                         isVertical={true}
                                         isLabel={true}
                                     >
-                                        <CountryDropdown />
+                                        <CountryDropdown
+                                            name={`country`}
+                                            placeholder={`This song is recorded in`}
+                                        />
                                     </Field>
                                     <Field>
                                         <Button
@@ -206,12 +209,15 @@ export class RegisterSongView extends React.Component<Props, State> {
 
     private onSubmit = (mutateFunction: MutationFn) => async (fields: Fields) => {
         const { history } = this.props
+        const { title, composer, creators, country } = fields
+
         const response = await mutateFunction({
             variables: {
                 song: {
-                    title: fields.title,
-                    composer: fields.composer,
-                    creators: fields.creators,
+                    title,
+                    composer,
+                    creators,
+                    country: Number(country),
                 },
             },
         })

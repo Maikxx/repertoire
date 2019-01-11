@@ -1,3 +1,5 @@
+import { GraphQLCountryInterface } from './Country'
+
 export interface ArtistShareInterface {
     _id: number
     name: string
@@ -14,19 +16,25 @@ export interface ArtistShareInputInterface {
 
 export interface DatabaseSongInterface {
     _id: number
-    composerShareId: number
+    title: string
+    composerShare: number
+    creatorShares: number[]
+    country: number
     createdAt: string
 }
 
 export interface GraphQLSongInterface {
     _id: number
-    composer: ArtistShareInterface
     title: string
+    composer: ArtistShareInterface
+    creators?: ArtistShareInterface[]
+    country?: GraphQLCountryInterface
     createdAt: string
 }
 
 export interface SongInputTypeInterface {
     title: string
     composer: ArtistShareInputInterface
-    creators: ArtistShareInputInterface[]
+    creators?: ArtistShareInputInterface[]
+    country?: number
 }
