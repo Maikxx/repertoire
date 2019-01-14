@@ -6,16 +6,17 @@ export interface TextInputProps {
     className?: ClassValue
     defaultValue?: string
     disabled?: boolean
+    max?: number | string
+    min?: number | string
     name: string
+    onAutoComplete?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void
     onChange?: React.ChangeEventHandler<HTMLInputElement>
     placeholder?: string
-    typeAhead?: string
     required?: boolean
-    min?: number | string
-    max?: number | string
     step?: number
-    type: string
     suffix?: string
+    type: string
+    typeAhead?: string
 }
 
 export class TextInput extends React.Component<TextInputProps> {
@@ -26,7 +27,7 @@ export class TextInput extends React.Component<TextInputProps> {
     private typeAheadRef = React.createRef<HTMLSpanElement>()
 
     public render() {
-        const { className, typeAhead, suffix, ...restProps } = this.props
+        const { className, typeAhead, suffix, onAutoComplete, ...restProps } = this.props
 
         return (
             <div className={this.bem.getElement('wrapper')}>
@@ -54,7 +55,7 @@ export class TextInput extends React.Component<TextInputProps> {
     }
 
     private onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = event => {
-        const { typeAhead } = this.props
+        const { onAutoComplete, typeAhead } = this.props
 
         if ((this.inputRef.current && this.typeAheadRef.current) && this.inputRef.current.value === typeAhead) {
             this.typeAheadRef.current.innerText = ''
@@ -67,6 +68,11 @@ export class TextInput extends React.Component<TextInputProps> {
         if (this.inputRef.current && typeAhead && this.typeAheadRef.current) {
             this.inputRef.current.value = typeAhead
             this.typeAheadRef.current.innerText = ''
+
+        }
+
+        if (onAutoComplete && this.inputRef.current) {
+            onAutoComplete(this.inputRef.current.value, event)
         }
     }
 }

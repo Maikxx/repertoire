@@ -32,6 +32,7 @@ export class ComposerFieldInput extends React.Component<Props, State> {
                     type={`text`}
                     required={required}
                     onChange={this.onArtistInputChange}
+                    onAutoComplete={this.onAutoComplete}
                     placeholder={`Name of an artist`}
                     typeAhead={typeAhead}
                 />
@@ -49,6 +50,14 @@ export class ComposerFieldInput extends React.Component<Props, State> {
                 />
             </React.Fragment>
         )
+    }
+
+    private onAutoComplete = (value: string, event: React.KeyboardEvent<HTMLInputElement>) => {
+        const { onNameChange } = this.props
+
+        if (onNameChange) {
+            onNameChange(value)
+        }
     }
 
     private onArtistInputChange: React.ChangeEventHandler<HTMLInputElement> = async ({ target: { value }}) => {
