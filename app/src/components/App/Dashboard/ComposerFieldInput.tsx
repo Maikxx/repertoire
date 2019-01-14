@@ -1,11 +1,13 @@
 import * as React from 'react'
 import { TextInput } from '../../Core/DataEntry/Input/TextInput'
 import { getArtistToPreview } from '../../../services/APIService'
+import { toast } from 'react-toastify'
 
 interface Props {
     baseName: string
     required?: boolean
-    onChange: (nameValue: string, shareValue: number) => void
+    onShareChange: (nameValue: string, shareValue: number) => void
+    onNameChange?: (nameValue: string) => void
 }
 
 interface State {
@@ -40,7 +42,7 @@ export class ComposerFieldInput extends React.Component<Props, State> {
                     step={0.1}
                     min={0}
                     disabled={!nameValue}
-                    onChange={this.onChange}
+                    onChange={this.onShareChange}
                     max={100}
                     placeholder={`Share`}
                     suffix={`%`}
@@ -50,13 +52,19 @@ export class ComposerFieldInput extends React.Component<Props, State> {
     }
 
     private onArtistInputChange: React.ChangeEventHandler<HTMLInputElement> = async ({ target: { value }}) => {
+        const { onNameChange } = this.props
+
         try {
             if (!value || !value.length) {
                 this.setState({ typeAhead: '' })
                 return
             }
 
-            this.setState({ nameValue: value })
+            this.setState({ nameValue: value }, () => {
+                if (onNameChange) {
+                    onNameChange(value)
+                }
+            })
 
             const artistToPreview = await getArtistToPreview(value)
 
@@ -67,14 +75,15 @@ export class ComposerFieldInput extends React.Component<Props, State> {
 
             this.setState({ typeAhead: artistToPreview.name })
         } catch (error) {
+            toast.error(error.message)
             throw new Error(error)
         }
     }
 
-    private onChange: React.ChangeEventHandler<HTMLInputElement> = ({ target: { value: shareValue }}) => {
-        const { onChange } = this.props
+    private onShareChange: React.ChangeEventHandler<HTMLInputElement> = ({ target: { value: shareValue }}) => {
+        const { onShareChange } = this.props
         const { nameValue } = this.state
 
-        onChange(nameValue, Number(shareValue))
+        onShareChange(nameValue, Number(shareValue))
     }
 }

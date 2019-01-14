@@ -59,7 +59,7 @@ interface State {
 
 export class RegisterSongForm extends React.Component<Props> {
     public state: State = {
-        hasMultpleCreators: false,
+        hasMultpleCreators: true,
         hasPublishers: true,
         hasPRO: true,
         chartValues: [],
@@ -105,14 +105,15 @@ export class RegisterSongForm extends React.Component<Props> {
                                     <ComposerFieldInput
                                         baseName={`composer`}
                                         required={true}
-                                        onChange={(name, share) => this.onChangeComposerFieldInput(0, name, share)}
+                                        onNameChange={name => this.onChangeComposerFieldInputName(0, name)}
+                                        onShareChange={(name, share) => this.onChangeComposerFieldInputShare(0, name, share)}
                                     />
                                 </MultiInput>
                             </Field>
                             <Field>
                                 <Checkbox
                                     label={`Multiple creators`}
-                                    defaultChecked={false}
+                                    defaultChecked={true}
                                     onChange={() => this.setState({ hasMultpleCreators: !hasMultpleCreators })}
                                 />
                             </Field>
@@ -144,7 +145,8 @@ export class RegisterSongForm extends React.Component<Props> {
                                             >
                                                 <ComposerFieldInput
                                                     baseName={`creators[${index}]`}
-                                                    onChange={(name, share) => this.onChangeComposerFieldInput(index + 1, name, share)}
+                                                    onNameChange={name => this.onChangeComposerFieldInputName(index + 1, name)}
+                                                    onShareChange={(name, share) => this.onChangeComposerFieldInputShare(index + 1, name, share)}
                                                 />
                                             </MultiInput>
                                             <ArtistRoleDropdown name={`creators[${index}].role`} />
@@ -265,7 +267,7 @@ export class RegisterSongForm extends React.Component<Props> {
         this.setState({ chartValues: newChartValues })
     }
 
-    private onChangeComposerFieldInput = (index: number, name: string, share: number) => {
+    private updateChartValues = (index: number, name: string, share?: number) => {
         const { chartValues } = this.state
 
         if (chartValues.length === 0) {
@@ -279,10 +281,20 @@ export class RegisterSongForm extends React.Component<Props> {
         }
 
         const itemToUpdate = chartValues[indexOfItemToUpdate]
-
         itemToUpdate.name = name
-        itemToUpdate.percentage = share
+
+        if (typeof share === 'number') {
+            itemToUpdate.percentage = share
+        }
 
         this.setState({ chartValues })
+    }
+
+    private onChangeComposerFieldInputShare = (index: number, name: string, share: number) => {
+        this.updateChartValues(index, name, share)
+    }
+
+    private onChangeComposerFieldInputName = (index: number, name: string) => {
+        this.updateChartValues(index, name)
     }
 }
