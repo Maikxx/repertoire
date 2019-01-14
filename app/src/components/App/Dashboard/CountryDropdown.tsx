@@ -5,6 +5,7 @@ import { Select } from '../../Core/DataEntry/Form/Select'
 import { Country } from '../../../types/Country'
 import { Loader } from '../../Core/Feedback/Loader/Loader'
 import { Text } from '../../Core/Text/Text/Text'
+import { toast } from 'react-toastify'
 
 const GET_COUNTRIES_QUERY = gql`
     query getCountries {
@@ -33,7 +34,11 @@ export class CountryDropdown extends React.Component<Props> {
                         return <Loader />
                     }
 
-                    if (!data || error) {
+                    if (error) {
+                        toast.error(error.message)
+                    }
+
+                    if (!data) {
                         return this.renderNotFoundText()
                     }
 

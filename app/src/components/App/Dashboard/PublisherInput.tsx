@@ -6,6 +6,7 @@ import { Publisher } from '../../../types/Publisher'
 import gql from 'graphql-tag'
 import { Loader } from '../../Core/Feedback/Loader/Loader'
 import { Text } from '../../Core/Text/Text/Text'
+import { toast } from 'react-toastify'
 
 const GET_PUBLISHERS_QUERY = gql`
     query {
@@ -44,7 +45,11 @@ export class PublisherInput extends React.Component<Props> {
                         return <Loader />
                     }
 
-                    if (!data || error) {
+                    if (error) {
+                        toast.error(error.message)
+                    }
+
+                    if (!data) {
                         return this.renderNotFoundText()
                     }
 

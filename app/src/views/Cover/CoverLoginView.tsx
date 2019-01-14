@@ -13,6 +13,7 @@ import gql from 'graphql-tag'
 import { Mutation, MutationFn } from 'react-apollo'
 import { setAuthToken } from '../../services/LocalStorageService'
 import { View } from '../../components/Core/Layout/View/View'
+import { toast } from 'react-toastify'
 
 const LOGIN_MUTATION = gql`
     mutation userLogin($auth: AuthInputType!) {
@@ -102,11 +103,8 @@ export class CoverLoginView extends React.Component<Props, State> {
                             >
                                 Sign in
                             </Button>
-                            <TextLink to={routes.cover.forgot}>
-                                Forgot password?
-                            </TextLink>
                             <TextLink to={routes.cover.signUp}>
-                                Create an account?
+                                Need to create an account?
                             </TextLink>
                         </Form>
                     )}
@@ -137,16 +135,23 @@ export class CoverLoginView extends React.Component<Props, State> {
         const { email, password } = this.state
 
         if (!email || !password) {
+            toast.error('All input fields need to be filled out')
             throw new Error('All input fields need to be filled out')
         }
 
-        const response = await userLogin({ variables: { auth: { email, password }}})
-        const data = response && response.data && response.data.userLogin
-        const token = data && data.token
+        try {
+            const response = await userLogin({ variables: { auth: { email, password }}})
+            const data = response && response.data && response.data.userLogin
+            const token = data && data.token
 
-        if (token) {
-            setAuthToken(token)
-            this.setState({ redirectToReferrer: true })
+            if (token) {
+                setAuthToken(token)
+                toast.success('Redirecting you...')
+                this.setState({ redirectToReferrer: true })
+            }
+        } catch (error) {
+            toast.error(error.message)
+            throw new Error(error.message)
         }
     }
 }

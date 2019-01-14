@@ -43,7 +43,7 @@ export class RootView extends React.Component<Props> {
                         to={redirectToRoute}
                     />
                 </Switch>
-                <ToastContainer position={ToastPosition.BOTTOM_CENTER} />
+                <ToastContainer position={ToastPosition.BOTTOM_CENTER} autoClose={2000} />
             </View>
         )
     }

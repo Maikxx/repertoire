@@ -10,10 +10,7 @@ export class ArtistSplit extends React.Component<Props> {
         const { values } = this.props
 
         return (
-            <PieChart
-                chartName={`artist-split-chart`}
-                values={values}
-            />
+            <PieChart chartName={`artist-split-chart`} values={values}/>
         )
     }
 }

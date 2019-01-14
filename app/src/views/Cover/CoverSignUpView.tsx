@@ -12,11 +12,13 @@ import { RouteComponentProps } from 'react-router-dom'
 import gql from 'graphql-tag'
 import { Mutation, MutationFn } from 'react-apollo'
 import { View } from '../../components/Core/Layout/View/View'
+import { toast } from 'react-toastify'
+import { setAuthToken } from '../../services/LocalStorageService'
 
 const SIGN_UP_USER_MUTATION = gql`
     mutation createUser($user: UserInputType!) {
         createUser(user: $user) {
-            _id
+            token
         }
     }
 `
@@ -30,7 +32,9 @@ interface SignUpMutationVariables {
 }
 
 interface SignUpMutationResponse {
-    token: string
+    createUser: {
+        token: string
+    }
 }
 
 interface Props extends RouteComponentProps {}
@@ -67,7 +71,11 @@ export class CoverSignUpView extends React.Component<Props, State> {
                 <Mutation<SignUpMutationResponse, SignUpMutationVariables> mutation={SIGN_UP_USER_MUTATION}>
                     {mutate => (
                         <Form
-                            renderFormTitle={this.renderFormTitle}
+                            renderFormTitle={() => (
+                                <Text element={`legend`}>
+                                    Sign up
+                                </Text>
+                            )}
                             onSubmit={this.onSubmit(mutate)}
                         >
                             <FieldCollection>
@@ -125,21 +133,13 @@ export class CoverSignUpView extends React.Component<Props, State> {
         )
     }
 
-    private renderFormTitle = (): JSX.Element => {
-        return (
-            <Text element={`legend`}>
-                Sign up
-            </Text>
-        )
-    }
-
-    private checkIfUserCanSubmitForm = (): boolean => {
+    private checkIfUserCanSubmitForm = () => {
         const { email, password, confirmPassword } = this.state
 
         return (!!email && !!password && (!!confirmPassword && password === confirmPassword))
     }
 
-    private onChangeInput: React.ChangeEventHandler<HTMLInputElement> = (event): void => {
+    private onChangeInput: React.ChangeEventHandler<HTMLInputElement> = event => {
         const { target: { value, name }} = event
 
         this.setState({
@@ -149,13 +149,26 @@ export class CoverSignUpView extends React.Component<Props, State> {
         })
     }
 
-    private onSubmit = (userSignUp: MutationFn) => (event: React.FormEvent<HTMLFormElement>): void => {
+    private onSubmit = (userSignUp: MutationFn) => async () => {
         const { email, password } = this.state
 
         if (!email || !password) {
+            toast.error('All input fields need to be filled out')
             throw new Error('All input fields need to be filled out')
         }
 
-        userSignUp({ variables: { user: { email, password, isAdmin: true }}})
+        try {
+            const response = await userSignUp({ variables: { user: { email, password, isAdmin: true }}})
+            const data = response && response.data && response.data.createUser
+            const token = data && data.token
+
+            if (token) {
+                setAuthToken(token)
+                toast.success('Redirecting you...')
+                this.setState({ redirectToReferrer: true })
+            }
+        } catch (error) {
+
+        }
     }
 }

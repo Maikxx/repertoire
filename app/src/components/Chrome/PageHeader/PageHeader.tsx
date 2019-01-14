@@ -104,19 +104,14 @@ export class PageHeader extends React.Component<Props> {
             return (
                 <Link to={routes.app.dashboard.index}>
                     <Icon
-                        className={this.bem.getElement('menu-icon')}
+                        className={this.bem.getElement('back-icon')}
                         type={IconType.LeftArrow}
                     />
                 </Link>
             )
         }
 
-        return (
-            <Icon
-                className={this.bem.getElement('menu-icon')}
-                type={IconType.Menu}
-            />
-        )
+        return null
     }
 
     private renderPageHeading = () => {

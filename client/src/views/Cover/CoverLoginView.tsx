@@ -106,7 +106,7 @@ export class CoverLoginView extends React.Component<Props, State> {
                                 Forgot password?
                             </TextLink>
                             <TextLink to={routes.cover.signUp}>
-                                Create an account?
+                                Need to create an account?
                             </TextLink>
                         </Form>
                     )}

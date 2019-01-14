@@ -1,4 +1,5 @@
 import './scss/index.scss'
+import 'react-toastify/dist/ReactToastify.css'
 import 'babel-polyfill'
 import * as React from 'react'
 import ReactDOM from 'react-dom'

@@ -21,6 +21,7 @@ import gql from 'graphql-tag'
 import { Text } from '../../Core/Text/Text/Text'
 import { ArtistSplit } from './ArtistSplit'
 import { PieChartData } from '../../Core/DataDisplay/PieChart/PieChart'
+import { toast } from 'react-toastify'
 
 const CREATE_SONG_MUTATION = gql`
     mutation createSong($song: SongInputType!) {
@@ -230,25 +231,30 @@ export class RegisterSongForm extends React.Component<Props> {
         const { onSubmitSuccess } = this.props
         const { title, composer, creators, country, pro, publisher, createdAt } = fields
 
-        const response = await mutateFunction({
-            variables: {
-                song: {
-                    title,
-                    composer,
-                    creators,
-                    country: Number(country),
-                    pro,
-                    createdAt: createdAt || null,
-                    publisher: {
-                        ...publisher,
-                        _id: Number(publisher._id),
+        try {
+            const response = await mutateFunction({
+                variables: {
+                    song: {
+                        title,
+                        composer,
+                        creators,
+                        country: Number(country),
+                        pro,
+                        createdAt: createdAt || null,
+                        publisher: {
+                            ...publisher,
+                            _id: Number(publisher._id),
+                        },
                     },
                 },
-            },
-        })
+            })
 
-        if (response && response.data && response.data.createSong && onSubmitSuccess) {
-            onSubmitSuccess()
+            if (response && response.data && response.data.createSong && onSubmitSuccess) {
+                toast.success('Song registered successfully')
+                onSubmitSuccess()
+            }
+        } catch (error) {
+            toast.error(error.message)
         }
     }
 
