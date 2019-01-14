@@ -186,7 +186,10 @@ export class RegisterSongForm extends React.Component<Props> {
                                 isVertical={true}
                                 isLabel={true}
                             >
-                                <DateOfRecordingInput name={`recordedOn`}/>
+                                <DateOfRecordingInput
+                                    name={`recordedOn`}
+                                    placeholder={`Select a date option`}
+                                />
                             </Field>
                             <Field
                                 title={`Location`}
