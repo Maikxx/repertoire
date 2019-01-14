@@ -5,20 +5,23 @@ import { getArtistToPreview } from '../../../services/APIService'
 interface Props {
     baseName: string
     required?: boolean
+    onChange: (nameValue: string, shareValue: number) => void
 }
 
 interface State {
     typeAhead: string
+    nameValue: string
 }
 
 export class ComposerFieldInput extends React.Component<Props, State> {
     public state: State = {
         typeAhead: '',
+        nameValue: '',
     }
 
     public render() {
         const { baseName, required } = this.props
-        const { typeAhead } = this.state
+        const { nameValue, typeAhead } = this.state
 
         return (
             <React.Fragment>
@@ -36,6 +39,8 @@ export class ComposerFieldInput extends React.Component<Props, State> {
                     required={required}
                     step={0.1}
                     min={0}
+                    disabled={!nameValue}
+                    onChange={this.onChange}
                     max={100}
                     placeholder={`Share`}
                     suffix={`%`}
@@ -51,6 +56,8 @@ export class ComposerFieldInput extends React.Component<Props, State> {
                 return
             }
 
+            this.setState({ nameValue: value })
+
             const artistToPreview = await getArtistToPreview(value)
 
             if (!artistToPreview || !artistToPreview.name.startsWith(value)) {
@@ -62,5 +69,12 @@ export class ComposerFieldInput extends React.Component<Props, State> {
         } catch (error) {
             throw new Error(error)
         }
+    }
+
+    private onChange: React.ChangeEventHandler<HTMLInputElement> = ({ target: { value: shareValue }}) => {
+        const { onChange } = this.props
+        const { nameValue } = this.state
+
+        onChange(nameValue, Number(shareValue))
     }
 }

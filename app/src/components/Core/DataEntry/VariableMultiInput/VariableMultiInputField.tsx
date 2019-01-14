@@ -15,7 +15,7 @@ interface Props extends FieldProps {
     isDisabled?: boolean
     limit?: number
     amountOfPrefilledInputs?: number
-    onAdd?: (event: React.SyntheticEvent<HTMLButtonElement>) => void
+    onAdd?: (index: number) => void
     onRemove?: (event: React.SyntheticEvent<HTMLButtonElement>, index: number) => void
     getNewInput: (iteration: number) => React.ReactNode
     getFieldTitle: (onAdd: () => void) => React.ReactNode
@@ -49,8 +49,13 @@ export class VariableMultiInputField extends React.Component<Props, State> {
 
     private onAdd = () => {
         const { amountOfInputs } = this.state
+        const { onAdd } = this.props
 
-        this.setState({ amountOfInputs: amountOfInputs + 1 })
+        this.setState({ amountOfInputs: amountOfInputs + 1 }, () => {
+            if (onAdd) {
+                onAdd(amountOfInputs + 1)
+            }
+        })
     }
 
     private onRemoveButtonClick = (index: number, event: React.SyntheticEvent<HTMLButtonElement>) => {

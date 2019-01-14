@@ -19,6 +19,8 @@ import { DateOfRecordingInput } from './DateOfRecordingInput'
 import { CountryDropdown } from './CountryDropdown'
 import gql from 'graphql-tag'
 import { Text } from '../../Core/Text/Text/Text'
+import { ArtistSplit } from './ArtistSplit'
+import { PieChartData } from '../../Core/DataDisplay/PieChart/PieChart'
 
 const CREATE_SONG_MUTATION = gql`
     mutation createSong($song: SongInputType!) {
@@ -50,21 +52,27 @@ interface Props {
 
 interface State {
     hasMultpleCreators: boolean
-    hasSplitRevenue: boolean
     hasPublishers: boolean
     hasPRO: boolean
+    chartValues: PieChartData[]
 }
 
 export class RegisterSongForm extends React.Component<Props> {
     public state: State = {
         hasMultpleCreators: false,
-        hasSplitRevenue: false,
         hasPublishers: true,
         hasPRO: true,
+        chartValues: [],
+    }
+
+    public componentDidMount() {
+        this.createNewDataEntry(0)
+        this.createNewDataEntry(1)
     }
 
     public render() {
-        const { hasMultpleCreators, hasSplitRevenue, hasPublishers, hasPRO } = this.state
+        const { hasMultpleCreators, hasPublishers, hasPRO, chartValues } = this.state
+        const canShowChart = chartValues.length > 1 && chartValues[1].percentage > 0
 
         return (
             <Mutation<MutationResponse, MutationVariables> mutation={CREATE_SONG_MUTATION}>
@@ -97,6 +105,7 @@ export class RegisterSongForm extends React.Component<Props> {
                                     <ComposerFieldInput
                                         baseName={`composer`}
                                         required={true}
+                                        onChange={(name, share) => this.onChangeComposerFieldInput(0, name, share)}
                                     />
                                 </MultiInput>
                             </Field>
@@ -111,6 +120,7 @@ export class RegisterSongForm extends React.Component<Props> {
                                 <VariableMultiInputField
                                     smallTitle={true}
                                     isVertical={true}
+                                    onAdd={this.createNewDataEntry}
                                     getFieldTitle={onAdd => (
                                         <FieldTitle>
                                             <Row>
@@ -132,23 +142,19 @@ export class RegisterSongForm extends React.Component<Props> {
                                                 type={MultiInputType.Suffix}
                                                 key={index}
                                             >
-                                                <ComposerFieldInput baseName={`creators[${index}]`}/>
+                                                <ComposerFieldInput
+                                                    baseName={`creators[${index}]`}
+                                                    onChange={(name, share) => this.onChangeComposerFieldInput(index + 1, name, share)}
+                                                />
                                             </MultiInput>
                                             <ArtistRoleDropdown name={`creators[${index}].role`} />
                                         </React.Fragment>
                                     )}
                                 />
                             )}
-                            <Field>
-                                <Checkbox
-                                    label={`Split revenue`}
-                                    defaultChecked={false}
-                                    onChange={() => this.setState({ hasSplitRevenue: !hasSplitRevenue })}
-                                />
-                            </Field>
-                            {hasSplitRevenue && (
+                            {canShowChart && (
                                 <Field>
-                                    TODO
+                                    <ArtistSplit values={chartValues}/>
                                 </Field>
                             )}
                             <Field>
@@ -242,5 +248,41 @@ export class RegisterSongForm extends React.Component<Props> {
         if (response && response.data && response.data.createSong && onSubmitSuccess) {
             onSubmitSuccess()
         }
+    }
+
+    private createNewDataEntry = (index: number) => {
+        const { chartValues } = this.state
+        const newChartValues = chartValues
+
+        const newEntry = {
+            index,
+            name: '',
+            percentage: 0,
+        }
+
+        newChartValues.push(newEntry)
+
+        this.setState({ chartValues: newChartValues })
+    }
+
+    private onChangeComposerFieldInput = (index: number, name: string, share: number) => {
+        const { chartValues } = this.state
+
+        if (chartValues.length === 0) {
+            return
+        }
+
+        const indexOfItemToUpdate = chartValues.findIndex(chartValue => (chartValue && chartValue.index) === index)
+
+        if (indexOfItemToUpdate === -1) {
+            return
+        }
+
+        const itemToUpdate = chartValues[indexOfItemToUpdate]
+
+        itemToUpdate.name = name
+        itemToUpdate.percentage = share
+
+        this.setState({ chartValues })
     }
 }
