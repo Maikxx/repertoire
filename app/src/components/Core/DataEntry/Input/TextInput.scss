@@ -26,12 +26,20 @@
         border-bottom-color: #83A9F4;
     }
 
+    &:disabled {
+        cursor: not-allowed;
+    }
+
     &__prefill {
         position: absolute;
-        top: 17%;
+        top: 28%;
         left: 0;
         color: #CFCCCC;
         font-size: 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        pointer-events: none;
     }
 
     &__suffix {
