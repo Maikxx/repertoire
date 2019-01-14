@@ -70,10 +70,12 @@ export class PublisherInput extends React.Component<Props> {
                 <Select
                     name={`${baseName}._id`}
                     options={options}
+                    placeholder={`Name`}
                 />
                 <Select
                     name={`${baseName}.role`}
                     options={this.roleOptions}
+                    placeholder={`Role`}
                 />
             </MultiInput>
         )
