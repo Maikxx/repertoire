@@ -208,7 +208,7 @@ export class RegisterSongForm extends React.Component<Props> {
                                     buttonStyle={ButtonStyleType.Secondary}
                                     isFullWidth={true}
                                 >
-                                    Add song
+                                    Register song
                                 </Button>
                             </Field>
                         </FieldCollection>
