@@ -14,7 +14,6 @@ import { Button, ButtonStyleType } from '../../Core/Button/Button'
 import { IconType } from '../../Core/Icon/Icon'
 import { ArtistRoleDropdown } from './ArtistRoleDropdown'
 import { PublisherInput } from './PublisherInput'
-import { PRODropdown } from './PRODropdown'
 import { DateOfRecordingInput } from './DateOfRecordingInput'
 import { CountryDropdown } from './CountryDropdown'
 import gql from 'graphql-tag'
@@ -22,6 +21,8 @@ import { Text } from '../../Core/Text/Text/Text'
 import { ArtistSplit } from './ArtistSplit'
 import { PieChartData } from '../../Core/DataDisplay/PieChart/PieChart'
 import { toast } from 'react-toastify'
+import { PerformanceRightsOrganizationDropdown } from './PerformanceRightsOrganizationDropdown'
+import { SongCreatorInputType } from '../../../types/SongCreator'
 
 const CREATE_SONG_MUTATION = gql`
     mutation createSong($song: SongInputType!) {
@@ -47,6 +48,19 @@ interface MutationVariables {
     }
 }
 
+interface RegisterSongFields {
+    title: string
+    composer: SongCreatorInputType
+    creators?: SongCreatorInputType[]
+    country?: number
+    publisher?: {
+        _id: number
+        role: string
+    }
+    performanceRightsOrganization?: number
+    createdAt?: string | null
+}
+
 interface Props {
     onSubmitSuccess?: () => void
 }
@@ -54,7 +68,7 @@ interface Props {
 interface State {
     hasMultpleCreators: boolean
     hasPublishers: boolean
-    hasPRO: boolean
+    hasPerformanceRightsOrganization: boolean
     chartValues: PieChartData[]
 }
 
@@ -62,7 +76,7 @@ export class RegisterSongForm extends React.Component<Props> {
     public state: State = {
         hasMultpleCreators: true,
         hasPublishers: true,
-        hasPRO: true,
+        hasPerformanceRightsOrganization: true,
         chartValues: [],
     }
 
@@ -72,7 +86,7 @@ export class RegisterSongForm extends React.Component<Props> {
     }
 
     public render() {
-        const { hasMultpleCreators, hasPublishers, hasPRO, chartValues } = this.state
+        const { hasMultpleCreators, hasPublishers, hasPerformanceRightsOrganization, chartValues } = this.state
         const canShowChart = chartValues.length > 1 && chartValues[1].percentage > 0
 
         return (
@@ -174,19 +188,21 @@ export class RegisterSongForm extends React.Component<Props> {
                             )}
                             <Field>
                                 <Checkbox
-                                    label={`PRO`}
+                                    label={`Performance rights organization`}
                                     defaultChecked={true}
-                                    onChange={() => this.setState({ hasPRO: !hasPRO })}
+                                    onChange={() => this.setState({ hasPerformanceRightsOrganization: !hasPerformanceRightsOrganization })}
                                 />
                             </Field>
-                            {hasPRO && (
+                            {hasPerformanceRightsOrganization && (
                                 <Field
-                                    title={`PRO`}
+                                    title={`Performance rights organization`}
                                     smallTitle={true}
                                     isLabel={true}
                                     isVertical={true}
                                 >
-                                    <PRODropdown name={`pro`}/>
+                                    <PerformanceRightsOrganizationDropdown
+                                        name={`performanceRightsOrganization`}
+                                    />
                                 </Field>
                             )}
                             <Field
@@ -229,7 +245,7 @@ export class RegisterSongForm extends React.Component<Props> {
 
     private onSubmit = (mutateFunction: MutationFn) => async (fields: Fields) => {
         const { onSubmitSuccess } = this.props
-        const { title, composer, creators, country, pro, publisher, createdAt } = fields
+        const { title, composer, creators, country, performanceRightsOrganization, publisher, createdAt } = fields as RegisterSongFields
 
         try {
             const response = await mutateFunction({
@@ -237,14 +253,11 @@ export class RegisterSongForm extends React.Component<Props> {
                     song: {
                         title,
                         composer,
-                        creators,
-                        country: Number(country),
-                        pro,
-                        createdAt: createdAt || null,
-                        publisher: {
-                            ...publisher,
-                            _id: Number(publisher._id),
-                        },
+                        ...(creators && { creators }),
+                        ...(country && { country: Number(country) }),
+                        ...(publisher && { publisher: { ...publisher, _id: Number(publisher._id) }}),
+                        ...(performanceRightsOrganization && { performanceRightsOrganization : Number(performanceRightsOrganization) }),
+                        ...(createdAt && { createdAt }),
                     },
                 },
             })
@@ -255,6 +268,7 @@ export class RegisterSongForm extends React.Component<Props> {
             }
         } catch (error) {
             toast.error(error.message)
+            throw new Error(error.message)
         }
     }
 

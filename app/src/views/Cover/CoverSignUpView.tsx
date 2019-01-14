@@ -164,7 +164,7 @@ export class CoverSignUpView extends React.Component<Props, State> {
 
             if (token) {
                 setAuthToken(token)
-                toast.success('Redirecting you...')
+                toast.success('You are now logged in')
                 this.setState({ redirectToReferrer: true })
             }
         } catch (error) {

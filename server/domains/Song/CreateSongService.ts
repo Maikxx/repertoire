@@ -5,7 +5,7 @@ import * as format from 'pg-format'
 import { getDateFromISOString } from '../../services/DateFormatter'
 
 export const CreateSong = async (args: CreateSongArgs) => {
-    const { title, composer, creators, country, pro, publisher, createdAt } = args.song
+    const { title, composer, creators, country, performanceRightsOrganization, publisher, createdAt } = args.song
     const { name: artistName, share } = composer
 
     try {
@@ -49,15 +49,30 @@ export const CreateSong = async (args: CreateSongArgs) => {
                 "composerShare",
                 "creatorShares",
                 country,
-                pro,
+                "performanceRightsOrganization",
                 publisher
-                ${hasCustomDate && ', "createdAt"'}
+                ${hasCustomDate ? ', "createdAt"' : ''}
             ) VALUES (
-                $1, $2, $3, $4, $5, $6${hasCustomDate && ', $7'}
+                $1, $2, $3, $4, $5, $6${hasCustomDate ? ', $7' : ''}
             ) RETURNING *;`,
             hasCustomDate
-                ? [ title, composerShare._id, creatorShares, country, pro, publisher && publisher._id, getDateFromISOString(createdAt) ]
-                : [ title, composerShare._id, creatorShares, country, pro, publisher && publisher._id ]
+                ? [
+                    title,
+                    composerShare._id,
+                    creatorShares,
+                    country,
+                    performanceRightsOrganization,
+                    publisher && publisher._id,
+                    getDateFromISOString(createdAt),
+                ]
+                : [
+                    title,
+                    composerShare._id,
+                    creatorShares,
+                    country,
+                    performanceRightsOrganization,
+                    publisher && publisher._id,
+                ]
         )
 
         const song = insertRows[0]

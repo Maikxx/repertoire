@@ -2,6 +2,7 @@ import { GraphQLObjectType, GraphQLNonNull, GraphQLInt, GraphQLString, GraphQLIn
 import { getISOStringFromDate } from '../../services/DateFormatter'
 import { CountryType } from '../Country/Country.type'
 import { PublisherType } from '../Publisher/Publisher.type'
+import { PerformanceRightsOrganizationType } from '../PerformanceRightsOrganization/PerformanceRightsOrganization.type'
 
 export const SongPublisherInputType = new GraphQLInputObjectType({
     name: 'SongPublisherInputType',
@@ -19,7 +20,7 @@ export const SongType = new GraphQLObjectType({
         composer: { type: new GraphQLNonNull(ArtistShareType) },
         creators: { type: new GraphQLList(ArtistShareType) },
         country: { type: CountryType },
-        pro: { type: GraphQLString },
+        performanceRightsOrganization: { type: PerformanceRightsOrganizationType },
         publisher: { type: PublisherType },
         createdAt: {
             type: new GraphQLNonNull(GraphQLString),
@@ -34,7 +35,7 @@ export const SongInputType = new GraphQLInputObjectType({
         title: { type: new GraphQLNonNull(GraphQLString) },
         composer: { type: new GraphQLNonNull(ArtistShareInputType) },
         creators: { type: new GraphQLList(ArtistShareInputType) },
-        pro: { type: GraphQLString },
+        performanceRightsOrganization: { type: GraphQLInt },
         publisher: { type: SongPublisherInputType },
         createdAt: { type: GraphQLString },
         country: { type: GraphQLInt },

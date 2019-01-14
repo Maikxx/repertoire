@@ -1,6 +1,9 @@
 import { CreateUser } from '../../domains/User/CreateUserService'
 
-export const seedAdminUser = async (): Promise<void> => {
+export const seedAdminUser = async () => {
+    console.info('Seeding admin user...')
+    const startTime = performance.now()
+
     const user = {
         name: 'Admin',
         email: 'admin@repertoire.org',
@@ -13,4 +16,7 @@ export const seedAdminUser = async (): Promise<void> => {
     }
 
     await CreateUser({ user: { ...user }})
+
+    const endTime = performance.now()
+    console.info(`Finished seeding admin user in ${endTime - startTime}ms`)
 }

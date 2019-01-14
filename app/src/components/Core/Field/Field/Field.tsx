@@ -12,6 +12,7 @@ export interface FieldProps {
     isVertical?: boolean
     smallTitle?: boolean
     title?: string
+    style?: React.CSSProperties
 }
 
 export class Field extends React.Component<FieldProps> {
@@ -21,10 +22,13 @@ export class Field extends React.Component<FieldProps> {
     }))
 
     public render() {
-        const { className } = this.props
+        const { className, style } = this.props
 
         return (
-            <div className={this.bem.getClassName(className)}>
+            <div
+                className={this.bem.getClassName(className)}
+                style={style}
+            >
                 {this.renderContainer()}
             </div>
         )
