@@ -3,6 +3,7 @@ import * as React from 'react'
 import { BEM } from '../../../../services/BEMService'
 import * as d3 from 'd3'
 import { PieChartSlice } from './PieChartSlice'
+import { PieChartLegend } from './PieChartLegend/PieChartLegend'
 
 export interface PieChartData {
     index: number
@@ -21,7 +22,6 @@ export class PieChart extends React.Component<PieChartProps> {
 
     public render() {
         const { className, chartName, values } = this.props
-        console.log(values)
 
         const width = 250
         const height = 250
@@ -46,6 +46,10 @@ export class PieChart extends React.Component<PieChartProps> {
                         />
                     </g>
                 </svg>
+                <PieChartLegend
+                    values={values}
+                    pie={pie}
+                />
             </React.Fragment>
         )
     }

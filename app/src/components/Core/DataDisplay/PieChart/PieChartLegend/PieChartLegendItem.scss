@@ -1,0 +1,16 @@
+.rpa-PieChartLegendItem {
+    min-width: 125px;
+
+    &__color {
+        height: 16px;
+        width: 16px;
+        display: block;
+        border-radius: 4px;
+        transition: background-color .1s ease-in-out;
+        margin-right: 12px;
+    }
+
+    &__share {
+        margin-left: 6px;
+    }
+}

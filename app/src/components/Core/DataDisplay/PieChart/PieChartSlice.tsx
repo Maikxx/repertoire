@@ -7,7 +7,7 @@ interface PieChartSliceOptions {
 }
 
 interface PieChartSliceProps {
-    pie: d3.PieArcDatum<number | { valueOf: () => number} >[]
+    pie: d3.PieArcDatum<number | { valueOf: () => number}>[]
     options: PieChartSliceOptions
 }
 

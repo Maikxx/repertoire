@@ -1,0 +1,9 @@
+.rpa-PieChartLegend {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 12px;
+
+    & > *:not(:first-child):not(:nth-child(2)) {
+        margin-top: 6px;
+    }
+}
