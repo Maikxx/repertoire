@@ -7,6 +7,7 @@ import { getAuthToken } from '../services/LocalStorageService'
 import { AuthenticatedRoute } from '../components/Core/AuthenticatedRoute/AuthenticatedRoute'
 import { AppView } from './App/AppView'
 import { View } from '../components/Core/Layout/View/View'
+import { ToastContainer, ToastPosition } from 'react-toastify'
 
 interface Props extends RouteComponentProps {}
 
@@ -42,6 +43,7 @@ export class RootView extends React.Component<Props> {
                         to={redirectToRoute}
                     />
                 </Switch>
+                <ToastContainer position={ToastPosition.BOTTOM_CENTER} />
             </View>
         )
     }
