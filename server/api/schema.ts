@@ -14,6 +14,7 @@ import { getSongs } from './Song/getSongs.query'
 import { getPublishers } from './Publisher/getPublishers.query'
 import { getPerformanceRightsOrganizations } from './PerformanceRightsOrganization/getPerformanceRightsOrganization.query'
 import { createPerformanceRightsOrganization } from './PerformanceRightsOrganization/createPerformanceRightsOrganization.mutation'
+import { addCreatorToSong } from './Song/addCreatorToSong.mutation'
 
 export const createSchema = () => new GraphQLSchema({
     query: new GraphQLObjectType({
@@ -34,6 +35,7 @@ export const createSchema = () => new GraphQLSchema({
         name: 'Mutation',
         description: 'The root for all mutations available.',
         fields: () => ({
+            addCreatorToSong: addCreatorToSong(),
             createCountry: createCountry(),
             createPerformanceRightsOrganization: createPerformanceRightsOrganization(),
             createSong: createSong(),

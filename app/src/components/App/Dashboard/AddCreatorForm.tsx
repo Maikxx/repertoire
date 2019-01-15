@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Mutation, MutationFn } from 'react-apollo'
-import { Form, Fields } from '../../Core/DataEntry/Form/Form'
+import { Form } from '../../Core/DataEntry/Form/Form'
 import { FieldCollection } from '../../Core/Field/FieldCollection/FieldCollection'
 import { Field } from '../../Core/Field/Field/Field'
 import { TextInput } from '../../Core/DataEntry/Input/TextInput'
@@ -13,11 +13,12 @@ import { ArtistSplit } from './ArtistSplit'
 import { toast } from 'react-toastify'
 import { GetSongQuery, GetSongQueryQueryContent } from '../GraphQL/GetSongByIdQuery'
 import { Song } from '../../../types/Song'
+import { ArtistRoleDropdown } from './ArtistRoleDropdown'
 
 const UPDATE_SONG_MUTATION = gql`
     mutation addCreatorToSong($songId: Int!, $creator: ArtistShareInputType!) {
         addCreatorToSong(songId: $songId, creator: $creator) {
-            _id
+            success
         }
     }
 `
@@ -37,7 +38,7 @@ interface MutationVariables {
     }
 }
 
-interface RegisterSongFields {
+interface AddCreatorToSongFields {
     newCreator: {
         name: string
         share: number
@@ -71,7 +72,6 @@ export class AddCreatorForm extends React.Component<Props, State> {
 
     private renderWithData = ({ data }: GetSongQueryQueryContent) => {
         const { chartValues } = this.state
-        console.log(chartValues)
         const song = data && data.getSong
 
         if (!song) {
@@ -162,6 +162,7 @@ export class AddCreatorForm extends React.Component<Props, State> {
                                         disabled={false}
                                     />
                                 </MultiInput>
+                                <ArtistRoleDropdown name={`newCreator.role`}/>
                             </Field>
                             {canShowChart && (
                                 <Field>
@@ -194,30 +195,32 @@ export class AddCreatorForm extends React.Component<Props, State> {
             this.setState({
                 chartValues: [
                     { index: song.composer._id, percentage: song.composer.share, ...song.composer },
-                    ...(song.creators && song.creators.map(creator => {
-                        const data = { index: creator._id, percentage: creator.share, ...creator }
+                    ...(song.creators
+                            ? song.creators.map(creator => {
+                                const data = { index: creator._id, percentage: creator.share, ...creator }
 
-                        delete data.createdAt
-                        delete data._id
-                        delete data.role
+                                delete data.createdAt
+                                delete data._id
+                                delete data.role
 
-                        return data
-                    })),
+                                return data
+                            })
+                            : {}
+                    ),
                     { index: 2, share: 0, name: '' },
                 ],
             })
         }
     }
 
-    private onSubmit = (mutateFunction: MutationFn) => async (fields: Fields) => {
-        const { onSubmitSuccess } = this.props
+    private onSubmit = (mutateFunction: MutationFn) => async (fields: AddCreatorToSongFields) => {
+        const { onSubmitSuccess, id } = this.props
 
         try {
             const response = await mutateFunction({
                 variables: {
-                    song: {
-
-                    },
+                    songId: id,
+                    creator: fields.newCreator,
                 },
             })
 
