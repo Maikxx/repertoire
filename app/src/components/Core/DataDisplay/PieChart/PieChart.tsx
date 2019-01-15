@@ -29,7 +29,10 @@ export class PieChart extends React.Component<PieChartProps> {
     public render() {
         const { className, chartName, values, options : { width, height }} = this.props
 
-        const pie = d3.pie()(values.map(value => value.percentage).filter(value => value > 0))
+        const data = values
+            .map(value => value.percentage)
+            .filter(value => value > 0)
+        const pie = d3.pie()(data)
 
         return (
             <React.Fragment>
