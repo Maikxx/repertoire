@@ -48,6 +48,7 @@ export const ArtistShareType = new GraphQLObjectType({
         _id: { type: new GraphQLNonNull(GraphQLInt) },
         name: { type: new GraphQLNonNull(GraphQLString) },
         share: { type: new GraphQLNonNull(GraphQLFloat) },
+        role: { type: GraphQLString },
         createdAt: {
             type: new GraphQLNonNull(GraphQLString),
             resolve: artistShare => getISOStringFromDate(artistShare.createdAt),

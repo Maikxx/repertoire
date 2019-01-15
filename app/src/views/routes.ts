@@ -10,7 +10,10 @@ export const routes = {
         dashboard: {
             index: '/app/dashboard',
             register: '/app/dashboard/register',
-            addCreator: '/app/dashboard/add-creator',
+            addCreator: {
+                index: '/app/dashboard/add-creator',
+                detail: (id: string | number = ':id') => `/app/dashboard/add-creator/${id}`,
+            },
             addPublisher: '/app/dashboard/add-publisher',
         },
     },

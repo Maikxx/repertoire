@@ -28,6 +28,7 @@
 
     &:disabled {
         cursor: not-allowed;
+        border-bottom-color: transparent;
     }
 
     &__prefill {

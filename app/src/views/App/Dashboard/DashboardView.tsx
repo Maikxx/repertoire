@@ -5,6 +5,7 @@ import { routes } from '../../routes'
 import { DashboardMasterView } from './Master/DashboardMasterView'
 import { PageHeader } from '../../../components/Chrome/PageHeader/PageHeader'
 import { RegisterSongView } from './Detail/RegisterSongView'
+import { AddCreatorView } from './Detail/AddCreator/AddCreatorView'
 
 interface Props extends RouteComponentProps {}
 
@@ -22,6 +23,10 @@ export class DashboardView extends React.Component<Props> {
                     <Route
                         path={routes.app.dashboard.register}
                         component={RegisterSongView}
+                    />
+                    <Route
+                        path={routes.app.dashboard.addCreator.index}
+                        component={AddCreatorView}
                     />
                     <Route
                         path={routes.app.dashboard.index}

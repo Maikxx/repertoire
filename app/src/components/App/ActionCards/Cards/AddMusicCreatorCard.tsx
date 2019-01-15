@@ -17,7 +17,7 @@ export class AddMusicCreatorCard extends React.Component<Props> {
                 title={`Add Music Creator`}
                 description={`On this page you will be able to add a music creator to an existing song that you made`}
                 iconType={IconType.AddCreator}
-                onClick={() => history.push(routes.app.dashboard.addCreator)}
+                onClick={() => history.push(routes.app.dashboard.addCreator.index)}
             />
         )
     }

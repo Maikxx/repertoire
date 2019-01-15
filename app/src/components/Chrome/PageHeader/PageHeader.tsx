@@ -117,13 +117,15 @@ export class PageHeader extends React.Component<Props> {
     private renderPageHeading = () => {
         const { location } = this.props
 
+        if (location.pathname.includes(routes.app.dashboard.addCreator.index)) {
+            return 'Add music creator'
+        }
+
         switch (location.pathname) {
             case routes.app.dashboard.index:
                 return 'Repertoire'
             case routes.app.dashboard.register:
                 return 'Register song'
-            case routes.app.dashboard.addCreator:
-                return 'Add music creator'
             case routes.app.dashboard.addPublisher:
                 return 'Add publisher/PRO'
             default:

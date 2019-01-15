@@ -12,6 +12,10 @@ export const GetSongData = async (song: DatabaseSongInterface) => {
             [composerShare]
         )
 
+        if (!composerShareRow) {
+            throw new ApolloError('No composer share found for the main author', '400')
+        }
+
         const { rows: [countryRow] } = await database.query(
             `SELECT * FROM countries WHERE _id = $1;`,
             [country]
@@ -27,7 +31,7 @@ export const GetSongData = async (song: DatabaseSongInterface) => {
             [performanceRightsOrganization]
         )
 
-        const creatorSharesData = await Promise.all(creatorShares.map(async creatorShare => {
+        const creatorSharesData = creatorShares && await Promise.all(creatorShares.map(async creatorShare => {
             const { rows: [composerShareRow] } = await database.query(
                 `SELECT * FROM "artistShare" WHERE _id = $1;`,
                 [creatorShare]
@@ -36,11 +40,8 @@ export const GetSongData = async (song: DatabaseSongInterface) => {
             return composerShareRow
         }))
 
-        if (!composerShareRow) {
-            throw new ApolloError('No composer share found for the main author', '400')
-        }
-
         delete song.composerShare
+        delete song.creatorShares
         delete song.country
         delete song.publisher
         delete song.performanceRightsOrganization

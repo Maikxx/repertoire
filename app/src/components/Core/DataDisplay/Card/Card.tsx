@@ -9,7 +9,7 @@ import { Row } from '../../Layout/Row/Row'
 
 interface Props {
     className?: ClassValue
-    description: string
+    description?: string
     iconType?: IconType
     onClick?: React.MouseEventHandler<HTMLDivElement>
     title: string
@@ -39,9 +39,11 @@ export class Card extends React.Component<Props> {
                         <Heading level={2} className={this.bem.getElement('heading')}>
                             {title}
                         </Heading>
-                        <Text element={`p`} className={this.bem.getElement('description')}>
-                            {description}
-                        </Text>
+                        {description && (
+                            <Text element={`p`} className={this.bem.getElement('description')}>
+                                {description}
+                            </Text>
+                        )}
                     </Column>
                 </Row>
             </div>

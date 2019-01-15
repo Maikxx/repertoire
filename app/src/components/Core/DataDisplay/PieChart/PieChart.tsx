@@ -11,9 +11,15 @@ export interface PieChartData {
     percentage: number
 }
 
+export interface PieChartOptions {
+    width: number
+    height: number
+}
+
 interface PieChartProps {
     className?: string
     chartName?: string
+    options: PieChartOptions
     values: PieChartData[]
 }
 
@@ -21,12 +27,9 @@ export class PieChart extends React.Component<PieChartProps> {
     private bem = new BEM('PieChart')
 
     public render() {
-        const { className, chartName, values } = this.props
+        const { className, chartName, values, options : { width, height }} = this.props
 
-        const width = 250
-        const height = 250
-
-        const pie = d3.pie()(values.map(value => value.percentage))
+        const pie = d3.pie()(values.map(value => value.percentage).filter(value => value > 0))
 
         return (
             <React.Fragment>

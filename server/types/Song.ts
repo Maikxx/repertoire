@@ -19,7 +19,7 @@ export interface DatabaseSongInterface {
     _id: number
     title: string
     composerShare: number
-    creatorShares: number[]
+    creatorShares?: number[]
     country?: number
     performanceRightsOrganization?: number
     publisher?: number

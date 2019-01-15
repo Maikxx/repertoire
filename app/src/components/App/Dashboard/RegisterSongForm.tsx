@@ -66,7 +66,7 @@ interface Props {
 }
 
 interface State {
-    hasMultpleCreators: boolean
+    hasMultipleCreators: boolean
     hasPublishers: boolean
     hasPerformanceRightsOrganization: boolean
     chartValues: PieChartData[]
@@ -74,7 +74,7 @@ interface State {
 
 export class RegisterSongForm extends React.Component<Props> {
     public state: State = {
-        hasMultpleCreators: true,
+        hasMultipleCreators: true,
         hasPublishers: true,
         hasPerformanceRightsOrganization: true,
         chartValues: [],
@@ -86,7 +86,7 @@ export class RegisterSongForm extends React.Component<Props> {
     }
 
     public render() {
-        const { hasMultpleCreators, hasPublishers, hasPerformanceRightsOrganization, chartValues } = this.state
+        const { hasMultipleCreators, hasPublishers, hasPerformanceRightsOrganization, chartValues } = this.state
         const canShowChart = chartValues.length > 1 && chartValues[1].percentage > 0
 
         return (
@@ -129,10 +129,10 @@ export class RegisterSongForm extends React.Component<Props> {
                                 <Checkbox
                                     label={`Multiple creators`}
                                     defaultChecked={true}
-                                    onChange={() => this.setState({ hasMultpleCreators: !hasMultpleCreators })}
+                                    onChange={() => this.setState({ hasMultipleCreators: !hasMultipleCreators })}
                                 />
                             </Field>
-                            {hasMultpleCreators && (
+                            {hasMultipleCreators && (
                                 <VariableMultiInputField
                                     smallTitle={true}
                                     isVertical={true}
@@ -171,7 +171,10 @@ export class RegisterSongForm extends React.Component<Props> {
                             )}
                             {canShowChart && (
                                 <Field>
-                                    <ArtistSplit values={chartValues}/>
+                                    <ArtistSplit
+                                        values={chartValues}
+                                        options={{ width: 250, height: 250 }}
+                                    />
                                 </Field>
                             )}
                             <Field>

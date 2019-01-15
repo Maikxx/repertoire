@@ -6,7 +6,13 @@ import { toast } from 'react-toastify'
 interface Props {
     baseName: string
     required?: boolean
-    onShareChange: (nameValue: string, shareValue: number) => void
+    disabled?: boolean
+    defaultValue?: {
+        _id: number
+        name: string
+        share: number
+    }
+    onShareChange?: (nameValue: string, shareValue: number) => void
     onNameChange?: (nameValue: string) => void
 }
 
@@ -22,7 +28,7 @@ export class ComposerFieldInput extends React.Component<Props, State> {
     }
 
     public render() {
-        const { baseName, required } = this.props
+        const { baseName, required, defaultValue, disabled } = this.props
         const { nameValue, typeAhead } = this.state
 
         return (
@@ -31,8 +37,10 @@ export class ComposerFieldInput extends React.Component<Props, State> {
                     name={`${baseName}.name`}
                     type={`text`}
                     required={required}
+                    disabled={disabled}
                     onChange={this.onArtistInputChange}
                     onAutoComplete={this.onAutoComplete}
+                    defaultValue={defaultValue && defaultValue.name}
                     placeholder={`Name of an artist`}
                     typeAhead={typeAhead}
                 />
@@ -42,7 +50,8 @@ export class ComposerFieldInput extends React.Component<Props, State> {
                     required={required}
                     step={0.1}
                     min={0}
-                    disabled={!nameValue}
+                    disabled={disabled || !nameValue}
+                    defaultValue={defaultValue && String(defaultValue.share)}
                     onChange={this.onShareChange}
                     max={100}
                     placeholder={`Share`}
@@ -93,6 +102,8 @@ export class ComposerFieldInput extends React.Component<Props, State> {
         const { onShareChange } = this.props
         const { nameValue } = this.state
 
-        onShareChange(nameValue, Number(shareValue))
+        if (onShareChange) {
+            onShareChange(nameValue, Number(shareValue))
+        }
     }
 }
