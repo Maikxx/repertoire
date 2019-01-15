@@ -1,62 +1,24 @@
 import * as React from 'react'
-import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
 import { Select } from '../../Core/DataEntry/Form/Select'
-import { Country } from '../../../types/Country'
-import { Loader } from '../../Core/Feedback/Loader/Loader'
-import { Text } from '../../Core/Text/Text/Text'
-import { toast } from 'react-toastify'
-
-const GET_COUNTRIES_QUERY = gql`
-    query getCountries {
-        getCountries {
-            _id
-            name
-        }
-    }
-`
+import { GetCountriesQuery, GetCountriesQueryResponse } from '../GraphQL/GetCountriesQuery'
 
 interface Props {
     name: string
     placeholder?: string
 }
 
-interface QueryData {
-    getCountries: Country[]
-}
-
 export class CountryDropdown extends React.Component<Props> {
     public render() {
         return (
-            <Query<QueryData> query={GET_COUNTRIES_QUERY}>
-                {({ loading, data, error }) => {
-                    if (loading) {
-                        return <Loader />
-                    }
-
-                    if (error) {
-                        toast.error(error.message)
-                    }
-
-                    if (!data) {
-                        return this.renderNotFoundText()
-                    }
-
-                    return this.renderWithData(data)
-                }}
-            </Query>
+            <GetCountriesQuery>
+                {({ data }) => this.renderWithData(data)}
+            </GetCountriesQuery>
         )
     }
 
-    private renderNotFoundText = () => (
-        <Text element={`span`} isSubtle={true}>
-            There were no countries found
-        </Text>
-    )
-
-    private renderWithData = (data: QueryData) => {
+    private renderWithData = (data?: GetCountriesQueryResponse) => {
         const { ...restProps } = this.props
-        const options = data.getCountries.map(country => ({ value: country._id, label: country.name }))
+        const options = data && data.getCountries.map(country => ({ value: country._id, label: country.name }))
 
         return (
             <Select
