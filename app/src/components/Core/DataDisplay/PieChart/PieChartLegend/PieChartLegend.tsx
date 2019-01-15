@@ -16,17 +16,31 @@ export class PieChartLegend extends React.Component<PieChartLegendProps> {
     private interpolate = d3.interpolateRgb('#47EADD', '#53AAE9')
 
     public render() {
-        const { values, pie } = this.props
+        const { values } = this.props
 
         return (
             <Row className={this.bem.getClassName()}>
-                {values.map(({ name, percentage }, index) => (
-                    <PieChartLegendItem
-                        key={index}
-                        options={{ name: name, share: percentage, color: this.interpolate(index / (pie.length - 1)) }}
-                    />
-                ))}
+                {values
+                    .filter(value => (value.percentage > 0 && !!value.name))
+                    .map(this.renderLegendItem)
+                }
             </Row>
+        )
+    }
+
+    private renderLegendItem = (value: PieChartData, index: number) => {
+        const { pie } = this.props
+        const { percentage, name } = value
+
+        return (
+            <PieChartLegendItem
+                key={index}
+                options={{
+                    name,
+                    share: percentage,
+                    color: this.interpolate(index / (pie.length - 1)),
+                }}
+            />
         )
     }
 }
