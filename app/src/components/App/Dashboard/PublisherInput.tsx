@@ -1,85 +1,55 @@
 import * as React from 'react'
 import { MultiInput, MultiInputType } from '../../Core/DataEntry/MultiInput/MultiInput'
-import { Select } from '../../Core/DataEntry/Form/Select'
-import Query from 'react-apollo/Query'
-import { Publisher } from '../../../types/Publisher'
-import gql from 'graphql-tag'
-import { Loader } from '../../Core/Feedback/Loader/Loader'
-import { Text } from '../../Core/Text/Text/Text'
-import { toast } from 'react-toastify'
+import { Select, SelectOption } from '../../Core/DataEntry/Form/Select'
+import { GetPublishersQuery, GetPublishersQueryResponse } from '../GraphQL/GetPublishersQuery'
 
-const GET_PUBLISHERS_QUERY = gql`
-    query {
-        getPublishers {
-            _id
-            name
-        }
-    }
-`
-
-interface QueryData {
-    getPublishers: Publisher[]
+export interface PublisherInputDefaultValue {
+    name: SelectOption
+    role: SelectOption
 }
 
 interface Props {
     baseName: string
+    defaultValue?: PublisherInputDefaultValue
+    disabled?: boolean
 }
 
-export class PublisherInput extends React.Component<Props> {
-    private roleOptions = [
-        {
-            label: 'Licenser',
-            value: 'licener',
-        },
-        {
-            label: 'Communicator',
-            value: 'communicator',
-        },
-    ]
+export const publisherInputRoleOptions = [
+    {
+        label: 'Licenser',
+        value: 'licener',
+    },
+    {
+        label: 'Communicator',
+        value: 'communicator',
+    },
+]
 
+export class PublisherInput extends React.Component<Props> {
     public render() {
         return (
-            <Query<QueryData> query={GET_PUBLISHERS_QUERY}>
-                {({ loading, data, error }) => {
-                    if (loading) {
-                        return <Loader />
-                    }
-
-                    if (error) {
-                        toast.error(error.message)
-                    }
-
-                    if (!data) {
-                        return this.renderNotFoundText()
-                    }
-
-                    return this.renderWithData(data)
-                }}
-            </Query>
-
+            <GetPublishersQuery>
+                {({ data }) => this.renderWithData(data)}
+            </GetPublishersQuery>
         )
     }
 
-    private renderNotFoundText = () => (
-        <Text element={`span`} isSubtle={true}>
-            There were no publishers found
-        </Text>
-    )
-
-    private renderWithData = (data: QueryData) => {
-        const { baseName } = this.props
-        const options = data.getPublishers.map(publisher => ({ value: publisher._id, label: publisher.name }))
+    private renderWithData = (data?: GetPublishersQueryResponse) => {
+        const { baseName, disabled } = this.props
+        const options = data && data.getPublishers.map(publisher => ({ value: publisher._id, label: publisher.name }))
 
         return (
             <MultiInput type={MultiInputType.Double}>
                 <Select
                     name={`${baseName}._id`}
                     options={options}
+                    disabled={disabled}
                     placeholder={`Name`}
                 />
                 <Select
                     name={`${baseName}.role`}
-                    options={this.roleOptions}
+                    disabled={disabled}
+                    options={publisherInputRoleOptions}
                     placeholder={`Role`}
                 />
             </MultiInput>

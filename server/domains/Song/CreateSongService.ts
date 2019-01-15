@@ -5,7 +5,7 @@ import * as format from 'pg-format'
 import { getDateFromISOString } from '../../services/DateFormatter'
 
 export const CreateSong = async (args: CreateSongArgs) => {
-    const { title, composer, creators, country, performanceRightsOrganization, publisher, createdAt } = args.song
+    const { title, composer, creators, country, performanceRightsOrganization, publishers, createdAt } = args.song
     const { name: artistName, share } = composer
 
     try {
@@ -33,13 +33,15 @@ export const CreateSong = async (args: CreateSongArgs) => {
             creatorShares = creatorShareRows.map(creatorShare => creatorShare._id)
         }
 
-        if (publisher) {
-            await database.query(
-                `UPDATE publishers
-                SET role = $1
-                WHERE _id = $2;`,
-                [ publisher.role, publisher._id ]
-            )
+        if (publishers && publishers.length > 0) {
+            await Promise.all(publishers.map(async publisher => {
+                await database.query(
+                    `UPDATE publishers
+                    SET role = $1
+                    WHERE _id = $2;`,
+                    [ publisher.role, publisher._id ]
+                )
+            }))
         }
 
         const hasCustomDate = !!createdAt
@@ -50,7 +52,7 @@ export const CreateSong = async (args: CreateSongArgs) => {
                 "creatorShares",
                 country,
                 "performanceRightsOrganization",
-                publisher
+                publishers
                 ${hasCustomDate ? ', "createdAt"' : ''}
             ) VALUES (
                 $1, $2, $3, $4, $5, $6${hasCustomDate ? ', $7' : ''}
@@ -62,7 +64,7 @@ export const CreateSong = async (args: CreateSongArgs) => {
                     creatorShares,
                     country,
                     performanceRightsOrganization,
-                    publisher && publisher._id,
+                    publishers && publishers.map(publisher => publisher._id),
                     getDateFromISOString(createdAt),
                 ]
                 : [
@@ -71,7 +73,7 @@ export const CreateSong = async (args: CreateSongArgs) => {
                     creatorShares,
                     country,
                     performanceRightsOrganization,
-                    publisher && publisher._id,
+                    publishers && publishers.map(publisher => publisher._id),
                 ]
         )
 

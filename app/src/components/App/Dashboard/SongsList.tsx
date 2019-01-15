@@ -3,11 +3,11 @@ import { GetSongsQuery, GetSongsQueryQueryContent } from '../GraphQL/GetSongsQue
 import { Column } from '../../Core/Layout/Column/Column'
 import { Card } from '../../Core/DataDisplay/Card/Card'
 import { History } from 'history'
-import { routes } from '../../../views/routes'
 import { IconType } from '../../Core/Icon/Icon'
 
 interface Props {
     history: History
+    routeBase: any
 }
 
 export class SongsList extends React.Component<Props> {
@@ -20,7 +20,7 @@ export class SongsList extends React.Component<Props> {
     }
 
     private renderWithData = ({ data }: GetSongsQueryQueryContent) => {
-        const { history } = this.props
+        const { history, routeBase } = this.props
 
         return (
             <Column>
@@ -29,7 +29,7 @@ export class SongsList extends React.Component<Props> {
                         key={song._id}
                         title={song.title}
                         iconType={IconType.RegisterSong}
-                        onClick={() => history.push(routes.app.dashboard.addCreator.detail(song._id))}
+                        onClick={() => history.push(routeBase.detail(song._id))}
                     />
                 ))}
             </Column>

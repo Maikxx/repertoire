@@ -15,3 +15,7 @@ export interface MutationContent<TData> {
     data?: TData
     error?: ApolloError
 }
+
+export interface GenericMutationResponse {
+    success: boolean
+}

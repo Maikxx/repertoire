@@ -14,7 +14,10 @@ export const routes = {
                 index: '/app/dashboard/add-creator',
                 detail: (id: string | number = ':id') => `/app/dashboard/add-creator/${id}`,
             },
-            addPublisher: '/app/dashboard/add-publisher',
+            addPublisher: {
+                index: '/app/dashboard/add-publisher',
+                detail: (id: string | number = ':id') => `/app/dashboard/add-publisher/${id}`,
+            },
         },
     },
 }

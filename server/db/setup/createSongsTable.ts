@@ -7,7 +7,7 @@ export const createSongsTable = `
         "creatorShares" integer[],
         country integer REFERENCES countries(_id),
         "performanceRightsOrganization" integer REFERENCES "performanceRightsOrganizations"(_id),
-        publisher integer REFERENCES publishers(_id),
+        publishers integer[],
         "createdAt" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
     )
     WITH (

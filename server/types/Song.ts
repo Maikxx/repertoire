@@ -22,7 +22,7 @@ export interface DatabaseSongInterface {
     creatorShares?: number[]
     country?: number
     performanceRightsOrganization?: number
-    publisher?: number
+    publishers?: number[]
     createdAt: string
 }
 
@@ -33,7 +33,7 @@ export interface GraphQLSongInterface {
     creators?: ArtistShareInterface[]
     country?: GraphQLCountryInterface
     performanceRightsOrganization?: string
-    publisher?: GraphQLPublisherInterface
+    publishers?: GraphQLPublisherInterface[]
     createdAt: string
 }
 
@@ -42,7 +42,7 @@ export interface SongInputTypeInterface {
     composer: ArtistShareInputInterface
     creators?: ArtistShareInputInterface[]
     country?: number
-    publisher?: PublisherInputTypeInterface
+    publishers?: PublisherInputTypeInterface[]
     createdAt?: string
     performanceRightsOrganization?: number
 }

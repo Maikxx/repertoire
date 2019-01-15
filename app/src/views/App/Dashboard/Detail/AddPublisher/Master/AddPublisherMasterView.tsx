@@ -5,14 +5,14 @@ import { routes } from '../../../../../routes'
 
 interface Props extends RouteComponentProps {}
 
-export class AddCreatorMasterView extends React.Component<Props> {
+export class AddPublisherMasterView extends React.Component<Props> {
     public render() {
         const { history } = this.props
 
         return (
             <SongsList
                 history={history}
-                routeBase={routes.app.dashboard.addCreator}
+                routeBase={routes.app.dashboard.addPublisher}
             />
         )
     }

@@ -23,6 +23,7 @@ import { PieChartData } from '../../Core/DataDisplay/PieChart/PieChart'
 import { toast } from 'react-toastify'
 import { PerformanceRightsOrganizationDropdown } from './PerformanceRightsOrganizationDropdown'
 import { SongCreatorInputType } from '../../../types/SongCreator'
+import { PublisherInputType } from '../../../types/Publisher'
 
 const CREATE_SONG_MUTATION = gql`
     mutation createSong($song: SongInputType!) {
@@ -53,10 +54,7 @@ interface RegisterSongFields {
     composer: SongCreatorInputType
     creators?: SongCreatorInputType[]
     country?: number
-    publisher?: {
-        _id: number
-        role: string
-    }
+    publishers?: PublisherInputType[]
     performanceRightsOrganization?: number
     createdAt?: string | null
 }
@@ -207,9 +205,28 @@ export class RegisterSongForm extends React.Component<Props> {
                                 />
                             </Field>
                             {hasPublishers && (
-                                <Field>
-                                    <PublisherInput baseName={`publisher`}/>
-                                </Field>
+                                <VariableMultiInputField
+                                    smallTitle={true}
+                                    isVertical={true}
+                                    getFieldTitle={onAdd => (
+                                        <FieldTitle>
+                                            <Row>
+                                                <Text element={`span`}>
+                                                    Add new composer
+                                                </Text>
+                                                <Button
+                                                    type={`button`}
+                                                    iconType={IconType.Add}
+                                                    buttonStyle={ButtonStyleType.Icon}
+                                                    onClick={() => onAdd()}
+                                                />
+                                            </Row>
+                                        </FieldTitle>
+                                    )}
+                                    getNewInput={(index: number) => (
+                                        <PublisherInput baseName={`publishers[${index}]`}/>
+                                    )}
+                                />
                             )}
                             <Field>
                                 <Checkbox
@@ -248,7 +265,7 @@ export class RegisterSongForm extends React.Component<Props> {
 
     private onSubmit = (mutateFunction: MutationFn) => async (fields: Fields) => {
         const { onSubmitSuccess } = this.props
-        const { title, composer, creators, country, performanceRightsOrganization, publisher, createdAt } = fields as RegisterSongFields
+        const { title, composer, creators, country, performanceRightsOrganization, publishers, createdAt } = fields as RegisterSongFields
 
         try {
             const response = await mutateFunction({
@@ -258,7 +275,7 @@ export class RegisterSongForm extends React.Component<Props> {
                         composer,
                         ...(creators && { creators }),
                         ...(country && { country: Number(country) }),
-                        ...(publisher && { publisher: { ...publisher, _id: Number(publisher._id) }}),
+                        ...(publishers && { publishers: publishers.map(publisher => ({ ...publisher, _id: Number(publisher._id) })) }),
                         ...(performanceRightsOrganization && { performanceRightsOrganization : Number(performanceRightsOrganization) }),
                         ...(createdAt && { createdAt }),
                     },

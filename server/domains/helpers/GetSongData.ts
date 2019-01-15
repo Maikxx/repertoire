@@ -5,7 +5,7 @@ import { DatabaseSongInterface } from '../../types/Song'
 export const GetSongData = async (song: DatabaseSongInterface) => {
     try {
 
-        const { creatorShares, composerShare, country, publisher, performanceRightsOrganization } = song
+        const { creatorShares, composerShare, country, publishers, performanceRightsOrganization } = song
 
         const { rows: [composerShareRow] } = await database.query(
             `SELECT * FROM "artistShare" WHERE _id = $1;`,
@@ -21,10 +21,14 @@ export const GetSongData = async (song: DatabaseSongInterface) => {
             [country]
         )
 
-        const { rows: [publisherRow] } = await database.query(
-            `SELECT * FROM publishers WHERE _id = $1;`,
-            [publisher]
-        )
+        const publishersData = (publishers && publishers.length > 0) && await Promise.all(publishers.map(async publisher => {
+            const { rows: [publisherRow] } = await database.query(
+                `SELECT * FROM publishers WHERE _id = $1;`,
+                [publisher]
+            )
+
+            return publisherRow
+        }))
 
         const { rows: [performanceRightsOrganizationRow] } = await database.query(
             `SELECT * FROM "performanceRightsOrganizations" WHERE _id = $1;`,
@@ -43,7 +47,7 @@ export const GetSongData = async (song: DatabaseSongInterface) => {
         delete song.composerShare
         delete song.creatorShares
         delete song.country
-        delete song.publisher
+        delete song.publishers
         delete song.performanceRightsOrganization
 
         return {
@@ -51,7 +55,7 @@ export const GetSongData = async (song: DatabaseSongInterface) => {
             country: countryRow,
             composer: composerShareRow,
             creators: creatorSharesData,
-            publisher: publisherRow,
+            publishers: publishersData,
             performanceRightsOrganization: performanceRightsOrganizationRow,
         }
     } catch (error) {

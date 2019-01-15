@@ -10,5 +10,5 @@ export interface Song {
     creators?: ArtistShare[]
     country?: Country
     performanceRightsOrganization?: PerformanceRightsOrganization
-    publisher?: Publisher
+    publishers?: Publisher[]
 }

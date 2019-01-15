@@ -18,7 +18,7 @@ export class AddPublisherCard extends React.Component<Props> {
                 description={`On this page you will be able to add a publisher and or performance
                  rights organization to an existing song that you added to the system earlier.`}
                 iconType={IconType.AddPublisher}
-                onClick={() => history.push(routes.app.dashboard.addPublisher)}
+                onClick={() => history.push(routes.app.dashboard.addPublisher.index)}
             />
         )
     }

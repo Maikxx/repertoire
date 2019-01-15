@@ -14,7 +14,9 @@ export class RegisterSongView extends React.Component<Props> {
         return (
             <View>
                 <Wrap allSides={true}>
-                    <RegisterSongForm onSubmitSuccess={() => history.push(routes.app.dashboard.index)}/>
+                    <RegisterSongForm
+                        onSubmitSuccess={() => history.push(routes.app.dashboard.index)}
+                    />
                 </Wrap>
             </View>
         )

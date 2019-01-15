@@ -14,6 +14,7 @@ import { toast } from 'react-toastify'
 import { GetSongQuery, GetSongQueryQueryContent } from '../GraphQL/GetSongByIdQuery'
 import { Song } from '../../../types/Song'
 import { ArtistRoleDropdown } from './ArtistRoleDropdown'
+import { GenericMutationResponse } from '../../../types/GraphQL'
 
 const UPDATE_SONG_MUTATION = gql`
     mutation addCreatorToSong($songId: Int!, $creator: ArtistShareInputType!) {
@@ -24,9 +25,7 @@ const UPDATE_SONG_MUTATION = gql`
 `
 
 interface MutationResponse {
-    addCreatorToSong: {
-        _id: number
-    }
+    addCreatorToSong: GenericMutationResponse
 }
 
 interface MutationVariables {

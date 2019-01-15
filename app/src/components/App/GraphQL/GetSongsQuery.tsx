@@ -31,11 +31,12 @@ const GET_SONGS_QUERY = gql`
                 _id
                 name
             }
-            publisher {
+            publishers {
                 _id
                 name
                 role
             }
+            createdAt
         }
     }
 `
@@ -70,9 +71,7 @@ export class GetSongsQuery extends React.Component<Props> {
                         return this.renderNotFoundText()
                     }
 
-                    return (
-                        children({ loading, data, error })
-                    )
+                    return children({ loading, data, error })
                 }}
             </Query>
         )
