@@ -14,8 +14,9 @@ export class AddPublisherCard extends React.Component<Props> {
 
         return (
             <Card
-                title={`Add Publisher/PRO`}
-                description={`On this page you will be able to add a publisher and or PRO to an existing song that you made`}
+                title={`Add Publisher / Performance rights organization`}
+                description={`On this page you will be able to add a publisher and or performance
+                 rights organization to an existing song that you added to the system earlier.`}
                 iconType={IconType.AddPublisher}
                 onClick={() => history.push(routes.app.dashboard.addPublisher)}
             />
