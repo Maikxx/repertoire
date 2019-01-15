@@ -74,9 +74,9 @@ interface State {
 
 export class RegisterSongForm extends React.Component<Props> {
     public state: State = {
-        hasMultipleCreators: true,
-        hasPublishers: true,
-        hasPerformanceRightsOrganization: true,
+        hasMultipleCreators: false,
+        hasPublishers: false,
+        hasPerformanceRightsOrganization: false,
         chartValues: [],
     }
 
@@ -125,10 +125,32 @@ export class RegisterSongForm extends React.Component<Props> {
                                     />
                                 </MultiInput>
                             </Field>
+                            <Field
+                                title={`Date of recording`}
+                                smallTitle={true}
+                                isVertical={true}
+                                isLabel={true}
+                            >
+                                <DateOfRecordingInput
+                                    name={`recordedOn`}
+                                    placeholder={`Select a date option`}
+                                />
+                            </Field>
+                            <Field
+                                title={`Location`}
+                                smallTitle={true}
+                                isVertical={true}
+                                isLabel={true}
+                            >
+                                <CountryDropdown
+                                    name={`country`}
+                                    placeholder={`This song is recorded in`}
+                                />
+                            </Field>
                             <Field>
                                 <Checkbox
                                     label={`Multiple creators`}
-                                    defaultChecked={true}
+                                    defaultChecked={hasMultipleCreators}
                                     onChange={() => this.setState({ hasMultipleCreators: !hasMultipleCreators })}
                                 />
                             </Field>
@@ -180,7 +202,7 @@ export class RegisterSongForm extends React.Component<Props> {
                             <Field>
                                 <Checkbox
                                     label={`Publishers`}
-                                    defaultChecked={true}
+                                    defaultChecked={hasPublishers}
                                     onChange={() => this.setState({ hasPublishers: !hasPublishers })}
                                 />
                             </Field>
@@ -192,7 +214,7 @@ export class RegisterSongForm extends React.Component<Props> {
                             <Field>
                                 <Checkbox
                                     label={`Performance rights organization`}
-                                    defaultChecked={true}
+                                    defaultChecked={hasPerformanceRightsOrganization}
                                     onChange={() => this.setState({ hasPerformanceRightsOrganization: !hasPerformanceRightsOrganization })}
                                 />
                             </Field>
@@ -208,28 +230,6 @@ export class RegisterSongForm extends React.Component<Props> {
                                     />
                                 </Field>
                             )}
-                            <Field
-                                title={`Date of recording`}
-                                smallTitle={true}
-                                isVertical={true}
-                                isLabel={true}
-                            >
-                                <DateOfRecordingInput
-                                    name={`recordedOn`}
-                                    placeholder={`Select a date option`}
-                                />
-                            </Field>
-                            <Field
-                                title={`Location`}
-                                smallTitle={true}
-                                isVertical={true}
-                                isLabel={true}
-                            >
-                                <CountryDropdown
-                                    name={`country`}
-                                    placeholder={`This song is recorded in`}
-                                />
-                            </Field>
                             <Field>
                                 <Button
                                     type={`submit`}
