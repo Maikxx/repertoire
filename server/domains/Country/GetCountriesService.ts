@@ -3,7 +3,8 @@ import { ApolloError } from 'apollo-server-core'
 
 export const GetCountries = async () => {
     try {
-        const { rows } = await database.query('SELECT * FROM countries;')
+        const sql = `SELECT * FROM countries;`
+        const { rows } = await database.query(sql)
 
         return rows
     } catch (error) {

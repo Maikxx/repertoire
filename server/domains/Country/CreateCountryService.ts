@@ -5,23 +5,18 @@ import { CreateCountryArgs } from '../../api/Country/createCountry.mutation'
 export const CreateCountry = async (args: CreateCountryArgs) => {
     const { name, code } = args.country
 
-    const countryData = {
-        name,
-        code,
-    }
-
     try {
-        const { rows: insertRows } = await database.query(
-            `INSERT INTO countries (
+        const sql = `
+            INSERT INTO countries (
                 name,
                 code
             ) VALUES (
                 $1, $2
-            ) RETURNING *;`,
-            Object.keys(countryData).map(key => countryData[key])
-        )
+            ) RETURNING *;
+        `
+        const queryVariables = [ name, code ]
+        const { rows: [country] } = await database.query(sql, queryVariables)
 
-        const country = insertRows[0]
         return { country }
     } catch (error) {
         throw new ApolloError(error.message, '500')
