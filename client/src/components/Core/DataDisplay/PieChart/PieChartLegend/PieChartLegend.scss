@@ -1,0 +1,11 @@
+.rps-PieChartLegend {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    max-height: 100px;
+    overflow-y: scroll;
+
+    & > *:not(:first-child) {
+        margin-top: 6px;
+    }
+}

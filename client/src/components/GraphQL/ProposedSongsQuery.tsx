@@ -52,16 +52,17 @@ export type ProposedSongsQueryQueryContent = QueryContent<ProposedSongsQueryResp
 interface Props {
     children: (apolloProps: ProposedSongsQueryQueryContent) => JSX.Element | JSX.Element[] | null
     variables?: SongQueryVariables
+    pollInterval?: number
 }
 
 export class ProposedSongsQuery extends React.Component<Props> {
     public render() {
-        const { children, variables } = this.props
+        const { children, ...restProps } = this.props
 
         return (
             <Query<ProposedSongsQueryResponse>
                 query={GET_SONGS_QUERY}
-                variables={variables}
+                {...restProps}
             >
                 {({ data, loading, error }) => {
                     if (loading) {

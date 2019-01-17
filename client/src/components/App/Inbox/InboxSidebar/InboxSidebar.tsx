@@ -22,7 +22,10 @@ export class InboxSidebar extends React.Component<Props> {
 
         return (
             <Sidebar className={this.bem.getClassName(className)}>
-                <ProposedSongsQuery variables={{ filters: { filterByIsAccepted: false }}}>
+                <ProposedSongsQuery
+                    variables={{ filters: { filterByIsAccepted: false }}}
+                    pollInterval={1000}
+                >
                     {({ data }) => {
                         const songs = data && data.getSongs
 

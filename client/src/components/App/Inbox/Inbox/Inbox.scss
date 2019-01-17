@@ -4,7 +4,11 @@
     position: relative;
 
     .rps-Column > * + * {
-        margin-top: 12px;
+        margin-top: 24px;
+    }
+
+    .rps-Heading {
+        margin-top: 0;
     }
 
     .rps-Row {
@@ -13,7 +17,11 @@
         }
 
         + .rps-Row {
-            margin-top: 12px;
+            margin-top: 24px;
+        }
+
+        &:first-of-type {
+            margin-top: 0;
         }
     }
 

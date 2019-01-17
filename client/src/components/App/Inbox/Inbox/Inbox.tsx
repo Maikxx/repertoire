@@ -10,6 +10,7 @@ import { InboxBase } from './InboxBase'
 import { RouteComponentProps } from 'react-router-dom'
 import { GetSongQuery } from '../../../GraphQL/GetSongByIdQuery'
 import { ReadableDate } from '../../../Core/DataDisplay/Date/ReadableDate'
+import { PieChart } from '../../../Core/DataDisplay/PieChart/PieChart'
 
 interface Params {
     id: string
@@ -32,6 +33,23 @@ export class Inbox extends React.Component<Props> {
                         if (!song) {
                             return null
                         }
+
+                        const canShowDistribution = (song.creators && song.creators.length > 0)
+                        const distribution = [
+                            {
+                                index: song.composer._id,
+                                name: song.composer.name,
+                                percentage: song.composer.share,
+                            },
+                            ...(song.creators
+                                ? song.creators.map(({ _id, name, share }) => ({
+                                    index: _id,
+                                    name,
+                                    percentage: share,
+                                }))
+                                : {}
+                            ),
+                        ]
 
                         return (
                             <Column>
@@ -74,11 +92,37 @@ export class Inbox extends React.Component<Props> {
                                     </Field>
                                 </Row>
                                 <Field
+                                    isInverse={true}
                                     isVertical={true}
-                                    title={`Split`}
+                                    title={`Other creators`}
+                                >
+                                    {song.creators
+                                        ? song.creators.map(creator => (
+                                            <Row key={creator._id}>
+                                                <Field title={`Name`}>
+                                                    {creator.name}
+                                                </Field>
+                                                <Field title={`Role`}>
+                                                    {creator.role}
+                                                </Field>
+                                            </Row>
+                                        ))
+                                        : '-'
+                                    }
+                                </Field>
+                                <Field
+                                    isVertical={true}
+                                    title={`Attribution distribution`}
                                     isInverse={true}
                                 >
-                                    50% / 50%
+                                    {canShowDistribution
+                                        ? (
+                                            <PieChart
+                                                options={{ width: 250, height: 250 }}
+                                                values={distribution}
+                                            />
+                                        ) : '-'
+                                    }
                                 </Field>
                                 <Field
                                     isVertical={true}
