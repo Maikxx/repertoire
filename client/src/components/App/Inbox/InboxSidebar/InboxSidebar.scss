@@ -4,6 +4,7 @@
     .rps-SidebarList {
         max-height: 600px;
         overflow-y: scroll;
+        padding-bottom: 6px;
 
         & + .rps-SidebarList {
             margin-top: 24px;

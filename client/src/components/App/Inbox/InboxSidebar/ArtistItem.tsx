@@ -8,20 +8,21 @@ import { Row } from '../../../Core/Layout/Row/Row'
 
 interface Props {
     className?: ClassValue
+    composer: string
 }
 
 export class ArtistItem extends React.Component<Props> {
     private bem = new BEM('ArtistItem')
 
     public render() {
-        const { className } = this.props
+        const { className, composer } = this.props
 
         return (
             <SidebarListItem className={this.bem.getClassName(className)}>
                 <Card>
                     <Row>
                         <Heading level={3}>
-                            Naam van de artiest
+                            {composer}
                         </Heading>
                     </Row>
                 </Card>

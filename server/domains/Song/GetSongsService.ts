@@ -10,10 +10,15 @@ export const GetSongs = async (args?: SongQueryArgs) => {
         let queryString = ``
         const queryVariables = []
         if (typeof filterByIsAccepted === 'boolean') {
-            queryString = `SELECT * FROM songs WHERE accepted = $1;`
+            queryString = `
+                SELECT * FROM songs
+                WHERE accepted = $1
+                ORDER BY "createdAt" DESC;`
             queryVariables.push(filterByIsAccepted)
         } else {
-            queryString = `SELECT * FROM songs;`
+            queryString = `
+                SELECT * FROM songs
+                ORDER BY "createdAt" DESC;`
         }
 
         const { rows: songRows, rowCount } = await database.query(

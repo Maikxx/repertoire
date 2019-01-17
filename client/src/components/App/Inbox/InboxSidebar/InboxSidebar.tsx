@@ -20,33 +20,47 @@ export class InboxSidebar extends React.Component<Props> {
 
         return (
             <Sidebar className={this.bem.getClassName(className)}>
-                <SidebarList>
-                    <SidebarListHeader level={2}>
-                        Inbox
-                    </SidebarListHeader>
-                    <ProposedSongsQuery variables={{ filters: { filterByIsAccepted: false }}}>
-                        {({ data }) => {
-                            const songs = data && data.getSongs
+                <ProposedSongsQuery variables={{ filters: { filterByIsAccepted: false }}}>
+                    {({ data }) => {
+                        const songs = data && data.getSongs
 
-                            if (!songs) {
-                                return null
-                            }
+                        if (!songs) {
+                            return null
+                        }
 
-                            return songs.map(song => (
-                                <InboxItem
-                                    key={song._id}
-                                    song={song}
-                                />
-                            ))
-                        }}
-                    </ProposedSongsQuery>
-                </SidebarList>
-                <SidebarList>
-                    <SidebarListHeader level={2}>
-                        Artists
-                    </SidebarListHeader>
-                    <ArtistItem />
-                </SidebarList>
+                        const composers = songs
+                            .map(song => song.composer.name)
+                            .sort()
+                        const uniqueComposers = [...new Set(composers)]
+
+                        return (
+                            <React.Fragment>
+                                <SidebarList>
+                                    <SidebarListHeader level={2}>
+                                        Inbox
+                                    </SidebarListHeader>
+                                    {songs.map(song => (
+                                        <InboxItem
+                                            key={song._id}
+                                            song={song}
+                                        />
+                                    ))}
+                                </SidebarList>
+                                <SidebarList>
+                                    <SidebarListHeader level={2}>
+                                        Artists
+                                    </SidebarListHeader>
+                                    {uniqueComposers.map(composer => (
+                                        <ArtistItem
+                                            key={composer}
+                                            composer={composer}
+                                        />
+                                    ))}
+                                </SidebarList>
+                            </React.Fragment>
+                        )
+                    }}
+                </ProposedSongsQuery>
             </Sidebar>
         )
     }
