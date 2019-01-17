@@ -5,7 +5,6 @@ import { Heading } from '../../../Core/Text/Heading/Heading'
 import { SidebarListItem } from '../../../Chrome/Sidebar/SidebarListItem'
 import { Card } from '../../../Core/DataDisplay/Card/Card'
 import { Row } from '../../../Core/Layout/Row/Row'
-import { Icon } from '../../../Core/Icon/Icon'
 
 interface Props {
     className?: ClassValue
@@ -21,10 +20,6 @@ export class ArtistItem extends React.Component<Props> {
             <SidebarListItem className={this.bem.getClassName(className)}>
                 <Card>
                     <Row>
-                        <Icon
-                            isRound={true}
-                            isSmall={true}
-                        />
                         <Heading level={3}>
                             Naam van de artiest
                         </Heading>

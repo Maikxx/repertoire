@@ -4,7 +4,6 @@ import { BEM, ClassValue } from '../../../../services/BEMService'
 import { Card } from '../../../Core/DataDisplay/Card/Card'
 import { SidebarListItem } from '../../../Chrome/Sidebar/SidebarListItem'
 import { Row } from '../../../Core/Layout/Row/Row'
-import { Icon } from '../../../Core/Icon/Icon'
 import { Column } from '../../../Core/Layout/Column/Column'
 import { Heading } from '../../../Core/Text/Heading/Heading'
 import { Text } from '../../../Core/Text/Text/Text'
@@ -26,7 +25,6 @@ export class InboxItem extends React.Component<Props> {
             <SidebarListItem className={this.bem.getClassName(className)}>
                 <Card>
                     <Row>
-                        <Icon />
                         <Column>
                             <Heading level={3}>
                                 {song.composer.name}
