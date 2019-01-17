@@ -16,6 +16,17 @@ interface Params {
     id: string
 }
 
+export const publisherRoles = {
+    licener: 'Licenser',
+    communicator: 'Communicator',
+}
+
+export const creatorRoles = {
+    composer: 'Composer',
+    singer: 'Singer',
+    songWriter: 'Songwriter',
+}
+
 interface Props extends RouteComponentProps<Params> {}
 
 export class Inbox extends React.Component<Props> {
@@ -99,11 +110,19 @@ export class Inbox extends React.Component<Props> {
                                     {song.creators
                                         ? song.creators.map(creator => (
                                             <Row key={creator._id}>
-                                                <Field title={`Name`}>
+                                                <Field
+                                                    title={`Name`}
+                                                    isInverse={true}
+                                                    isVertical={true}
+                                                >
                                                     {creator.name}
                                                 </Field>
-                                                <Field title={`Role`}>
-                                                    {creator.role}
+                                                <Field
+                                                    title={`Role`}
+                                                    isInverse={true}
+                                                    isVertical={true}
+                                                >
+                                                    {creatorRoles[creator.role]}
                                                 </Field>
                                             </Row>
                                         ))
@@ -147,7 +166,7 @@ export class Inbox extends React.Component<Props> {
                                                     isVertical={true}
                                                     title={`Role`}
                                                 >
-                                                    {publisher.role}
+                                                    {publisherRoles[publisher.role]}
                                                 </Field>
                                             </Row>
                                         ))
