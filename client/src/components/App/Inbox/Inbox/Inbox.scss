@@ -1,34 +1,26 @@
 .rps-Inbox {
     @import '../../../../scss/variables/colors';
 
-    color: $color-soft-brown;
     position: relative;
-    z-index: 1;
 
-    &__heading {
-        color: $color-blue;
-        margin-bottom: 24px;
-    }
-
-    &__card {
-        padding: 72px 60px 24px;
-    }
-
-    &__field-group {
+    .rps-Column > * + * {
         margin-top: 12px;
     }
 
-    &__field-row {
+    .rps-Row {
         .rps-Field {
             flex: 1;
         }
 
-        + .rps-Inbox__field-row {
+        + .rps-Row {
             margin-top: 12px;
         }
     }
 
     &__action-bar {
-        margin-top: 24px;
+        position: absolute;
+        bottom: 24px;
+        left: 24px;
+        right: 24px;
     }
 }

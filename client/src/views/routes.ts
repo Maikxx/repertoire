@@ -9,6 +9,7 @@ export const routes = {
         index: '/app',
         inbox: {
             index: '/app/inbox',
+            detail: (id: string | number = ':id') => `/app/inbox/${id}`,
         },
     },
 }

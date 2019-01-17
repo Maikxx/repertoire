@@ -15,7 +15,8 @@ export interface Song {
 }
 
 export interface SongQueryVariables {
-    filters: {
+    byId?: number
+    filters?: {
         filterByIsAccepted?: boolean
     }
 }

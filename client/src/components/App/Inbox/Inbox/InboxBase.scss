@@ -1,0 +1,18 @@
+.rps-InboxBase {
+    @import '../../../../scss/variables/colors';
+
+    color: $color-soft-brown;
+    position: relative;
+    z-index: 1;
+
+    &__card {
+        padding: 72px 60px 24px;
+        min-height: 600px;
+        min-width: 850px;
+    }
+
+    .rps-Heading {
+        color: $color-blue;
+        margin-bottom: 24px;
+    }
+}

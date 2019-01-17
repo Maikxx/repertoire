@@ -9,20 +9,26 @@ import { Heading } from '../../../Core/Text/Heading/Heading'
 import { Text } from '../../../Core/Text/Text/Text'
 import { Song } from '../../../../types/Song'
 import { ReadableDate } from '../../../Core/DataDisplay/Date/ReadableDate'
+import { routes } from '../../../../views/routes'
+import { History } from 'history'
 
 interface Props {
     className?: ClassValue
     song: Song
+    history: History
 }
 
 export class InboxItem extends React.Component<Props> {
     private bem = new BEM('InboxItem')
 
     public render() {
-        const { className, song } = this.props
+        const { className, song, history } = this.props
 
         return (
-            <SidebarListItem className={this.bem.getClassName(className)}>
+            <SidebarListItem
+                className={this.bem.getClassName(className)}
+                onClick={() => history.push(routes.app.inbox.detail(song._id))}
+            >
                 <Card>
                     <Row>
                         <Column>

@@ -7,16 +7,18 @@ import { SidebarListHeader } from '../../../Chrome/Sidebar/SidebarListHeader'
 import { InboxItem } from './InboxItem'
 import { ArtistItem } from './ArtistItem'
 import { ProposedSongsQuery } from '../../../GraphQL/ProposedSongsQuery'
+import { History } from 'history'
 
 interface Props {
     className?: ClassValue
+    history: History
 }
 
 export class InboxSidebar extends React.Component<Props> {
     private bem = new BEM('InboxSidebar')
 
     public render() {
-        const { className } = this.props
+        const { className, history } = this.props
 
         return (
             <Sidebar className={this.bem.getClassName(className)}>
@@ -43,6 +45,7 @@ export class InboxSidebar extends React.Component<Props> {
                                         <InboxItem
                                             key={song._id}
                                             song={song}
+                                            history={history}
                                         />
                                     ))}
                                 </SidebarList>

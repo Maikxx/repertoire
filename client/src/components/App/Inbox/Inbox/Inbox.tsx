@@ -1,130 +1,148 @@
 import './Inbox.scss'
 import * as React from 'react'
-import { BEM, ClassValue } from '../../../../services/BEMService'
+import { BEM } from '../../../../services/BEMService'
 import { Heading } from '../../../Core/Text/Heading/Heading'
-import { Card } from '../../../Core/DataDisplay/Card/Card'
 import { Column } from '../../../Core/Layout/Column/Column'
 import { Row } from '../../../Core/Layout/Row/Row'
 import { Field } from '../../../Core/Field/Field/Field'
-import { FieldGroup } from '../../../Core/Field/FieldGroup/FieldGroup'
 import { Button, ButtonStyleType } from '../../../Core/Button/Button'
+import { InboxBase } from './InboxBase'
+import { RouteComponentProps } from 'react-router-dom'
+import { GetSongQuery } from '../../../GraphQL/GetSongByIdQuery'
+import { ReadableDate } from '../../../Core/DataDisplay/Date/ReadableDate'
 
-interface Props {
-    className?: ClassValue
+interface Params {
+    id: string
 }
+
+interface Props extends RouteComponentProps<Params> {}
 
 export class Inbox extends React.Component<Props> {
     private bem = new BEM('Inbox')
 
     public render() {
-        const { className } = this.props
+        const { id } = this.props.match.params
 
         return (
-            <section className={this.bem.getClassName(className)}>
-                <Card className={this.bem.getElement('card')}>
-                    <Column>
-                        <Heading
-                            className={this.bem.getElement('heading')}
-                            level={2}
-                        >
-                            Confirm song information
-                        </Heading>
-                        <Row className={this.bem.getElement('field-row')}>
-                            <Field
-                                isInverse={true}
-                                isVertical={true}
-                                title={`Writer / composer`}
-                            >
-                                Name of the artist(s)
-                            </Field>
-                            <Field
-                                isInverse={true}
-                                isVertical={true}
-                                title={`Date`}
-                            >
-                                Date of recording
-                            </Field>
-                        </Row>
-                        <Row className={this.bem.getElement('field-row')}>
-                            <Field
-                                isInverse={true}
-                                isVertical={true}
-                                title={`Song title`}
-                            >
-                                Name of the song
-                            </Field>
-                            <Field
-                                isInverse={true}
-                                title={`Location`}
-                                isVertical={true}
-                            >
-                                Loction where the song is created
-                            </Field>
-                        </Row>
-                        <FieldGroup
-                            className={this.bem.getElement('field-group')}
-                            isVertical={true}
-                            title={`Split`}
-                        >
-                            50% / 50%
-                        </FieldGroup>
-                        <FieldGroup
-                            className={this.bem.getElement('field-group')}
-                            isVertical={true}
-                            title={`Publishers`}
-                        >
-                            <Row className={this.bem.getElement('field-row')}>
+            <InboxBase className={this.bem.getClassName()}>
+                <GetSongQuery byId={Number(id)}>
+                    {({ data }) => {
+                        const song = data && data.getSong
+
+                        if (!song) {
+                            return null
+                        }
+
+                        return (
+                            <Column>
+                                <Heading level={2}>
+                                    Confirm song information
+                                </Heading>
+                                <Row>
+                                    <Field
+                                        isInverse={true}
+                                        isVertical={true}
+                                        title={`Writer / composer`}
+                                    >
+                                        {song.composer.name}
+                                    </Field>
+                                    <Field
+                                        isInverse={true}
+                                        isVertical={true}
+                                        title={`Date`}
+                                    >
+                                        <ReadableDate date={song.createdAt}/>
+                                    </Field>
+                                </Row>
+                                <Row>
+                                    <Field
+                                        isInverse={true}
+                                        isVertical={true}
+                                        title={`Song title`}
+                                    >
+                                        {song.title}
+                                    </Field>
+                                    <Field
+                                        isInverse={true}
+                                        title={`Location`}
+                                        isVertical={true}
+                                    >
+                                        {song.country
+                                            ? song.country.name
+                                            : '-'
+                                        }
+                                    </Field>
+                                </Row>
                                 <Field
-                                    isInverse={true}
                                     isVertical={true}
-                                    title={`Names`}
+                                    title={`Split`}
+                                    isInverse={true}
                                 >
-                                    A state to check if the names of publishers can be shown
+                                    50% / 50%
                                 </Field>
                                 <Field
-                                    isInverse={true}
                                     isVertical={true}
-                                    title={`Role`}
+                                    title={`Publishers`}
+                                    isInverse={true}
                                 >
-                                    Role of the publisher
+                                    {song.publishers
+                                        ? song.publishers.map(publisher => (
+                                            <Row
+
+                                                key={publisher._id}
+                                            >
+                                                <Field
+                                                    isInverse={true}
+                                                    isVertical={true}
+                                                    title={`Name`}
+                                                >
+                                                    {publisher.name}
+                                                </Field>
+                                                <Field
+                                                    isInverse={true}
+                                                    isVertical={true}
+                                                    title={`Role`}
+                                                >
+                                                    {publisher.role}
+                                                </Field>
+                                            </Row>
+                                        ))
+                                        : '-'
+                                    }
                                 </Field>
-                            </Row>
-                        </FieldGroup>
-                        <FieldGroup
-                            className={this.bem.getElement('field-group')}
-                            isVertical={true}
-                            title={`PRO`}
-                        >
-                            <Field
-                                isInverse={true}
-                                isVertical={true}
-                                title={`Names`}
-                            >
-                                Names of the PROs
-                            </Field>
-                        </FieldGroup>
-                        <Row
-                            className={this.bem.getElement('action-bar')}
-                            justifyEnd={true}
-                        >
-                            <Button
-                                buttonStyle={ButtonStyleType.Secondary}
-                                isSmall={true}
-                                type={`button`}
-                            >
-                                Confirm
-                            </Button>
-                            <Button
-                                buttonStyle={ButtonStyleType.Default}
-                                isSmall={true}
-                                type={`button`}
-                            >
-                                Information
-                            </Button>
-                        </Row>
-                    </Column>
-                </Card>
-            </section>
+                                <Row>
+                                    <Field
+                                        isVertical={true}
+                                        title={`Performance rights organization`}
+                                        isInverse={true}
+                                    >
+                                        {song.performanceRightsOrganization
+                                            ? song.performanceRightsOrganization.name
+                                            : '-'
+                                        }
+                                    </Field>
+                                </Row>
+                                <Row className={this.bem.getElement('action-bar')} justifyEnd={true}>
+                                    <Button
+                                        buttonStyle={ButtonStyleType.Secondary}
+                                        isSmall={true}
+                                        type={`button`}
+                                    >
+                                        Confirm
+                                    </Button>
+                                    <Button
+                                        buttonStyle={ButtonStyleType.Default}
+                                        isSmall={true}
+                                        type={`button`}
+                                    >
+                                        Send feedback
+                                    </Button>
+                                </Row>
+                            </Column>
+                        )
+                    }}
+                </GetSongQuery>
+            </InboxBase>
         )
     }
 }
