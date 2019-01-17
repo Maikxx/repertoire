@@ -1,5 +1,8 @@
 .rps-SidebarList {
-    .rps-SidebarListHeader + .rps-SidebarListItem {
-        margin-top: 6px;
+    max-height: 300px;
+    overflow-y: auto;
+
+    > * + * {
+        margin-top: 12px;
     }
 }
