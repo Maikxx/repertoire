@@ -1,7 +1,8 @@
 import { PublisherInputTypeInterface, GraphQLPublisherInterface } from './Publisher'
 import { GraphQLCountryInterface } from './Country'
 
-export interface GetSongArgs {
+export interface SongQueryArgs {
+    byId?: number
     filters?: {
         filterByIsAccepted?: boolean
     }

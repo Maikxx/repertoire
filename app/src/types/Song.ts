@@ -12,3 +12,10 @@ export interface Song {
     performanceRightsOrganization?: PerformanceRightsOrganization
     publishers?: Publisher[]
 }
+
+export interface SongQueryVariables {
+    byId?: number
+    filters?: {
+        filterByIsAccepted?: boolean
+    }
+}

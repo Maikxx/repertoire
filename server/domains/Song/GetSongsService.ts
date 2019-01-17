@@ -1,9 +1,9 @@
 import { database } from '../../db/connect'
 import { ApolloError } from 'apollo-server-core'
 import { GetSongData } from '../helpers/GetSongData'
-import { GetSongArgs } from '../../types/Song'
+import { SongQueryArgs } from '../../types/Song'
 
-export const GetSongs = async (args?: GetSongArgs) => {
+export const GetSongs = async (args?: SongQueryArgs) => {
     const filterByIsAccepted = args && args.filters && args.filters.filterByIsAccepted
 
     try {
