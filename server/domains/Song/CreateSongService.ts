@@ -5,7 +5,16 @@ import * as format from 'pg-format'
 import { getDateFromISOString } from '../../services/DateFormatter'
 
 export const CreateSong = async (args: CreateSongArgs) => {
-    const { title, composer, creators, country, performanceRightsOrganization, publishers, createdAt } = args.song
+    const {
+        title,
+        composer,
+        creators,
+        country,
+        performanceRightsOrganization,
+        publishers,
+        createdAt,
+        accepted,
+    } = args.song
     const { name: artistName, share } = composer
 
     try {
@@ -52,10 +61,11 @@ export const CreateSong = async (args: CreateSongArgs) => {
                 "creatorShares",
                 country,
                 "performanceRightsOrganization",
-                publishers
+                publishers,
+                accepted
                 ${hasCustomDate ? ', "createdAt"' : ''}
             ) VALUES (
-                $1, $2, $3, $4, $5, $6${hasCustomDate ? ', $7' : ''}
+                $1, $2, $3, $4, $5, $6, $7${hasCustomDate ? ', $8' : ''}
             ) RETURNING *;`,
             hasCustomDate
                 ? [
@@ -65,6 +75,7 @@ export const CreateSong = async (args: CreateSongArgs) => {
                     country,
                     performanceRightsOrganization,
                     publishers && publishers.map(publisher => publisher._id),
+                    accepted,
                     getDateFromISOString(createdAt),
                 ]
                 : [
@@ -74,6 +85,7 @@ export const CreateSong = async (args: CreateSongArgs) => {
                     country,
                     performanceRightsOrganization,
                     publishers && publishers.map(publisher => publisher._id),
+                    accepted,
                 ]
         )
 

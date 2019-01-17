@@ -1,4 +1,13 @@
-import { GraphQLObjectType, GraphQLNonNull, GraphQLInt, GraphQLString, GraphQLInputObjectType, GraphQLFloat, GraphQLList } from 'graphql'
+import {
+    GraphQLObjectType,
+    GraphQLNonNull,
+    GraphQLInt,
+    GraphQLString,
+    GraphQLInputObjectType,
+    GraphQLFloat,
+    GraphQLList,
+    GraphQLBoolean
+} from 'graphql'
 import { getISOStringFromDate } from '../../services/DateFormatter'
 import { CountryType } from '../Country/Country.type'
 import { PublisherType } from '../Publisher/Publisher.type'
@@ -22,10 +31,18 @@ export const SongType = new GraphQLObjectType({
         country: { type: CountryType },
         performanceRightsOrganization: { type: PerformanceRightsOrganizationType },
         publishers: { type: new GraphQLList(PublisherType) },
+        accepted: { type: new GraphQLNonNull(GraphQLBoolean) },
         createdAt: {
             type: new GraphQLNonNull(GraphQLString),
             resolve: song => getISOStringFromDate(song.createdAt),
         },
+    }),
+})
+
+export const SongFilterInputType = new GraphQLInputObjectType({
+    name: 'SongFilterInputType',
+    fields: () => ({
+        filterByIsAccepted: { type: new GraphQLNonNull(GraphQLBoolean) },
     }),
 })
 
@@ -37,8 +54,9 @@ export const SongInputType = new GraphQLInputObjectType({
         creators: { type: new GraphQLList(ArtistShareInputType) },
         performanceRightsOrganization: { type: GraphQLInt },
         publishers: { type: new GraphQLList(SongPublisherInputType) },
-        createdAt: { type: GraphQLString },
+        accepted: { type: new GraphQLNonNull(GraphQLBoolean) },
         country: { type: GraphQLInt },
+        createdAt: { type: GraphQLString },
     }),
 })
 

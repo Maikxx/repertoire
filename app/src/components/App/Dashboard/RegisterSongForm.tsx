@@ -278,6 +278,7 @@ export class RegisterSongForm extends React.Component<Props> {
                         ...(publishers && { publishers: publishers.map(publisher => ({ ...publisher, _id: Number(publisher._id) })) }),
                         ...(performanceRightsOrganization && { performanceRightsOrganization : Number(performanceRightsOrganization) }),
                         ...(createdAt && { createdAt }),
+                        accepted: false,
                     },
                 },
             })

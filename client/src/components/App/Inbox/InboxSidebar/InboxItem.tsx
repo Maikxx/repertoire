@@ -8,16 +8,19 @@ import { Icon } from '../../../Core/Icon/Icon'
 import { Column } from '../../../Core/Layout/Column/Column'
 import { Heading } from '../../../Core/Text/Heading/Heading'
 import { Text } from '../../../Core/Text/Text/Text'
+import { Song } from '../../../../types/Song'
+import { ReadableDate } from '../../../Core/DataDisplay/Date/ReadableDate'
 
 interface Props {
     className?: ClassValue
+    song: Song
 }
 
 export class InboxItem extends React.Component<Props> {
     private bem = new BEM('InboxItem')
 
     public render() {
-        const { className } = this.props
+        const { className, song } = this.props
 
         return (
             <SidebarListItem className={this.bem.getClassName(className)}>
@@ -26,13 +29,13 @@ export class InboxItem extends React.Component<Props> {
                         <Icon />
                         <Column>
                             <Heading level={3}>
-                                Naam
+                                {song.composer.name}
                             </Heading>
                             <Text element={'span'}>
-                                Titel
+                                {song.title}
                             </Text>
                             <Text element={'span'} isSubtle={true}>
-                                {new Date().toString()}
+                                <ReadableDate date={song.createdAt} />
                             </Text>
                         </Column>
                     </Row>

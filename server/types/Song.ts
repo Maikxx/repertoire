@@ -1,6 +1,12 @@
 import { PublisherInputTypeInterface, GraphQLPublisherInterface } from './Publisher'
 import { GraphQLCountryInterface } from './Country'
 
+export interface GetSongArgs {
+    filters?: {
+        filterByIsAccepted?: boolean
+    }
+}
+
 export interface ArtistShareInterface {
     _id: number
     name: string
@@ -22,6 +28,7 @@ export interface DatabaseSongInterface {
     creatorShares?: number[]
     country?: number
     performanceRightsOrganization?: number
+    accepted: boolean
     publishers?: number[]
     createdAt: string
 }
@@ -34,6 +41,7 @@ export interface GraphQLSongInterface {
     country?: GraphQLCountryInterface
     performanceRightsOrganization?: string
     publishers?: GraphQLPublisherInterface[]
+    accepted: boolean
     createdAt: string
 }
 
@@ -44,5 +52,6 @@ export interface SongInputTypeInterface {
     country?: number
     publishers?: PublisherInputTypeInterface[]
     createdAt?: string
+    accepted: boolean
     performanceRightsOrganization?: number
 }
