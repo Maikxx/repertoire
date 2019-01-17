@@ -3,5 +3,8 @@
 
     color: $color-white;
     font-size: 36px;
+    position: sticky;
+    z-index: 0;
+    top: 0;
     font-weight: 500;
 }

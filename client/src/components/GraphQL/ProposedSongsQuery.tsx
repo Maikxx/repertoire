@@ -16,11 +16,13 @@ const GET_SONGS_QUERY = gql`
                 _id
                 name
                 share
+                role
             }
             creators {
                 _id
                 name
                 share
+                role
             }
             country {
                 _id

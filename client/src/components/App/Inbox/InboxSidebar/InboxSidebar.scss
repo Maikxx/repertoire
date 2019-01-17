@@ -2,12 +2,17 @@
     width: 264px;
 
     .rps-SidebarList {
-        max-height: 600px;
+        max-height: 300px;
         overflow-y: scroll;
         padding-bottom: 6px;
+        position: relative;
 
         & + .rps-SidebarList {
             margin-top: 24px;
+        }
+
+        .rps-SidebarListItem {
+            z-index: 1;
         }
     }
 }
