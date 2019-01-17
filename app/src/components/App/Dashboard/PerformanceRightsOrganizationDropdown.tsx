@@ -16,6 +16,7 @@ export class PerformanceRightsOrganizationDropdown extends React.Component<Props
     }
 
     private renderWithData = (data?: GetPerformanceRightsOrganizationsQueryResponse) => {
+        const { name } = this.props
         const options = data && data.getPerformanceRightsOrganizations.map(performanceRightsOrganization =>
             ({ value: performanceRightsOrganization._id, label: performanceRightsOrganization.name })
         )
