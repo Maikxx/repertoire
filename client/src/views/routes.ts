@@ -3,7 +3,6 @@ export const routes = {
     cover: {
         index: '/cover',
         login: '/cover/login',
-        forgot: '/cover/forgot',
         signUp: '/cover/signup',
     },
     app: {
