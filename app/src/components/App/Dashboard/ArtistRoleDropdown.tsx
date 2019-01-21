@@ -9,7 +9,7 @@ interface Props {
 export const artistRoleDropdownOptions = [
     { label: 'Composer', value: 'composer' },
     { label: 'Singer', value: 'singer' },
-    { label: 'Song writer', value: 'songWriter' },
+    { label: 'Songwriter', value: 'songWriter' },
 ]
 
 export class ArtistRoleDropdown extends React.Component<Props> {
