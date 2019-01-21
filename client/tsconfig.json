@@ -6,7 +6,7 @@
         "module": "commonjs",
         "jsx": "react",
         "outDir": "./dist",
-        "sourceMap": true,
+        "sourceMap": false,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "esModuleInterop": true,
@@ -20,8 +20,8 @@
         "downlevelIteration": true
     },
     "include": [
-        "**/*.ts",
-        "**/*.tsx"
+        "src/**/*.ts",
+        "src/**/*.tsx",
     ],
     "exclude": [
         "node_modules",
