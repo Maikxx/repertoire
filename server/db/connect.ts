@@ -5,6 +5,7 @@ import { createUsersTable } from './setup/createUsersTable'
 import { createArtistShareTable } from './setup/createArtistShareTable'
 import { createPublishersTable } from './setup/createPublishersTable'
 import { createPerformanceRightsOrganizationsTable } from './setup/createPerformanceRightsOrganizationsTable'
+import { clearDatabase } from './clearDatabase'
 require('dotenv').load()
 
 export const database = new Client({
@@ -16,12 +17,17 @@ export const database = new Client({
 
 export const connectToDatabase = async (): Promise<void> => {
     await database.connect()
+
+    if (process.env.RUN_CLEANERS === 'true') {
+        await clearDatabase()
+    }
+
     await database.query(`
+        ${createCountriesTable}
+        ${createPerformanceRightsOrganizationsTable}
         ${createUsersTable}
         ${createPublishersTable}
         ${createArtistShareTable}
         ${createSongsTable}
-        ${createCountriesTable}
-        ${createPerformanceRightsOrganizationsTable}
     `)
 }

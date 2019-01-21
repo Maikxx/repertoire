@@ -8,7 +8,7 @@ export const AddCreatorToSong = async (args: AddCreatorToSongArgs) => {
 
     try {
         const { rows: [creatorShareRow] } = await database.query(
-            `INSERT INTO "artistShare" (
+            `INSERT INTO "artistShares" (
                 name,
                 share,
                 role

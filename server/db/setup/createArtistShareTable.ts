@@ -1,5 +1,5 @@
 export const createArtistShareTable = `
-    CREATE TABLE IF NOT EXISTS public."artistShare"
+    CREATE TABLE IF NOT EXISTS public."artistShares"
     (
         _id serial PRIMARY KEY,
         name character varying(150) NOT NULL,
@@ -12,6 +12,6 @@ export const createArtistShareTable = `
     )
     TABLESPACE pg_default;
 
-    ALTER TABLE public."artistShare"
+    ALTER TABLE public."artistShares"
         OWNER to admin;
 `

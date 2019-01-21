@@ -8,7 +8,7 @@ export const GetSongData = async (song: DatabaseSongInterface) => {
         const { creatorShares, composerShare, country, publishers, performanceRightsOrganization } = song
 
         const { rows: [composerShareRow] } = await database.query(
-            `SELECT * FROM "artistShare" WHERE _id = $1;`,
+            `SELECT * FROM "artistShares" WHERE _id = $1;`,
             [composerShare]
         )
 
@@ -37,7 +37,7 @@ export const GetSongData = async (song: DatabaseSongInterface) => {
 
         const creatorSharesData = creatorShares && await Promise.all(creatorShares.map(async creatorShare => {
             const { rows: [composerShareRow] } = await database.query(
-                `SELECT * FROM "artistShare" WHERE _id = $1;`,
+                `SELECT * FROM "artistShares" WHERE _id = $1;`,
                 [creatorShare]
             )
 

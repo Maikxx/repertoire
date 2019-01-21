@@ -19,7 +19,7 @@ export const CreateSong = async (args: CreateSongArgs) => {
 
     try {
         const { rows: [composerShare] } = await database.query(
-            `INSERT INTO "artistShare" (
+            `INSERT INTO "artistShares" (
                 name,
                 share,
                 role
@@ -35,7 +35,7 @@ export const CreateSong = async (args: CreateSongArgs) => {
 
         let creatorShares: number[] | null = null
         if (creators && creators.length > 0) {
-            const sql = `INSERT INTO "artistShare" (name, share, role) VALUES %L RETURNING _id;`
+            const sql = `INSERT INTO "artistShares" (name, share, role) VALUES %L RETURNING _id;`
             const creatorInsertionData = format(sql, creators.map(creator => [ creator.name, creator.share, creator.role ]))
 
             const { rows: creatorShareRows } = await database.query(creatorInsertionData)
