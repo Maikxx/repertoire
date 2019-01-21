@@ -36,6 +36,7 @@ Thanks for asking! A lot of the functionalities in both applications work.
 * Editing the current logged in user in the web-app
 * Viewing and editing the currently logged in user in the mobile application
 * Sending feedback on a song request is now done by sending a mail, while this can definately be created better
+* User validation (to determine who can execute queries and mutations)
 
 ## Main technologies used
 

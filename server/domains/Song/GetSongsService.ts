@@ -21,16 +21,14 @@ export const GetSongs = async (args?: SongQueryArgs) => {
                 ORDER BY "createdAt" DESC;`
         }
 
-        const { rows: songRows, rowCount } = await database.query(
+        const { rows: songRows } = await database.query(
             sql,
             queryVariables
         )
 
-        if (!rowCount) {
-            throw new ApolloError('There are no songs in the database', '404')
-        }
-
-        const songs = await Promise.all(songRows.map(GetSongData))
+        const songs = songRows.length > 0
+            ? await Promise.all(songRows.map(GetSongData))
+            : []
 
         return songs
     } catch (error) {

@@ -7,13 +7,35 @@ import { Row } from '../../../Core/Layout/Row/Row'
 import { Field } from '../../../Core/Field/Field/Field'
 import { Button, ButtonStyleType } from '../../../Core/Button/Button'
 import { InboxBase } from './InboxBase'
-import { RouteComponentProps, Link } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router-dom'
 import { GetSongQuery } from '../../../GraphQL/GetSongByIdQuery'
 import { ReadableDate } from '../../../Core/DataDisplay/Date/ReadableDate'
 import { PieChart } from '../../../Core/DataDisplay/PieChart/PieChart'
+import { Mutation } from 'react-apollo'
+import gql from 'graphql-tag'
+import { toast } from 'react-toastify'
+import { routes } from '../../../../views/routes'
 
 interface Params {
     id: string
+}
+
+const SET_SONG_TO_ACCEPTED_MUTATION = gql`
+    mutation _($songId: Int!) {
+        setSongToAccepted(songId: $songId) {
+            success
+        }
+    }
+`
+
+interface MutationResponse {
+    setSongToAccepted: {
+        success: boolean
+    }
+}
+
+interface MutationVariables {
+    songId: number
 }
 
 export const publisherRoles = {
@@ -186,13 +208,30 @@ export class Inbox extends React.Component<Props> {
                                     </Field>
                                 </Row>
                                 <Row className={this.bem.getElement('action-bar')} justifyEnd={true}>
-                                    <Button
-                                        buttonStyle={ButtonStyleType.Secondary}
-                                        isSmall={true}
-                                        type={`button`}
-                                    >
-                                        Confirm
-                                    </Button>
+                                    <Mutation<MutationResponse, MutationVariables> mutation={SET_SONG_TO_ACCEPTED_MUTATION}>
+                                        {(mutate, { data, error }) => {
+                                            const { history } = this.props
+
+                                            if (data) {
+                                                history.push(routes.app.inbox.index)
+                                            }
+
+                                            if (error) {
+                                                toast(error.message)
+                                            }
+
+                                            return (
+                                                <Button
+                                                    buttonStyle={ButtonStyleType.Secondary}
+                                                    isSmall={true}
+                                                    type={`button`}
+                                                    onClick={() => mutate({ variables: { songId: Number(id) }})}
+                                                >
+                                                    Confirm
+                                                </Button>
+                                            )
+                                        }}
+                                    </Mutation>
                                     <a href={`mailto:admin@repertoire.org`} className={this.bem.getElement('link')}>
                                         Send feedback
                                     </a>

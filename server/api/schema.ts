@@ -16,6 +16,7 @@ import { getPerformanceRightsOrganizations } from './PerformanceRightsOrganizati
 import { createPerformanceRightsOrganization } from './PerformanceRightsOrganization/createPerformanceRightsOrganization.mutation'
 import { addCreatorToSong } from './Song/addCreatorToSong.mutation'
 import { addPublisherToSong } from './Song/addPublisherToSong.mutation'
+import { setSongToAccepted } from './Song/setSongToAccepted.mutation'
 
 export const createSchema = () => new GraphQLSchema({
     query: new GraphQLObjectType({
@@ -43,6 +44,7 @@ export const createSchema = () => new GraphQLSchema({
             createSong: createSong(),
             createUser: createUser(),
             deleteUser: deleteUser(),
+            setSongToAccepted: setSongToAccepted(),
             updateUser: updateUser(),
             userLogin: userLogin(),
         }),
