@@ -33,7 +33,7 @@ import { spawn } from 'child_process'
     server.applyMiddleware({ app })
 
     app.listen(({ port: 5000 }), () => {
-        console.info(`GraphQL is now running on http://localhost:5000${server.graphqlPath}`)
+        console.info(`GraphQL is now running on port 5000!`)
     })
 
     app.on('sigterm', () => {
