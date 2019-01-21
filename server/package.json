@@ -1,12 +1,19 @@
 {
   "name": "repertoire-server",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "create-dump": "pg_dump repertoire > db/backups/dump.sql ",
-    "start-db": "brew services start postgres",
-    "start-server": "yarn start-db && nodemon --watch './**/*' -e ts --exec 'ts-node' ./index.ts"
+    "build": "yarn build-ts && yarn copy-static-assets",
+    "build-ts": "tsc",
+    "copy-static-assets": "ts-node copyStaticAssets.ts",
+    "create-dump": "pg_dump repertoire > db/backups/dump.sql",
+    "serve": "node dist/index.js",
+    "start": "yarn serve",
+    "start-server": "yarn watch",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "watch": "concurrently -k \"yarn watch-ts\" \"yarn watch-node\"",
+    "watch-node": "nodemon dist/index.js",
+    "watch-ts": "tsc -w"
   },
   "dependencies": {
     "apollo-server-express": "^2.3.1",
@@ -40,7 +47,11 @@
     "@types/node": "^10.12.18",
     "@types/pg": "^7.4.11",
     "@types/pg-format": "^1.0.0",
+    "@types/shelljs": "^0.8.1",
+    "concurrently": "^4.1.0",
+    "shelljs": "^0.8.3",
     "ts-node": "^7.0.1",
+    "tslint": "^5.12.1",
     "typescript": "^3.2.2"
   }
 }
