@@ -4,6 +4,7 @@ import { View } from '../../components/Core/Layout/View/View'
 import { Switch, Route, Redirect, RouteComponentProps } from 'react-router-dom'
 import { routes } from '../routes'
 import { InboxView } from './Inbox/InboxView'
+import { UserView } from './User/UserView'
 
 interface Props extends RouteComponentProps {}
 
@@ -16,6 +17,7 @@ export class AppView extends React.Component<Props> {
                 <PageHeader history={history} />
                 <Switch>
                     <Route path={routes.app.inbox.index} component={InboxView}/>
+                    <Route path={routes.app.currentUser} component={UserView}/>
                     <Redirect
                         from={routes.app.index}
                         exact={true}
