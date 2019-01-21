@@ -4,6 +4,7 @@ dist/
 .cache/
 .env
 server/data/
+server/db/backups/
 
 # Misc
 .DS_Store

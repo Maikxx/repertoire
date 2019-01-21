@@ -36,9 +36,7 @@ import { spawn } from 'child_process'
         console.info(`GraphQL is now running on http://localhost:5000${server.graphqlPath}`)
     })
 
-    if (process.env.NODE !== 'production') {
-        app.on('sigterm', () => {
-            spawn('sh', ['./db/stop_db.sh'])
-        })
-    }
+    app.on('sigterm', () => {
+        spawn('sh', ['./db/stop_db.sh'])
+    })
 })()

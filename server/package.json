@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "create-dump": "pg_dump repertoire > db/backups/dump.sql ",
     "start-db": "brew services start postgres",
     "start-server": "yarn start-db && nodemon --watch './**/*' -e ts --exec 'ts-node' ./index.ts"
   },
