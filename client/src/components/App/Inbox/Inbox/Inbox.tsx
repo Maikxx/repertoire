@@ -7,7 +7,7 @@ import { Row } from '../../../Core/Layout/Row/Row'
 import { Field } from '../../../Core/Field/Field/Field'
 import { Button, ButtonStyleType } from '../../../Core/Button/Button'
 import { InboxBase } from './InboxBase'
-import { RouteComponentProps } from 'react-router-dom'
+import { RouteComponentProps, Link } from 'react-router-dom'
 import { GetSongQuery } from '../../../GraphQL/GetSongByIdQuery'
 import { ReadableDate } from '../../../Core/DataDisplay/Date/ReadableDate'
 import { PieChart } from '../../../Core/DataDisplay/PieChart/PieChart'
@@ -193,13 +193,9 @@ export class Inbox extends React.Component<Props> {
                                     >
                                         Confirm
                                     </Button>
-                                    <Button
-                                        buttonStyle={ButtonStyleType.Default}
-                                        isSmall={true}
-                                        type={`button`}
-                                    >
+                                    <a href={`mailto:admin@repertoire.org`} className={this.bem.getElement('link')}>
                                         Send feedback
-                                    </Button>
+                                    </a>
                                 </Row>
                             </Column>
                         )
