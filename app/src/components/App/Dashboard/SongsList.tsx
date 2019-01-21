@@ -4,6 +4,7 @@ import { Column } from '../../Core/Layout/Column/Column'
 import { Card } from '../../Core/DataDisplay/Card/Card'
 import { History } from 'history'
 import { IconType } from '../../Core/Icon/Icon'
+import { Text } from '../../Core/Text/Text/Text'
 
 interface Props {
     history: History
@@ -24,6 +25,11 @@ export class SongsList extends React.Component<Props> {
 
         return (
             <Column>
+                {(!data || !data.getSongs.length) && (
+                    <Text isSubtle={true} element={`span`}>
+                        No songs found
+                    </Text>
+                )}
                 {data && data.getSongs && data.getSongs.map(song => (
                     <Card
                         key={song._id}
