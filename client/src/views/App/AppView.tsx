@@ -5,6 +5,7 @@ import { Switch, Route, Redirect, RouteComponentProps } from 'react-router-dom'
 import { routes } from '../routes'
 import { InboxView } from './Inbox/InboxView'
 import { UserView } from './User/UserView'
+import { HelpView } from './Help/HelpView'
 
 interface Props extends RouteComponentProps {}
 
@@ -14,13 +15,16 @@ export class AppView extends React.Component<Props> {
 
         return (
             <View>
-                <PageHeader
-                    history={history}
-                    location={location}
-                />
+                {location.pathname !== routes.app.help && (
+                    <PageHeader
+                        history={history}
+                        location={location}
+                    />
+                )}
                 <Switch>
                     <Route path={routes.app.inbox.index} component={InboxView}/>
                     <Route path={routes.app.currentUser} component={UserView}/>
+                    <Route path={routes.app.help} component={HelpView}/>
                     <Redirect
                         from={routes.app.index}
                         exact={true}

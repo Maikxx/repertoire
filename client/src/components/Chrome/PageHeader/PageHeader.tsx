@@ -34,16 +34,26 @@ export class PageHeader extends React.Component<Props> {
                                 src={LogoWhiteHorizontal}
                             />
                         </Link>
-                        {showSettings && (
+                        <Row className={this.bem.getElement('navigation')}>
                             <Button
                                 buttonStyle={ButtonStyleType.Default}
                                 className={this.bem.getElement('navigation-button')}
-                                onClick={() => history.push(routes.app.currentUser)}
+                                onClick={() => history.push(routes.app.help)}
                                 type={`button`}
                             >
-                                Settings
+                                ?
                             </Button>
-                        )}
+                            {showSettings && (
+                                <Button
+                                    buttonStyle={ButtonStyleType.Default}
+                                    className={this.bem.getElement('navigation-button')}
+                                    onClick={() => history.push(routes.app.currentUser)}
+                                    type={`button`}
+                                >
+                                    Settings
+                                </Button>
+                            )}
+                        </Row>
                     </Row>
                 </Wrap>
             </header>

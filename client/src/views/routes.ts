@@ -11,6 +11,7 @@ export const routes = {
             index: '/app/inbox',
             detail: (id: string | number = ':id') => `/app/inbox/${id}`,
         },
+        help: '/app/help',
         currentUser: '/app/user',
     },
 }

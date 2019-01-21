@@ -9,8 +9,21 @@
         flex: 1 0;
     }
 
-    .rps-UserView {
+    .rps-UserView,
+    .rps-HelpView {
         background-color: $color-white;
-        height: calc(100vh - 108px);
+        min-height: calc(100vh - 108px);
+    }
+
+    .rps-HelpView {
+        position: relative;
+
+        &__link {
+            position: absolute;
+            top: 60px;
+            right: 48px;
+            width: 220px;
+            height: 150px;
+        }
     }
 }

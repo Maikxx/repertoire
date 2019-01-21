@@ -8,8 +8,11 @@
         height: 60px;
     }
 
-    &__navigation-button {
+    &__navigation {
         margin-left: auto;
+    }
+
+    &__navigation-button {
         position: relative;
         z-index: 1;
         overflow: hidden;
