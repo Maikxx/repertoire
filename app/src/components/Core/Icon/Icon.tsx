@@ -18,6 +18,7 @@ export enum IconType {
     Pro = 'pro',
     CreateSong = 'createSong',
     MusicCreators = 'musicCreators',
+    QuestionMark = 'questionMark',
 }
 
 interface Props {

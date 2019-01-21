@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom'
 import { routes } from '../../../views/routes'
 import { Button, ButtonStyleType } from '../../Core/Button/Button'
 import { History, Location } from 'history'
+import { Icon } from '../../Core/Icon/Icon'
+import QuestionMarkIcon from '../../../../public/images/icons/question-mark.svg'
+import SettingsIcon from '../../../../public/images/icons/settings.svg'
 
 interface Props {
     className?: ClassValue
@@ -41,7 +44,7 @@ export class PageHeader extends React.Component<Props> {
                                 onClick={() => history.push(routes.app.help)}
                                 type={`button`}
                             >
-                                ?
+                                <Icon src={QuestionMarkIcon}/>
                             </Button>
                             {showSettings && (
                                 <Button
@@ -50,7 +53,7 @@ export class PageHeader extends React.Component<Props> {
                                     onClick={() => history.push(routes.app.currentUser)}
                                     type={`button`}
                                 >
-                                    Settings
+                                    <Icon src={SettingsIcon}/>
                                 </Button>
                             )}
                         </Row>
