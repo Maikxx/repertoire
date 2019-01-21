@@ -17,7 +17,7 @@ export class RegisterSongCard extends React.Component<Props> {
                 title={`Register Song`}
                 description={`Here you can add a new song to the Repertoire system.
                  You will be able to add the fields that are not required later using the buttons below.`}
-                iconType={IconType.RegisterSong}
+                iconType={IconType.CreateSong}
                 onClick={() => history.push(routes.app.dashboard.register)}
             />
         )

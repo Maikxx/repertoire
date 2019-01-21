@@ -15,6 +15,9 @@ export enum IconType {
     DownArrow = 'downArrow',
     Close = 'close',
     Trash = 'trash',
+    Pro = 'pro',
+    CreateSong = 'createSong',
+    MusicCreators = 'musicCreators',
 }
 
 interface Props {
