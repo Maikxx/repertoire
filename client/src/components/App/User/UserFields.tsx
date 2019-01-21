@@ -28,15 +28,15 @@ export class UserFields extends React.Component<Props> {
                     return (
                         <FieldCollection>
                             <FieldGroup title={`General`}>
-                                <Field title={`Name`}>
+                                <Field isInverse={true} title={`Name`}>
                                     {currentUser.name}
                                 </Field>
-                                <Field title={`Email address`}>
+                                <Field isInverse={true} title={`Email address`}>
                                     {currentUser.email}
                                 </Field>
                             </FieldGroup>
                             <FieldGroup title={`Function`}>
-                                <Field title={`Role`}>
+                                <Field isInverse={true} title={`Role`}>
                                     {currentUser.isAdmin
                                         ? 'Admin'
                                         : 'Regular user'
