@@ -41,7 +41,7 @@ export class PageHeader extends React.Component<Props> {
                                 onClick={() => history.push(routes.app.currentUser)}
                                 type={`button`}
                             >
-                                To settings
+                                Settings
                             </Button>
                         )}
                     </Row>
