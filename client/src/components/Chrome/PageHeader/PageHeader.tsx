@@ -8,41 +8,20 @@ import { Wrap } from '../../Core/Layout/Wrap/Wrap'
 import { Link } from 'react-router-dom'
 import { routes } from '../../../views/routes'
 import { Button, ButtonStyleType } from '../../Core/Button/Button'
-import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
-import { Icon } from '../../Core/Icon/Icon'
-import LogoutIcon from '../../../../public/images/icons/logout.svg'
-import { logOut } from '../../../services/UserService'
-import { History } from 'history'
-
-const GET_CURRENT_USER_QUERY = gql`
-    query {
-        me {
-            _id
-            email
-            name
-        }
-    }
-`
-
-interface CurrentUserResponse {
-    me: {
-        _id: string
-        email: string
-        name?: string
-    }
-}
+import { History, Location } from 'history'
 
 interface Props {
     className?: ClassValue
     history: History
+    location: Location
 }
 
 export class PageHeader extends React.Component<Props> {
     private bem = new BEM('PageHeader')
 
     public render() {
-        const { className } = this.props
+        const { className, history, location } = this.props
+        const showSettings = !location.pathname.includes(routes.app.currentUser)
 
         return (
             <header className={this.bem.getClassName(className)}>
@@ -55,34 +34,19 @@ export class PageHeader extends React.Component<Props> {
                                 src={LogoWhiteHorizontal}
                             />
                         </Link>
-                        <Query<CurrentUserResponse> query={GET_CURRENT_USER_QUERY}>
-                            {({ data }) => this.renderWithData(data)}
-                        </Query>
+                        {showSettings && (
+                            <Button
+                                buttonStyle={ButtonStyleType.Default}
+                                className={this.bem.getElement('navigation-button')}
+                                onClick={() => history.push(routes.app.currentUser)}
+                                type={`button`}
+                            >
+                                To settings
+                            </Button>
+                        )}
                     </Row>
                 </Wrap>
             </header>
-        )
-    }
-
-    private renderWithData = (data?: CurrentUserResponse) => {
-        const { history } = this.props
-        const nameOrEmail = data && data.me && (data.me.name || data.me.email)
-
-        return (
-            <Button
-                buttonStyle={ButtonStyleType.Default}
-                className={this.bem.getElement('logout-button')}
-                onClick={() => logOut(history)}
-                type={`button`}
-            >
-                <Row>
-                    {nameOrEmail}
-                    <Icon
-                        isExtraSmall={true}
-                        src={LogoutIcon}
-                    />
-                </Row>
-            </Button>
         )
     }
 }

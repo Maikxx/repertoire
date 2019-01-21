@@ -3,11 +3,14 @@ import * as React from 'react'
 import { BEM, ClassValue } from '../../../../services/BEMService'
 
 interface Props {
+    allSides?: boolean
     className?: ClassValue
 }
 
 export class Wrap extends React.Component<Props> {
-    private bem = new BEM('Wrap')
+    private bem = new BEM('Wrap', () => ({
+        'all-sides': this.props.allSides,
+    }))
 
     public render() {
         const { children, className } = this.props

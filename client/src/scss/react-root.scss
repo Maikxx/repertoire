@@ -1,9 +1,16 @@
 #react-root {
+    @import './variables/colors.scss';
+
     display: flex;
     flex: 1;
 
     .rps-RootView {
         position: relative;
         flex: 1 0;
+    }
+
+    .rps-UserView {
+        background-color: $color-white;
+        height: calc(100vh - 108px);
     }
 }
