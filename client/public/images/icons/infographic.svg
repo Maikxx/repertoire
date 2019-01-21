@@ -1,31 +1,16 @@
-import * as React from 'react'
-import { BEM } from '../../../services/BEMService'
-import { View } from '../../../components/Core/Layout/View/View'
-import { Link } from 'react-router-dom'
-import { routes } from '../../routes'
-
-interface Props {}
-
-export class HelpView extends React.Component<Props> {
-    private bem = new BEM('HelpView')
-
-    // tslint:disable:ter-max-len
-    public render() {
-        return (
-            <View className={this.bem.getClassName()}>
-                <svg viewBox="0 0 410 889">
+<svg viewBox="0 0 410 889" id="help-view">
                     <defs>
-                        <linearGradient id="a" y2="100%">
-                            <stop stopColor="#42EADC" offset="0"/>
-                            <stop stopColor="#6B47FE" offset="1"/>
-                        </linearGradient>
+                    <linearGradient id="a" y2="100%">
+                        <stop stopColor="#42EADC" offset="0"/>
+                        <stop stopColor="#6B47FE" offset="1"/>
+                    </linearGradient>
                     </defs>
                     <g fill="none" fillRule="evenodd">
-                        <rect width="410" height="998" fill="url(#a)"/>
-                        <text fill="#FFFFFF" fontFamily="Roboto" fontSize="36" fontWeight="bold">
-                            <tspan x="13" y="75">HOW DOES IT</tspan>
-                            <tspan x="13" y="117">WORK?</tspan>
-                        </text>
+                    <rect width="410" height="998" fill="url(#a)"/>
+                    <text fill="#FFFFFF" fontFamily="Roboto-Bold, Roboto" fontSize="36" fontWeight="bold">
+                    <tspan x="13" y="75">HOW DOES IT</tspan>
+                    <tspan x="13" y="117">WORK?</tspan>
+                    </text>
                     <g transform="translate(37 253)">
                     <ellipse cx="34.12" cy="74.603" rx="1" ry="1" fill="#000"/>
                     <path d="m131.99 95.576l-3.2923 0.89883" stroke="#979797" strokeLinecap="square" strokeWidth=".6"/>
@@ -235,8 +220,3 @@ export class HelpView extends React.Component<Props> {
                     </text>
                     </g>
                 </svg>
-                <Link to={routes.app.index} className={this.bem.getElement('link')}/>
-            </View>
-        )
-    }
-}
