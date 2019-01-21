@@ -15,7 +15,7 @@ export const database = new Client({
     password: process.env.PG_PASSWORD,
 })
 
-export const connectToDatabase = async (): Promise<void> => {
+export const connectToDatabase = async () => {
     await database.connect()
 
     if (process.env.RUN_CLEANERS === 'true') {
