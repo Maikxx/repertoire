@@ -80,7 +80,6 @@ export class PageHeader extends React.Component<Props> {
 
     private renderWithData = (data: CurrentUserResponse) => {
         const { history } = this.props
-        const nameOrEmail = data && data.me && (data.me.name || data.me.email)
 
         return (
             <Button
@@ -89,10 +88,7 @@ export class PageHeader extends React.Component<Props> {
                 onClick={() => logOut(history)}
                 type={`button`}
             >
-                <Row>
-                    {nameOrEmail}
-                    <Icon type={IconType.LogOut}/>
-                </Row>
+                Log out
             </Button>
         )
     }

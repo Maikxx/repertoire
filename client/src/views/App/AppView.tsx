@@ -10,11 +10,14 @@ interface Props extends RouteComponentProps {}
 
 export class AppView extends React.Component<Props> {
     public render() {
-        const { history } = this.props
+        const { history, location } = this.props
 
         return (
             <View>
-                <PageHeader history={history} />
+                <PageHeader
+                    history={history}
+                    location={location}
+                />
                 <Switch>
                     <Route path={routes.app.inbox.index} component={InboxView}/>
                     <Route path={routes.app.currentUser} component={UserView}/>
