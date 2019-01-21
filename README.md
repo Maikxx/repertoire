@@ -33,9 +33,9 @@ Thanks for asking! A lot of the functionalities in both applications work.
 ### What things are not quite finished yet?
 
 * Design implementation in both the application for artists and the web-app for service providers
-* Editing the current logged in user in the web-app.
-* Viewing and editing the currently logged in user in the mobile application.
-* Sending feedback on a song request is now done by sending a mail, while this can definately be created better.
+* Editing the current logged in user in the web-app
+* Viewing and editing the currently logged in user in the mobile application
+* Sending feedback on a song request is now done by sending a mail, while this can definately be created better
 
 ## Main technologies used
 
