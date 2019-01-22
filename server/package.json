@@ -5,7 +5,7 @@
   "scripts": {
     "build": "yarn build-ts && yarn copy-static-assets",
     "build-ts": "tsc",
-    "copy-static-assets": "ts-node copyStaticAssets.ts",
+    "copy-static-assets": "copyfiles -u 3 \"src/db/data/**.*\" dist/db/data",
     "create-dump": "pg_dump repertoire > db/backups/dump.sql",
     "heroku-postbuild": "yarn build",
     "serve": "node dist/index.js",
@@ -29,6 +29,7 @@
     "helmet": "^3.15.0",
     "jsonwebtoken": "^8.4.0",
     "moment": "^2.23.0",
+    "node-fetch": "^2.3.0",
     "nodemon": "^1.18.9",
     "pg": "^7.7.1",
     "pg-format": "^1.0.4"
@@ -46,11 +47,11 @@
     "@types/jsonwebtoken": "^8.3.0",
     "@types/moment": "^2.13.0",
     "@types/node": "^10.12.18",
+    "@types/node-fetch": "^2.1.4",
     "@types/pg": "^7.4.11",
     "@types/pg-format": "^1.0.0",
-    "@types/shelljs": "^0.8.1",
     "concurrently": "^4.1.0",
-    "shelljs": "^0.8.3",
+    "copyfiles": "^2.1.0",
     "ts-node": "^7.0.1",
     "tslint": "^5.12.1",
     "typescript": "^3.2.2"

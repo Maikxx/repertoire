@@ -8,19 +8,14 @@ import { connectToDatabase } from './db/connect'
 import { runSeeders } from './db/seeders/runSeeders'
 require('dotenv').config()
 
-const {
-    RUN_SEEDERS,
-    NODE_ENV,
-    SECRET_KEY,
-} = process.env
+const { RUN_SEEDERS, SECRET_KEY } = process.env
 
-const envIsDevelopment = NODE_ENV === 'development'
 const shouldRunSeeders = RUN_SEEDERS === 'true'
 
 ; (async () => {
     await connectToDatabase()
 
-    if (shouldRunSeeders && envIsDevelopment) {
+    if (shouldRunSeeders) {
         await runSeeders()
     }
 
@@ -40,7 +35,7 @@ const shouldRunSeeders = RUN_SEEDERS === 'true'
     })
     server.applyMiddleware({ app })
 
-    app.listen(({ port: 5000 }), () => {
+    app.listen(({ port: process.env.PORT || 5000 }), () => {
         console.info(`GraphQL is now running on port 5000!`)
     })
 })()
