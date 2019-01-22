@@ -18,7 +18,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const httpLink = new HttpLink({
-    uri: window.location.pathname.includes('localhost')
+    uri: window.location.hostname === 'localhost'
         ? 'http://localhost:5000/graphql'
         : 'https://repertoire-server-application.herokuapp.com/graphql',
 })
