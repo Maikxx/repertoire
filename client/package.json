@@ -12,6 +12,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/animejs": "^2.0.1",
     "@types/classnames": "^2.2.6",
     "@types/d3": "^5.7.0",
     "@types/graphql": "^14.0.3",
@@ -33,6 +34,7 @@
     "wait-on": "^3.2.0"
   },
   "dependencies": {
+    "animejs": "^3.0.1",
     "apollo-boost": "^0.1.22",
     "apollo-link-context": "^1.0.12",
     "babel-polyfill": "^6.26.0",
