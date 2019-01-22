@@ -2,21 +2,30 @@ import * as express from 'express'
 import * as helmet from 'helmet'
 import * as cors from 'helmet'
 import * as jwt from 'express-jwt'
-require('dotenv').load()
 import { ApolloServer } from 'apollo-server-express'
 import { createSchema } from './api/schema'
 import { connectToDatabase } from './db/connect'
 import { runSeeders } from './db/seeders/runSeeders'
+require('dotenv').config()
+
+const {
+    RUN_SEEDERS,
+    NODE_ENV,
+    SECRET_KEY,
+} = process.env
+
+const envIsDevelopment = NODE_ENV === 'development'
+const shouldRunSeeders = RUN_SEEDERS === 'true'
 
 ; (async () => {
     await connectToDatabase()
 
-    if (process.env.RUN_SEEDERS === 'true') {
+    if (shouldRunSeeders && envIsDevelopment) {
         await runSeeders()
     }
 
     const auth = jwt({
-        secret: process.env.SECRET_KEY,
+        secret: SECRET_KEY,
         credentialsRequired: false,
     })
 

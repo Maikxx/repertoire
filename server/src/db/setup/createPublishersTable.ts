@@ -10,7 +10,4 @@ export const createPublishersTable = `
         OIDS = FALSE
     )
     TABLESPACE pg_default;
-
-    ALTER TABLE public.publishers
-        OWNER to admin;
 `

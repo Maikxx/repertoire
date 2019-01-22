@@ -9,7 +9,4 @@ export const createPerformanceRightsOrganizationsTable = `
         OIDS = FALSE
     )
     TABLESPACE pg_default;
-
-    ALTER TABLE public."performanceRightsOrganizations"
-        OWNER to admin;
 `

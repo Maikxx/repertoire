@@ -15,7 +15,4 @@ export const createSongsTable = `
         OIDS = FALSE
     )
     TABLESPACE pg_default;
-
-    ALTER TABLE public.songs
-        OWNER to admin;
 `

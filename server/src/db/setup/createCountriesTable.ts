@@ -10,7 +10,4 @@ export const createCountriesTable = `
         OIDS = FALSE
     )
     TABLESPACE pg_default;
-
-    ALTER TABLE public.countries
-        OWNER to admin;
 `

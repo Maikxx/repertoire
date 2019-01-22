@@ -6,19 +6,29 @@ import { createArtistShareTable } from './setup/createArtistShareTable'
 import { createPublishersTable } from './setup/createPublishersTable'
 import { createPerformanceRightsOrganizationsTable } from './setup/createPerformanceRightsOrganizationsTable'
 import { clearDatabase } from './clearDatabase'
-require('dotenv').load()
+require('dotenv').config()
 
-export const database = new Client({
-    host: process.env.PG_HOST,
-    database: process.env.PG_DATABASE,
-    port: Number(process.env.PG_PORT),
-    password: process.env.PG_PASSWORD,
-})
+const { PG_HOST, PG_DATABASE, PG_PORT, PG_PASSWORD, RUN_CLEANERS, DATABASE_URL, NODE_ENV } = process.env
+const envIsDevelopment = NODE_ENV === 'development'
+const shouldRunCleaners = RUN_CLEANERS === 'true'
+
+const connectionOptions = envIsDevelopment
+    ? {
+        host: PG_HOST,
+        database: PG_DATABASE,
+        port: Number(PG_PORT),
+        password: PG_PASSWORD,
+    }
+    : {
+        connectionString: DATABASE_URL,
+    }
+
+export const database = new Client(connectionOptions)
 
 export const connectToDatabase = async () => {
     await database.connect()
 
-    if (process.env.RUN_CLEANERS === 'true') {
+    if (envIsDevelopment && shouldRunCleaners) {
         await clearDatabase()
     }
 

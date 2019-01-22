@@ -15,7 +15,4 @@ export const createUsersTable = `
         OIDS = FALSE
     )
     TABLESPACE pg_default;
-
-    ALTER TABLE public.users
-        OWNER to admin;
 `

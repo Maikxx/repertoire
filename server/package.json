@@ -7,6 +7,7 @@
     "build-ts": "tsc",
     "copy-static-assets": "ts-node copyStaticAssets.ts",
     "create-dump": "pg_dump repertoire > db/backups/dump.sql",
+    "heroku-postbuild": "yarn build",
     "serve": "node dist/index.js",
     "start": "yarn serve",
     "start-server": "yarn watch",
@@ -53,5 +54,8 @@
     "ts-node": "^7.0.1",
     "tslint": "^5.12.1",
     "typescript": "^3.2.2"
+  },
+  "engines": {
+    "node": "8.11.4"
   }
 }

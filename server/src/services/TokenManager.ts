@@ -1,9 +1,8 @@
 import * as jwt from 'jsonwebtoken'
 import { ApolloError } from 'apollo-server-express'
+require('dotenv').config()
 
-require('dotenv').load()
-
-const secretKey = process.env.SECRET_KEY
+const { SECRET_KEY } = process.env
 
 interface TokenPayload {
     id: number
@@ -16,13 +15,13 @@ export const encodeToken = (payload?: TokenPayload): string => {
         throw new ApolloError('Payload cannot be empty', '409')
     }
 
-    const token = jwt.sign(payload, secretKey)
+    const token = jwt.sign(payload, SECRET_KEY)
 
     return token
 }
 
 export const decodeToken = async (token?: string) => {
-    const decoded = await jwt.verify(token, secretKey)
+    const decoded = await jwt.verify(token, SECRET_KEY)
 
     return decoded
 }

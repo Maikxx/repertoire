@@ -1,5 +1,5 @@
 import { GraphQLSchema, GraphQLObjectType } from 'graphql'
-import { createUser } from './User/CreateUser.mutation'
+import { createUser } from './User/createUser.mutation'
 import { deleteUser } from './User/deleteUser.mutation'
 import { getUser } from './User/getUser.query'
 import { getUsers } from './User/getUsers.query'

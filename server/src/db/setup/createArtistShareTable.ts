@@ -11,7 +11,4 @@ export const createArtistShareTable = `
         OIDS = FALSE
     )
     TABLESPACE pg_default;
-
-    ALTER TABLE public."artistShares"
-        OWNER to admin;
 `
