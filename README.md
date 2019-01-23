@@ -6,7 +6,7 @@ A multi-part project that me and my team at the AUAS created for Repertoire.
 
 This repository contains the structure required to create the application for artists themselves. The code for this can be found in the `app` directory.
 
-Not only have we made the application for artists, but we have also made a desktop web-application for the service providers. This platform is created in a way that all the involved groups, be it PROs or publishers, can use this system.
+Not only have we created the application for artists, but we have also created a desktop web-application for the service providers. This platform is set up in a way that all the involved groups, be it PROs or publishers, can use this system.
 The code for this rests in the `client` directory.
 
 These two products would be nothing, without the other, to get them to communicate together, I created a server, which is an attempt to mock the blockchain network of Repertoire. The code for the server can be found in the `server` directory.
