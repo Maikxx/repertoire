@@ -39,8 +39,8 @@ interface MutationVariables {
 }
 
 export const publisherRoles = {
-    licener: 'Licenser',
     communicator: 'Communicator',
+    licener: 'Licenser',
 }
 
 export const creatorRoles = {

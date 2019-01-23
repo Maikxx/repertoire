@@ -16,12 +16,12 @@ interface Props {
 
 export const publisherInputRoleOptions = [
     {
-        label: 'Licenser',
-        value: 'licener',
-    },
-    {
         label: 'Communicator',
         value: 'communicator',
+    },
+    {
+        label: 'Licenser',
+        value: 'licener',
     },
 ]
 
