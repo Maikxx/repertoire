@@ -212,7 +212,7 @@ export class RegisterSongForm extends React.Component<Props> {
                                         <FieldTitle>
                                             <Row>
                                                 <Text element={`span`}>
-                                                    Add new composer
+                                                    Add new publisher
                                                 </Text>
                                                 <Button
                                                     type={`button`}
