@@ -127,16 +127,16 @@ export class AddCreatorForm extends React.Component<Props, State> {
                                     isLabel={true}
                                     isVertical={true}
                                 >
-                                    <MultiInput type={MultiInputType.Suffix}>
-                                        {song.creators.map(creator => (
+                                    {song.creators.map(creator => (
+                                        <MultiInput type={MultiInputType.Suffix}>
                                             <ComposerFieldInput
                                                 key={creator._id}
                                                 baseName={`creators[${creator._id}]`}
                                                 disabled={true}
                                                 defaultValue={creator}
                                             />
-                                        ))}
-                                    </MultiInput>
+                                        </MultiInput>
+                                    ))}
                                 </Field>
                             )}
                             <Field
