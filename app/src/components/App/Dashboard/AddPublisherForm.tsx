@@ -35,7 +35,7 @@ interface MutationVariables {
 
 interface AddPublisherFormFields {
     publisher: {
-        _id: number
+        _id: string
         role: string
     }
     performanceRightsOrganization: {
@@ -162,7 +162,7 @@ export class AddPublisherForm extends React.Component<Props> {
                 variables: {
                     songId: id,
                     publisher: { ...publisher, _id: Number(publisher._id) },
-                    performanceRightsOrganization,
+                    performanceRightsOrganization: Number(performanceRightsOrganization),
                 },
             })
 
