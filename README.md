@@ -17,14 +17,14 @@ Thanks for asking! A lot of the functionalities in both applications work.
 
 #### Application for artists
 
-* Persistent Login system.
+* Persistent login system.
 * User creation system.
 * Creation of song requests.
 * Modifying of a song request.
 
 #### Web-application for service providers
 
-* Persistent Login system.
+* Persistent login system.
 * User creation system.
 * Viewing of song requests.
 * Accepting song requests.
