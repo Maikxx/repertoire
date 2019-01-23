@@ -168,7 +168,7 @@ export class CoverSignUpView extends React.Component<Props, State> {
                 this.setState({ redirectToReferrer: true })
             }
         } catch (error) {
-
+            toast.error(error.message)
         }
     }
 }

@@ -2,7 +2,7 @@ export const createUsersTable = `
     CREATE TABLE IF NOT EXISTS public.users
     (
         _id serial PRIMARY KEY,
-        name character varying(150) COLLATE pg_catalog."default" NOT NULL,
+        name character varying(150),
         email text NOT NULL UNIQUE,
         password text NOT NULL,
         "profileImage" text,
