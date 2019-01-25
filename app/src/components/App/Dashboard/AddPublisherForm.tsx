@@ -102,6 +102,7 @@ export class AddPublisherForm extends React.Component<Props> {
                                 >
                                     {publishers.map(publisher => {
                                         const { _id, name, role } = publisher
+                                        const roleLabel = publisherInputRoleOptions.find(option => option.value === role)
 
                                         return (
                                             <PublisherInput
@@ -109,7 +110,7 @@ export class AddPublisherForm extends React.Component<Props> {
                                                 key={_id}
                                                 defaultValue={{
                                                     name: { value: _id, label: name },
-                                                    role: { value: role, label: publisherInputRoleOptions[role] },
+                                                    role: { value: role, label: roleLabel ? roleLabel.label : '' },
                                                 }}
                                                 disabled={true}
                                             />

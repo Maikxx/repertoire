@@ -156,6 +156,7 @@ export class RegisterSongForm extends React.Component<Props> {
                                 <VariableMultiInputField
                                     smallTitle={true}
                                     isVertical={true}
+                                    onRemove={this.removeDataEntry}
                                     onAdd={this.createNewDataEntry}
                                     getFieldTitle={onAdd => (
                                         <FieldTitle>
@@ -291,6 +292,12 @@ export class RegisterSongForm extends React.Component<Props> {
             toast.error(error.message)
             throw new Error(error.message)
         }
+    }
+
+    private removeDataEntry = (event: React.SyntheticEvent<HTMLButtonElement>, index: number) => {
+        const { chartValues } = this.state
+        const newChartValues = chartValues.filter((_, valueIndex) => valueIndex !== index)
+        this.setState({ chartValue: newChartValues })
     }
 
     private createNewDataEntry = (index: number) => {

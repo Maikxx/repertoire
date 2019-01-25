@@ -35,7 +35,7 @@ export class PublisherInput extends React.Component<Props> {
     }
 
     private renderWithData = (data?: GetPublishersQueryResponse) => {
-        const { baseName, disabled } = this.props
+        const { baseName, disabled, defaultValue } = this.props
         const options = data && data.getPublishers.map(publisher => ({ value: publisher._id, label: publisher.name }))
 
         return (
@@ -43,6 +43,7 @@ export class PublisherInput extends React.Component<Props> {
                 <Select
                     name={`${baseName}._id`}
                     options={options}
+                    defaultValue={defaultValue && defaultValue.name}
                     disabled={disabled}
                     placeholder={`Name`}
                 />
@@ -51,6 +52,7 @@ export class PublisherInput extends React.Component<Props> {
                     disabled={disabled}
                     options={publisherInputRoleOptions}
                     placeholder={`Role`}
+                    defaultValue={defaultValue && defaultValue.role}
                 />
             </MultiInput>
         )
